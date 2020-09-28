@@ -1,0 +1,31 @@
+<footer th:fragment="footer">
+	<div class="footer">
+        <ul class="menu_footer">
+            <li><a href="/">Главная</a></li>
+            <li><a href="/courses">Каталог программ</a></li>
+            <li><a href="/calendar">Календарь обучения</a></li>
+            <li><a href="/about">О центре</a></li>
+            <li><a href="/news">Новости</a></li>
+            <!--<li><a href="/signin">Записаться</a></li>-->
+            <li><a href="/contacts">Контакты</a></li>
+            <li><a href="/bank_documents">Банковские реквизиты</a></li>
+        </ul>
+        <div class="subscription">
+            <h3>Подписаться на новости</h3>
+            <form class="mainpage_subscription_form" enctype="multipart/form-data" name="request" method="post">
+                <div>
+                    <label for="email_subscription">Email</label>
+                    <input name="email_subscription" type="email" id="email_subscription" placeholder="Введите ваш email">
+                </div>
+                <div>
+                    <button type="submit" name="button_subscription" onclick="feedback.sendMail(event)" class="btn">Отправить</button>
+                </div>
+            </form>
+        </div>
+        <div class="contacts_vk_footer">
+            <p>+7 (495) 223-05-21</p>
+            <a href="mailto:dpo@mospolytech.ru"><p>dpo@mospolytech.ru</p></a>
+        </div>
+    </div>
+    <p class="license">© 2019 Московский политехнический университет</p>
+</footer>

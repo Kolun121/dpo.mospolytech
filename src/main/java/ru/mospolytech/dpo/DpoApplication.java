@@ -1,4 +1,4 @@
-package ru.mospolytech.dpo.dpo;
+package ru.mospolytech.dpo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

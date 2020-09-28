@@ -1,0 +1,44 @@
+<header th:fragment="header">
+    <div class="header">
+        <a href="/"><div class='logo'>
+            <img src="<?= $themePath ?>/img/logo.png">
+            <div>
+                <p>Дополнительное профессиональное образование</p>
+                <p>Московский Политех</p>
+            </div>
+        </div></a>
+        <ul class="menu">
+            <p>+7 (495) 223-05-21, <a href="mailto:dpo@mospolytech.ru">dpo@mospolytech.ru</a></p>
+            <li><a href="/courses">Каталог программ</a></li>
+            <li><a href="/calendar">Календарь обучения</a></li>
+            <li><a href="/about">О центре</a></li>
+            <li><a href="/news">Новости</a></li>
+            <!--<li><a href="/signin" class="signin">Записаться</a></li>-->
+            <li><a href="/contacts">Контакты</a></li>
+        </ul>
+
+        <!-- Pushy Menu -->
+        <nav class="pushy pushy-left" data-focus="#first-link">
+            <div class="pushy-content">
+                <ul>
+                    <li class="pushy-link"><a href="/">Главная</a></li>
+                    <li class="pushy-link"><a href="/courses">Каталог программ</a></li>
+                    <li class="pushy-link"><a href="/calendar">Календарь обучения</a></li>
+                    <li class="pushy-link"><a href="/about">О центре</a></li>
+                    <li class="pushy-link"><a href="/news">Новости</a></li>
+                    <!--<li class="pushy-link"><a href="/signin">Записаться</a></li>-->
+                    <li class="pushy-link"><a href="/contacts">Контакты</a></li>
+                    <li><a href="/bank_documents">Банковские реквизиты</a></li>
+                </ul>
+            </div>
+        </nav>
+        <a class="menu-btn">&#9776;</a>
+
+    </div>
+    <div class="header_text">
+        <h1>Пройди курсы дополнительного образования у нас</h1>
+        <p>Стань профессионалом в своем деле</p>
+        <div><a  href="/courses">Записаться на курс</a></div>
+    </div>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</header>
