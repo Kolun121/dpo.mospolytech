@@ -1,11 +1,13 @@
-package ru.mospolytech.dpo.controllers;
+package ru.mospolytech.dpo.controllers.admin;
 
+import ru.mospolytech.dpo.controllers.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+@Controller("adminIndexController")
+@RequestMapping("/admin")
 public class IndexController {
 
     @GetMapping("/")
@@ -13,10 +15,5 @@ public class IndexController {
 
         return "index";
     }
-    
-    @GetMapping("/admin")
-    public String getD2(Model model) {
 
-        return "index";
-    }
 }
