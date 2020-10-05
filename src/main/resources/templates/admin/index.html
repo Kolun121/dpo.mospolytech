@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'home')}">
+    
+<main>
+    
+    <div class="container mb-5 d-flex flex-column align-items-center">
+        
+        <h1>Главная страница</h1>
+        
+        <h2>Популярные курсы/сферы обучения</h2>
+        
+        <div class="col-12 d-flex flex-column align-items-center" id="listSliderItems">
+<!--            <?php foreach($sliders as $slider) {
+                Theme::block('main/slider_item', [
+                    'item' => $slider
+                ]);
+            } ?>-->
+        </div>
+        
+        <button class="btn btn-outline-primary mt-4" onclick="main.addSliderItem()">
+            Добавить блок
+        </button>
+        
+        <h2 class="my-2">Мы в цифрах</h2>
+        
+        <div class="d-flex justify-content-around flex-wrap mt-4">
+<!--            <?php foreach($numbers as $number) {
+                Theme::block('main/number_item', [
+                    'item' => $number
+                ]);
+            } ?>-->
+        </div>
+        
+    </div>
+    
+</main>
+
+</html>

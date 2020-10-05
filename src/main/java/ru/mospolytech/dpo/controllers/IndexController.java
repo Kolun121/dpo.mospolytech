@@ -13,10 +13,4 @@ public class IndexController {
 
         return "index";
     }
-    
-    @GetMapping("/admin")
-    public String getD2(Model model) {
-
-        return "index";
-    }
 }

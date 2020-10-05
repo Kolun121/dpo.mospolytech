@@ -1,0 +1,28 @@
+<!doctype html>
+<html th:fragment="adminLayout (template, menu)">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--        <link href="<?= $themePath ?>/css/index.css" rel="stylesheet">
+        <link href="<?= $themePath ?>/css/footer.css" rel="stylesheet">
+        <link href="<?= $themePath ?>/css/totopbutton.css" rel="stylesheet">
+        <link rel="stylesheet" href="<?= $themePath ?>/css/pushy.css">
+        <link rel="shortcut icon" href="<?= $themePath ?>/img/icon.ico" type="image/x-icon">
+
+         Bootstrap 
+        <link rel="stylesheet" href="<?= $themePath ?>/css/bootstrap/bootstrap.min.css">
+        <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>-->
+
+        <title th:text="admin"></title>
+    </head>
+
+<body>
+    
+    <header th:replace="~{admin/fragments/adminHeader :: adminHeader}" />
+    
+    <main th:replace="${template}" />  
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<header th:fragment="adminHeader"> 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
+        <a class="navbar-brand" th:href="@{/admin}">Admin</a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            
+            <!--Шаблон для menu item-->
+            <div th:remove="all">
+                
+                <li th:fragment="menuItem (path,active,title,glyph,text)" th:class="'nav-item' + ${active==menu ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{${path}}">
+                        <i th:class="'icons icon-' + ${glyph}"></i>
+                        <span th:text="${text}"></span>
+                    </a>
+                </li>
+                
+            </div>
+            
+            <ul class="navbar-nav mr-auto">
+                <li th:replace="::menuItem ('/admin','home','Главная страница','home','Главная')"/>
+                
+                <li th:replace="::menuItem ('/admin/courses','courses','Страница с курсами','doc','Курсы')"/>
+                
+                <li th:replace="::menuItem ('/admin/news','news','Страница с новостями','envelope','Новости')"/>
+                
+                <li th:replace="::menuItem ('/admin/teachers','teachers','Страница с преподавателями','pencil','Преподаватели')"/>
+                
+                <li th:replace="::menuItem ('/admin/contacts','contacts','Страница с контактами','phone','Контакты')"/>
+                
+            </ul>
+            
+            <div class="right-toolbar">
+                <form th:action="@{/auth/logout}" method="POST">
+                    <button type="submit">Выход</button>
+                </form>
+            </div>
+            
+        </div>
+        
+    </nav>
+</header>
