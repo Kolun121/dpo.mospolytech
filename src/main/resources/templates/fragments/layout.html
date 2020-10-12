@@ -4,30 +4,44 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--        <link href="<?= $themePath ?>/css/index.css" rel="stylesheet">
-        <link href="<?= $themePath ?>/css/footer.css" rel="stylesheet">
-        <link href="<?= $themePath ?>/css/totopbutton.css" rel="stylesheet">
-        <link rel="stylesheet" href="<?= $themePath ?>/css/pushy.css">
-        <link rel="shortcut icon" href="<?= $themePath ?>/img/icon.ico" type="image/x-icon">
 
-         Bootstrap 
-        <link rel="stylesheet" href="<?= $themePath ?>/css/bootstrap/bootstrap.min.css">
-        <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>-->
-
+        <link rel="shortcut icon" th:href="@{/resources/image/icons/icon.ico}" type="image/x-icon">
+        
+        <link th:href="@{/resources/css/index.css}" rel="stylesheet">
+        <link th:href="@{/resources/css/footer.css}" rel="stylesheet">
+        <link th:href="@{/resources/css/totopbutton.css}" rel="stylesheet">
+        
+        <link th:href="@{/webjars/pushy/1.1.0/css/pushy.css}" rel="stylesheet">
+        
+        
+        
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.5.0/css/font-awesome.min.css}"/>
         <title>ДПО Политех - Главная</title>
     </head>
 
-<body>
+<body>        
     <header th:replace="~{fragments/header :: header}" />
     
-    <main th:replace="${template}" />  
-
-    <div id="toTop">Наверх</div>  
+    <main th:replace="${template}" />   
 
     <footer th:replace="~{fragments/footer :: footer}" />
-<!--  <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-  <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
-  <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>-->
+    
+    <div id="toTop">Наверх</div> 
+
+    <script th:src="@{/webjars/tether/1.4.0/dist/js/tether.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+    <!-- Pushy JS -->
+    <script th:src="@{/webjars/pushy/1.1.0/js/pushy.min.js}"></script>
+
+    <script th:src="@{/resources/js/index.js}"></script>
+
+    <!-- Скрипты для кнопки "наверх" -->
+    <script th:src="@{/resources/js/totopbutton.js}"></script>
+
+    <script th:src="@{/resources/js/feedback.js}"></script>
 
 </body>
 

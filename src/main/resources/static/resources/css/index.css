@@ -1,0 +1,513 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+@font-face {
+    font-family: GilroyBold; 
+    src: url(../fonts/Gilroy-ExtraBold.otf); 
+}
+@font-face {
+    font-family: GilroyThin;
+    src: url(../fonts/Gilroy-Light.otf); 
+}
+body {
+    display: flex;
+	min-height: 100vh;
+    flex-direction: column;
+    height: 100%;
+}
+main {
+    flex: 1 0 auto;
+}
+footer {
+	flex: 0 0 auto;
+}
+
+/*Header*/
+header {
+    color: white;
+    width: 100%;
+    max-width: 3000px;
+    margin: 0 auto;
+    padding-top: 10px;
+
+    font-family: GilroyBold; 
+
+    background-image: url(../image/first_illustration.jpg);
+    background-position: center center;   
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    background-size: cover;
+    background-color: #464646; 
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.header p {
+    margin: 0;
+}
+.header div, .header ul {
+    padding: 20px;
+}
+header a {
+    text-decoration: none;
+}
+header a:hover {
+    text-decoration: none;
+}
+.logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;   
+    align-items: center; 
+    font-size: 16pt;
+    color: white;
+}
+.logo div {
+    margin-left: 10px;
+}
+.menu {
+    margin-top: 15px;
+}
+.menu p {
+    padding: 8px;
+    padding-right: 0;
+    padding-bottom: 0;
+    text-align: right;
+    font-size: 15pt;
+}
+.menu a {
+    color: white;
+    font-size: 15pt;
+}
+.menu a:hover {
+    color: rgb(134, 75, 160); 
+}
+.menu li {
+    display: inline;
+    padding-left: 10px;
+    color: white;
+}
+header img {
+    max-width: 100px;
+    width: 100%;
+}
+.header_text {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 100px;
+    padding-bottom: 200px;
+    text-align: center;
+    color: white;
+}
+.header_text h1 {
+    padding-bottom: 5px;
+	font-size: 23pt;
+}
+.header_text p {
+    padding-bottom: 80px;
+    font-size: 17pt;
+    margin: 20px auto;
+}
+.header_text a {
+    padding: 20px 55px 20px 55px; 
+    border-radius: 8px;
+    background-color: rgba(134, 75, 160, 0.842); 
+    color: white;
+    font-size: 15pt;
+}
+.header_text a:hover {
+    color: white;
+    background-color: rgba(191, 107, 230, 0.842); 
+}
+/* Конец стилей header */
+.menu-btn {
+    display: none;
+}
+main h1{
+    font-size: 33px
+}
+
+/* Main */
+/*.populartoday {
+    width: 100%;
+    max-width: 530px;
+}
+.carousel-item h2 {
+	font-size: 17pt;
+}
+.slider_popular {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 50px;
+    margin-bottom: 50px;
+}
+.carousel {
+    margin: 2px;
+}
+.carousel img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+}*/
+main {
+    font-family: GilroyBold; 
+    margin-bottom: 50px;
+}
+.innumbers, .nextcourses {
+    background-color:  rgba(94, 94, 94, 0.103); 
+    background-position: center center;   
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    background-size: cover;
+    width: 100%;
+    max-width: 2000px;
+    margin: 0 auto; 
+}
+.innumbers_blocks div {
+    /* иллюстрации в "мы в цифрах" */
+    padding: 10px;
+    padding-top: 20px;
+}
+.innumbers_blocks div img {
+    width: 100%;
+    max-width: 160px;
+}
+.innumbers_blocks {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+	width: 100%;
+	max-width: 1500px;
+	margin: 0 auto;
+}
+.innumbers h1 {
+    text-align: center;
+    padding-top: 50px;
+}
+.innumbers_blocks {
+    font-size: 18pt;
+    font-family: GilroyThin;
+}
+.innumbers {
+   padding-bottom: 60px;
+}
+.number {
+    margin-top: 10px;
+    font-size: 40pt;
+    font-family: GilroyBold;
+	margin-bottom: 0;
+}
+
+.whyimportant, .popular_blocks {
+    padding-top: 50px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+
+    margin-bottom: 50px;
+}
+.whyimportant div h1 {
+    padding-bottom: 30px;
+}
+.whyimportant div {
+    width: 100%;
+    max-width: 660px;
+    text-align: justify;  
+}
+.whyimportant img {
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+}
+.whyimportant ul {
+	list-style-image: url(../image/tick.png);
+}
+.whyimportant ul li{
+	font-size: 22px;
+	margin: 5px;
+    font-family: GilroyThin;
+    margin-left:6%
+}
+.popular_blocks h1 {
+	width: 100%;
+	max-width: 562px;
+	margin: 0 auto;
+	padding-bottom: 30px;	
+	text-align: center;
+}
+.popular_courses {
+	width: 100%;
+	max-width: 1250px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	margin-bottom: 20px;
+}
+.popular_courses div img {
+	width: 100%;
+	max-width: 60px;
+	margin: 10px;
+}
+.popular_courses a {
+	color: black;
+	text-decoration: none;
+	margin: 10px;
+	width: 100%;
+	width: 390px;
+	
+}
+.popular_courses div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 100%;
+	min-height: 100px;
+	font-family: GilroyThin;
+	font-size: 16pt;
+	align-items: center;
+	background-color:  rgba(94, 94, 94, 0.103); 
+	border-radius: 8px;
+}
+.popular_courses div:hover {
+	box-shadow: 0 0 15px rgba(0,0,0,0.5); 
+}
+.popular_courses a:hover {
+	color: black;
+	text-decoration: none;
+}
+.popular_courses p {
+	margin-bottom: 0;
+	margin: 5px;
+	
+}
+/*.populartoday_text h1,*/ .whyimportant h1, .nextcourses h1, .mainpage_registration_form {
+    text-align: center;
+    padding-bottom: 10px;
+}
+/*.populartoday_text p, .whyimportant p {
+    font-family: GilroyThin;
+    font-size: 17pt;
+    margin: 20px;
+}*/
+/*.populartoday_text p {
+    text-align: justify;
+}*/
+.nextcourses {
+    padding-bottom: 100px;
+}
+.calendar {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.calendar_item {
+    width: 100%;
+    max-width: 270px;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px;
+    background-color:  rgba(94, 94, 94, 0.103); 
+    margin: 5px;
+	text-decoration: none;
+	color: black;
+}
+.calendar a:hover {
+	text-decoration: none;
+}
+.calendar_item:hover {
+	box-shadow: 0 0 15px rgba(0,0,0,0.5); 
+}
+.calendar_item .info {
+    height: 100%;
+    min-height: 410px;
+    vertical-align: top;
+}
+.calendar_item h3 {
+    font-weight: bold;
+    margin-top: 15px;
+    font-family: GilroyBold; 
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 17pt;
+}
+.calendar_item img {
+    padding-top: 10px;
+	height: 100%;
+	max-height: 130px;
+}
+.calendar_item p {
+    font-family: GilroyThin;
+}
+.date {
+    background-color: rgba(85, 180, 50, 0.575);
+    padding: 10px; 
+    border-radius: 8px 8px 0 0;
+    width: 270px;
+    margin-left: -10px;
+    margin-top: -10px;
+  
+}
+.date p {
+    font-family: GilroyThin; 
+    font-size: 17pt;
+    color: black;
+    padding: 5px;
+    margin: 0;
+}
+.calendar_btn_div {
+    text-align: center;
+    margin-top: 50px;
+}
+.calendar_btn {
+    text-decoration: none;
+    margin-top: 30px;
+    padding: 20px 30px 20px 30px; 
+    border-radius: 8px;
+    background-color: rgba(134, 75, 160, 0.842); 
+    color: white;
+    font-size: 15pt;
+}
+.calendar_btn:hover {
+    text-decoration: none;
+    color: white;
+    background-color: rgba(191, 107, 230, 0.842); 
+}
+
+.nextcourses h1, .mainpage_registration_form h1 {
+    padding-top: 50px;
+}
+.mainpage_registration_form h1 {
+    padding-bottom: 30px;
+}
+.mainpage_registration_form label {
+	font-size: 18pt;
+	width:120px;
+	text-align: right;
+	margin-right: 35px;
+    vertical-align: top;
+    font-family:  GilroyThin;
+}
+.mainpage_registration_form input, .mainpage_registration_form textarea, .mainpage_registration_form select {
+	width:250px !important;
+	text-align: left !important;
+	border-radius: 8px !important;
+    padding: 5px !important;
+    font-family: GilroyThin !important;
+}
+.mainpage_registration_form button {
+	padding: 15px 40px 15px 40px; 
+    border-radius: 8px;
+    background-color: rgba(134, 75, 160, 0.842); 
+    color: white;
+    font-size: 15pt;
+}
+.mainpage_registration_form button:hover {
+    color: white;
+    background-color: rgba(191, 107, 230, 0.842); 
+}
+.btn_mainpage_r_form  {
+	width:100%;
+	max-width: 400px;
+	margin-top: 30px;
+}
+
+.personal_agree {
+    width: 100%;
+    max-width: 700px;
+    margin: 10px auto;
+    font-family: GilroyThin;
+}
+.formSend_alert {
+    margin-top: 30px;
+    font-family: GilroyBold;
+    padding: 30px;
+    background-color: rgba(85, 180, 50, 0.479);
+    font-size: 15pt;
+}
+.formNotSend_alert {
+    margin-top: 30px;
+    font-family: GilroyBold;
+    padding: 30px;
+    background-color: rgba(230, 50, 71, 0.479);
+    font-size: 15pt;
+} 
+/* Конец стилей Main */
+
+@media only screen and (max-width: 2000px) {
+    .menu a, .menu p {
+        font-size: 15pt;
+    }
+    .logo div {
+        font-size: 15pt;
+    }
+}
+@media only screen and (max-width: 1550px) {
+    .menu a, .menu p{
+        font-size: 11pt;
+    }
+    .logo div {
+        font-size: 11pt;
+    }
+}
+@media only screen and (max-width: 1245px) {
+    .whyimportant, .slider_popular {
+        justify-content: center;
+    }
+    .menu {
+        display: none;
+    }
+    .menu-btn {
+        display: block;
+    }
+    .header div {
+        padding: 0;
+        padding-bottom: 25px;
+    }
+    .logo div  {
+        display: none;
+    }
+}
+@media only screen and (max-width: 770px) {
+    .innumbers_blocks div {
+        /* иллюстрации в "мы в цифрах" */
+        padding: 0;
+    }
+}
+@media only screen and (max-width: 680px) {
+   /*.populartoday_text p,*/ .whyimportant div {
+        text-align: center;
+    }
+    .whyimportant li{list-style:none}
+}
+@media only screen and (max-width: 426px) {
+    .mainpage_registration_form label {
+        text-align: center;
+        margin: 0;
+    }
+}

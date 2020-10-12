@@ -1,0 +1,135 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+@font-face {
+    font-family: GilroyBold; 
+    src: url(../fonts/Gilroy-ExtraBold.otf); 
+}
+@font-face {
+    font-family: GilroyThin;
+    src: url(../fonts/Gilroy-Light.otf); 
+}
+footer {
+    font-family: GilroyBold;
+    width: 100%;
+    max-width: 2000px;
+    margin: 0 auto;
+    color: white;
+    
+    background-color:  #1e1e1e; 
+}
+.footer {
+    padding-top: 50px;
+    padding-bottom: 70px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.menu_footer, .subscription, .contacts_vk_footer {
+    width: 100%;
+    max-width: 400px;
+}
+.contacts_vk_footer img {
+    width: 100%;
+    max-width: 60px;
+}
+.menu_footer {
+    text-align: end;
+}
+.menu_footer li {
+    list-style-type: none;
+    font-family: GilroyThin;
+}
+.menu_footer a {
+    text-decoration: none;
+    color:white;
+    font-size: 15pt;
+}
+.menu_footer a:hover {
+    text-decoration: none;
+    color: rgb(134, 75, 160); 
+}
+.subscription form {
+    margin-top: 30px;
+}
+.subscription {
+    text-align: center;
+}
+.subscription input {
+	width:250px;
+	text-align: left;
+	border-radius: 8px;
+    padding: 5px;
+    font-family: GilroyThin;
+}
+.subscription label {
+	font-size: 20pt;
+	width:50px;
+	text-align: right;
+	margin-right: 35px;
+    vertical-align: top;
+    font-family:  GilroyThin;
+}
+.subscription button {
+    margin-top: 20px;
+	padding: 10px 20px 10px 20px; 
+    border-radius: 8px;
+    background-color: rgba(134, 75, 160, 0.623); 
+    color: white;
+    font-size: 15pt;
+}
+.subscription button:hover {
+    color: white;
+    background-color: rgba(191, 107, 230, 0.842); 
+}
+.contacts_vk_footer {
+    text-align: center;
+    font-family: GilroyThin;
+}
+.contacts_vk_footer p {
+    font-size: 18pt;
+    margin: 0;
+    color: white;
+    padding: 0;
+}
+.contacts_vk_footer h3 {
+    padding-top: 30px;
+    font-size: 18pt;
+}
+.license {
+    padding-bottom: 10px;
+    margin: 0;
+    text-align: center;
+    font-size: 15pt;
+}
+.contacts_vk_footer a:hover{
+    color: rgb(134, 75, 160); 
+}
+
+
+
+@media only screen and (max-width: 1245px) {
+    .menu_footer {
+        text-align: left;
+        padding-left: 30px;
+    }
+}
+@media only screen and (max-width: 755px) {
+    .contacts_vk_footer {
+        margin-top: 30px;
+    }
+    .footer {
+        flex-wrap: wrap;
+    }
+    .menu_footer {
+        /* text-align: center;
+        margin-bottom: 30px; */
+        display: none;
+    }
+    .contacts_vk_footer p{
+        color:white
+    }
+    
+}

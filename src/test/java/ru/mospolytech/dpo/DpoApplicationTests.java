@@ -1,4 +1,4 @@
-package ru.mospolytech.dpo.dpo;
+package ru.mospolytech.dpo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

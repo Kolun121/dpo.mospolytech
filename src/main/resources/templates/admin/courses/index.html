@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'courses')}">
+    
+<main>
+    <div class="container">
+        <h1 class="text-center">Курс</h1>
+        <h2 class="text-center"><a href="/admin/courses/create/">Создать курс</a></h2>
+        
+        
+    </div>
+            
+    <table class="table">
+        <thead>
+        <tr class="d-flex justify-content-around">
+            <td class="col-2">Заголовок</td>
+            <td class="col-4">Цель</td>
+            <td class="col-3">Вид курса</td>
+            <td class="col-1">Дата начала</td>
+            <td class="col-2">Статус</td>
+        </tr>
+        </thead>
+        <tbody class="filter_loading">
+            <tr class="d-flex justify-content-around">
+                <th class="col-2">
+                    <a href="/admin/courses/edit/<?= $course['id'] ?>">
+                         <?= $course['title'] ?>
+                    </a>
+                </th>
+                <td class="col-4"><?= substr($course['content_goal'],0,280) ?>...</td>
+                <td class="col-3"><?= $course['course_form'] == "individual" ? "Для физических лиц" : "Для юридических лиц" ?></td>
+                <td class="col-1"><?= $course['date'] ?></td>
+                <td class="col-2"><?= $course['status'] == "published" ? "Опубликовано" : "Не опубликовано" ?></td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+
+</html>
