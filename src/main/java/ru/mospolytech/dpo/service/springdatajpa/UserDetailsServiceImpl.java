@@ -1,4 +1,4 @@
-package ru.mospolytech.dpo.security;
+package ru.mospolytech.dpo.service.springdatajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.mospolytech.dpo.domain.User;
 import ru.mospolytech.dpo.repository.UserRepository;
+import ru.mospolytech.dpo.security.SecurityUser;
 
 @Service("userDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {
