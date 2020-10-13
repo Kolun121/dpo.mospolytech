@@ -2,17 +2,19 @@
 <head>
     <meta charset="utf-8">
     <title>Авторизация</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
+    
 </head>
 <body>
 <div class="container">
     <form class="form-signin" method="post" th:action="@{/auth/login}">
         <h2 class="form-signin-heading">Login</h2>
         <p>
-            <label for="username">Username</label>
+            <label for="username">Имя пользователя</label>
             <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
         </p>
         <p>
-            <label for="password">Password</label>
+            <label for="password">Пароль</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'teachers')}">
+    
+<main>
+    <div class="container">
+        <h1 class="text-center">Страница</h1>
+        <h2 class="text-center"><a href="/admin/teachers/create/">Добавить преподавателя</a></h2>
+    </div>
+    
+    <table class="table">
+        <thead>
+        <tr>
+            <td>ФИО</td>
+            <td>Род деятельности</td>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($teachers as $teacher): ?>
+            <tr>
+                <th>
+                    <a href="/admin/teachers/edit/<?= $teacher['id'] ?>">
+                         <?= $teacher['name'] ?>
+                    </a>
+                </th>
+                <td><?= $teacher['profession'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</main>
+
+</html>

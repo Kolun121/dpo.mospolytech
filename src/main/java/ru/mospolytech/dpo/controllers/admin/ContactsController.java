@@ -5,13 +5,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller("adminCoursesController")
-@RequestMapping("/admin/courses")
-public class CoursesController {
+@Controller("adminContactsController")
+@RequestMapping("/admin/contacts")
+public class ContactsController {
     
     @GetMapping
     public String getIndexPage(Model model) {
 
-        return "admin/courses/index";
+        return "admin/contacts/index";
     }
 }

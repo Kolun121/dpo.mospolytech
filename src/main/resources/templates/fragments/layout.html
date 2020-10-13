@@ -1,22 +1,20 @@
 <!doctype html>
-<html th:fragment="layout (template)">
+<html th:fragment="layout (template, page)">
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+   
         <link rel="shortcut icon" th:href="@{/resources/image/icons/icon.ico}" type="image/x-icon">
         
-        <link th:href="@{/resources/css/index.css}" rel="stylesheet">
         <link th:href="@{/resources/css/footer.css}" rel="stylesheet">
         <link th:href="@{/resources/css/totopbutton.css}" rel="stylesheet">
-        
         <link th:href="@{/webjars/pushy/1.1.0/css/pushy.css}" rel="stylesheet">
-        
-        
-        
         <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
         <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.5.0/css/font-awesome.min.css}"/>
+        
+        <th:block th:insert="~{fragments/css :: css}"></th:block>
+        
         <title>ДПО Политех - Главная</title>
     </head>
 
@@ -36,12 +34,11 @@
     <!-- Pushy JS -->
     <script th:src="@{/webjars/pushy/1.1.0/js/pushy.min.js}"></script>
 
-    <script th:src="@{/resources/js/index.js}"></script>
-
     <!-- Скрипты для кнопки "наверх" -->
     <script th:src="@{/resources/js/totopbutton.js}"></script>
-
     <script th:src="@{/resources/js/feedback.js}"></script>
+    
+    <th:block th:insert="~{fragments/js :: js}"></th:block>
 
 </body>
 

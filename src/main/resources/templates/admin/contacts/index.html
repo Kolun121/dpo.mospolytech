@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'contacts')}">
+    
+<main>
+    <div class="container mb-5 d-flex flex-column align-items-center">
+        <h1>О нас</h1>
+        <h2>Коллектив центра</h2>
+        <div id="listContactItems" class="d-flex flex-column align-items-center col-md-9 mb-2">
+            <?php foreach($contacts as $contact) {
+                Theme::block('contacts/contact_item', [
+                    'contact' => $contact,
+                    'imagePath' => $imagePath
+                ]);
+            } ?>
+         </div>
+        <button class="btn btn-outline-primary" onclick="contact.addContactItem()">
+            Добавить сотрудника
+        </button>
+    </div>
+</main>
+
+</html>

@@ -12,7 +12,7 @@
             <!--Шаблон для menu item-->
             <div th:remove="all">
                 
-                <li th:fragment="menuItem (path,active,title,glyph,text)" th:class="'nav-item' + ${active==menu ? 'active' : ''}">
+                <li th:fragment="menuItem (path,active,title,glyph,text)" th:class="'nav-item ' + ${active==page ? 'active' : ''}">
                     <a class="nav-link" th:href="@{${path}}">
                         <i th:class="'icons icon-' + ${glyph}"></i>
                         <span th:text="${text}"></span>

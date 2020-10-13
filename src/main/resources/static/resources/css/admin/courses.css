@@ -1,0 +1,30 @@
+
+.form-group{
+    max-width: 800px;
+}
+
+.except{
+    max-width: 100%;
+}
+.course-segment{
+    max-width:150px;
+}
+.main-image-form img{
+    margin-top:10px;
+}
+
+.gallery-form{
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+.gallery-form .form-group{
+    max-width: 100%;
+}
+.comments_item {
+    width: 100%;
+    max-width: 1200px;
+    margin: 5px auto; 
+    border-radius: 8px;
+    background-color:  rgba(94, 94, 94, 0.103); 
+    padding: 10px 26px 10px 26px;
+}
