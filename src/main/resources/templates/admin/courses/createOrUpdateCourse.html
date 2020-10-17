@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'createOrUpdateCourse')}">
+    
+<main>
+    <form  th:object="${course}" th:action="@{/admin/courses/createOrUpdate}"  method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Url курса', 'urlSegment', 'text')}" />
+        
+        <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Название курса', 'title', 'text')}" />
+        
+        <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Аудитория курса(для кого предназначена программа)', 'courseAudience', 'textarea')}" />
+        
+        <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Чему обучают на курсе', 'courseSubject', 'textarea')}" />
+        
+        <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Цена курса', 'coursePrice', 'number')}" />
+        
+        <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Длительность курса', 'courseTime', 'number')}" />
+        
+        <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Выдаваемый документ курса', 'courseDocument', 'text')}" />
+
+        <td th:text="'Статус курса'" class="col-2"></td>
+        
+        <div class="col-sm-offset-2 col-sm-10">
+            <button
+              th:with="text=*{id} ? 'Обновить курс' : 'Добавить курс'"
+              class="btn btn-primary" type="submit" th:text="${text}"></button>
+            
+            <a th:if="*{id}" id="deleteCourse" class="btn btn-danger" th:text="'Удалить курс'" 
+                    th:href="@{/admin/courses/delete/} + *{id}"></a>
+        </div>
+
+    </form>
+</main>
+
+</html>

@@ -1,4 +1,7 @@
 <th:block th:fragment="adminJs"><th:block th:switch="${page}">
         <th:block th:case="home">
         </th:block>
+        <th:block th:case="createOrUpdateCourse">
+            <script th:if="*{id}" th:src="@{/resources/js/admin/deleteCourse.js}"></script>
+        </th:block>
 </th:block></th:block>

@@ -5,7 +5,7 @@
 <main>
     <div class="container">
         <h1 class="text-center">Курс</h1>
-        <h2 class="text-center"><a href="/admin/courses/create/">Создать курс</a></h2>
+        <h2 class="text-center"><a th:href="@{courses/new}">Создать курс</a></h2>
         
         
     </div>
@@ -20,17 +20,18 @@
             <td class="col-2">Статус</td>
         </tr>
         </thead>
-        <tbody class="filter_loading">
-            <tr class="d-flex justify-content-around">
+        <tbody class="filter_loading">            
+            <tr class="d-flex justify-content-around" th:each="course : ${courses}">
                 <th class="col-2">
-                    <a href="/admin/courses/edit/<?= $course['id'] ?>">
-                         <?= $course['title'] ?>
+                    <a th:text="${course.title}" th:href="@{courses/update/} + ${course.id}">
                     </a>
                 </th>
-                <td class="col-4"><?= substr($course['content_goal'],0,280) ?>...</td>
-                <td class="col-3"><?= $course['course_form'] == "individual" ? "Для физических лиц" : "Для юридических лиц" ?></td>
-                <td class="col-1"><?= $course['date'] ?></td>
-                <td class="col-2"><?= $course['status'] == "published" ? "Опубликовано" : "Не опубликовано" ?></td>
+                <td th:text="${course.courseGoal}" class="col-4"></td>
+<!--                <td  th:text="${course.courseForm}" class="col-3">></td>-->
+                <td  th:text="'Форма курса'" class="col-3">></td>
+                <td th:text="${course.createdAt}" class="col-1"></td>
+                <!--<td th:text="${course.courseStatus}"class="col-2"></td>-->
+                <td th:text="'Статус курса'" class="col-2"></td>
             </tr>
         </tbody>
     </table>

@@ -1,6 +1,7 @@
 package ru.mospolytech.dpo.service.springdatajpa;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import org.springframework.stereotype.Service;
 import ru.mospolytech.dpo.domain.Course;
@@ -25,12 +26,18 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Optional<Course> courseOptional = courseRepository.findById(id);
+        
+        if(!courseOptional.isPresent()){
+            throw new RuntimeException("Курс не найден");
+        }
+        
+        return courseOptional.get();
     }
 
     @Override
     public Course save(Course object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return courseRepository.save(object);
     }
 
     @Override
@@ -40,7 +47,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void deleteById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        courseRepository.deleteById(id);
     }
     
 }
