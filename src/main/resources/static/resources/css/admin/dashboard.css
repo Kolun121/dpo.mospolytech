@@ -123,6 +123,9 @@ header {
     font-family: GilroyBold; 
 }
 main {
-    font-family: GilroyBold; 
+    font-family: GilroyThin; 
     margin-bottom: 50px;
+}
+label{
+    font-family: GilroyBold; 
 }

@@ -21,7 +21,7 @@
         </tr>
         </thead>
         <tbody class="filter_loading">            
-            <tr class="d-flex justify-content-around" th:each="course : ${courses}">
+            <tr class="d-flex justify-content-around" th:object="${course}" th:each="course : ${courses}">
                 <th class="col-2">
                     <a th:text="${course.title}" th:href="@{courses/update/} + ${course.id}">
                     </a>
@@ -31,7 +31,7 @@
                 <td  th:text="'Форма курса'" class="col-3">></td>
                 <td th:text="${course.createdAt}" class="col-1"></td>
                 <!--<td th:text="${course.courseStatus}"class="col-2"></td>-->
-                <td th:text="'Статус курса'" class="col-2"></td>
+                <td th:text="*{courseStatus.getValue()}" class="col-2"></td>
             </tr>
         </tbody>
     </table>

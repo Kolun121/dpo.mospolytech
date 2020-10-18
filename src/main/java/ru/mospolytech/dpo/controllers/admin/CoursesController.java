@@ -29,7 +29,6 @@ public class CoursesController {
     
     @GetMapping("/update/{id}")
     public String updateCourseById(@PathVariable String id, Model model) {
-        
         model.addAttribute("course", courseService.findById(Long.parseLong(id)));
         return "admin/courses/createOrUpdateCourse";
     }

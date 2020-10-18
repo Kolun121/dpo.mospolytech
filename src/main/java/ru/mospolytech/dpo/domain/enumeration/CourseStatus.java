@@ -2,5 +2,16 @@ package ru.mospolytech.dpo.domain.enumeration;
 
 
 public enum CourseStatus {
-    PUBLISHED, UNPUBLISHED
+    UNPUBLISHED("Отложен"),
+    PUBLISHED("Опубликован");
+    
+    private final String value;
+    
+    CourseStatus(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }
