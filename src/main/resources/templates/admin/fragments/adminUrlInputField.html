@@ -1,0 +1,10 @@
+<th:block th:fragment="adminUrlInput (label, name, page)">
+    <div class="form-group">
+        <label class="control-label" th:text="${label}" th:for="${name}">Label</label>
+        <div class="row">
+            <span class="col-sm-auto col-form-label col-form-label-sm">/[[${page}]]/</span>
+            <input th:class="${'form-control ' + name}" type="text" th:field="*{__${name}__}" />
+        </div>
+    </div>
+
+</th:block>

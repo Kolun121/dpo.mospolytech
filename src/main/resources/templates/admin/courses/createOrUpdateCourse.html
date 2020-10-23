@@ -2,12 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" 
       th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'createOrUpdateCourse')}">
     
-<main class="container-fluid" >
-    <div class="row">
-        <div class="col-md-9 col-md-offset-3">
-            <form  th:object="${course}" th:action="@{/admin/courses/createOrUpdate}"  method="post">
-                <input type="hidden" th:field="*{id}"/>
-                    <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Url курса', 'urlSegment', 'text')}" />
+<main class="container mb-5" >
+    <div class="row pb-5">
+        <div class="col-12">
+            <form  th:object="${course}" method="post">
+                    <input th:replace="~{admin/fragments/adminUrlInputField :: adminUrlInput ('Url курса', 'urlSegment', 'courses')}" />
 
                     <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Название курса', 'title', 'text')}" />
 

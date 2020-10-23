@@ -1,14 +1,11 @@
 <th:block th:fragment="adminInput (label, name, type)">
     <div class="form-group">
-        
-        <label class="col-sm-10 control-label" th:text="${label}" th:for="${name}">Label</label>
-        <div class="col-sm-10">
-            <div th:switch="${type}">
-                <input th:case="'text'" class="form-control" type="text" th:field="*{__${name}__}" />
-                <input th:case="'number'" class="form-control" type="number" th:field="*{__${name}__}" />
-                <textarea th:case="'textarea'" class="form-control" th:field="*{__${name}__}" />
-            </div>
-        </div>
-        
+        <label class="control-label" th:text="${label}" th:for="${name}">Label</label>
+        <th:block th:switch="${type}">
+            <input th:case="'text'" th:class="${'form-control ' + name}" type="text" th:field="*{__${name}__}" />
+            <input th:case="'number'" th:class="${'form-control ' + name}" type="number" th:field="*{__${name}__}" />
+            <textarea th:case="'textarea'" th:class="${'form-control ' + name}" th:field="*{__${name}__}" />
+        </th:block>
     </div>
+
 </th:block>

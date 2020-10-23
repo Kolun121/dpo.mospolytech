@@ -3,7 +3,9 @@ package ru.mospolytech.dpo.controllers.admin;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +21,11 @@ public class CoursesController {
 
     CoursesController(CourseService courseService) {
         this.courseService = courseService;
+    }
+    
+    @InitBinder
+    public void setAllowedFields(WebDataBinder dataBinder) {
+        dataBinder.setDisallowedFields("id");
     }
     
     @GetMapping
@@ -40,8 +47,9 @@ public class CoursesController {
         return "admin/courses/createOrUpdateCourse";
     }
     
-    @PostMapping("/createOrUpdate")
-    public String createOrUpdate(@ModelAttribute Course course){
+    @PostMapping("/update/{id}")
+    public String createOrUpdate(@PathVariable Long id, @ModelAttribute Course course){
+        course.setId(id);
         Course savedCourse = courseService.save(course);
 
         return "redirect:/admin/courses/update/" + savedCourse.getId();

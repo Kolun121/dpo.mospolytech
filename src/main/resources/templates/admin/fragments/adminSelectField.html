@@ -1,9 +1,8 @@
 <th:block th:fragment="adminSelect (label, name, items)">
     <div class="form-group">
-        <label class="col-sm-10 control-label" th:for="${name}" th:text="${label}">Label</label>
-
-        <div class="col-sm-10">
-            <select th:field="*{__${name}__}">
+        <label class="control-label" th:for="${name}" th:text="${label}">Label</label>
+        <div>
+            <select class="col-8" th:field="*{__${name}__}">
                 <option th:each="item : ${items}" th:value="${item}"
                 th:text="${item.getValue()}"></option>
             </select>
