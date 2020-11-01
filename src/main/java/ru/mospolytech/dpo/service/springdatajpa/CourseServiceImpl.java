@@ -49,5 +49,16 @@ public class CourseServiceImpl implements CourseService {
     public void deleteById(Long id) {
         courseRepository.deleteById(id);
     }
+
+    @Override
+    public Course findByUrlSegment(String urlSegment) {
+        Optional<Course> courseOptional = courseRepository.findByUrlSegment(urlSegment);
+        
+        if(!courseOptional.isPresent()){
+            throw new RuntimeException("Курс не найден");
+        }
+        
+        return courseOptional.get();
+    }
     
 }

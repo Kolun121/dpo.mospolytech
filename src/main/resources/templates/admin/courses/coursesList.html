@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" 
-      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'courses')}">
+      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'coursesList')}">
     
 <main>
     <div class="container">
         <h1 class="text-center">Курс</h1>
-        <h2 class="text-center"><a th:href="@{courses/new}">Создать курс</a></h2>
+        <h2 class="text-center"><a th:onclick="course.createCourse(event)" th:href="@{courses/new}">Создать курс</a></h2>
         
         
     </div>
@@ -14,25 +14,22 @@
         <thead>
         <tr class="d-flex justify-content-around">
             <td class="col-2">Заголовок</td>
-            <td class="col-4">Цель</td>
+            <td class="col-3">Цель</td>
             <td class="col-3">Вид курса</td>
-            <td class="col-1">Дата начала</td>
             <td class="col-2">Статус</td>
+            <td class="col-2">Ссылка</td>
         </tr>
         </thead>
-        <tbody class="filter_loading">            
+        <tbody class="filter_loading">   
             <tr class="d-flex justify-content-around" th:object="${course}" th:each="course : ${courses}">
-                <th class="col-2">
-                    <a th:text="${course.title}" th:href="@{courses/update/} + ${course.id}">
-                    </a>
-                </th>
-                <td th:text="${course.courseGoal}" class="col-4"></td>
+                <th th:text="${course.title}" class="col-2"></th>
+                <td th:text="${course.courseGoal}" class="col-3"></td>
 <!--                <td  th:text="${course.courseForm}" class="col-3">></td>-->
                 <td  th:text="'Форма курса'" class="col-3">></td>
-                <td th:text="${course.createdAt}" class="col-1"></td>
-                <!--<td th:text="${course.courseStatus}"class="col-2"></td>-->
                 <td th:text="*{courseStatus.getValue()}" class="col-2"></td>
+                <td class="col-2"><a th:text="'Перейти'" th:href="@{'courses/' + ${course.id}}"></a></td>
             </tr>
+        
         </tbody>
     </table>
 </main>

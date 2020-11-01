@@ -4,12 +4,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import ru.mospolytech.dpo.domain.Course;
 import ru.mospolytech.dpo.service.CourseService;
 
@@ -29,37 +32,35 @@ public class CoursesController {
     }
     
     @GetMapping
-    public String getIndexPage(Model model) {
+    public String getCoursesListPage(Model model) {
         model.addAttribute("courses", courseService.findAll());
-        return "admin/courses/index";
+        return "admin/courses/coursesList";
     }
     
-    @GetMapping("/update/{id}")
-    public String updateCourseById(@PathVariable String id, Model model) {
+    @GetMapping("{id}")
+    public String getCourseById(@PathVariable String id, Model model) {
         model.addAttribute("course", courseService.findById(Long.parseLong(id)));
-        return "admin/courses/createOrUpdateCourse";
+        return "admin/courses/updateCourse";
     }
     
-    @GetMapping("/new")
-    public String newRecipe(Model model){
-        model.addAttribute("course", new Course());
+    @PostMapping("/new")
+    public @ResponseBody String newCourse(Model model){
+        Course savedCourse = courseService.save(new Course());
 
-        return "admin/courses/createOrUpdateCourse";
+        return savedCourse.getId().toString();
     }
     
-    @PostMapping("/update/{id}")
-    public String createOrUpdate(@PathVariable Long id, @ModelAttribute Course course){
+    @PostMapping("{id}")
+    public String updateCourseById(@PathVariable Long id, @ModelAttribute Course course){
         course.setId(id);
         Course savedCourse = courseService.save(course);
 
-        return "redirect:/admin/courses/update/" + savedCourse.getId();
+        return "redirect:/admin/courses/" + savedCourse.getId();
     }
     
-    @GetMapping("/delete/{id}")
-    public String deleteCourseById(@PathVariable String id){
-        log.debug("Deleting id: " + id);
+    @DeleteMapping("{id}")
+    public @ResponseBody void deleteCourseById(@PathVariable String id){
         courseService.deleteById(Long.valueOf(id));
-        return "redirect:/admin/courses";
     }
 
 }

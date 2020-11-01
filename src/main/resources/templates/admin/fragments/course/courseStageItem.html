@@ -1,0 +1,15 @@
+<th:block th:fragment="courseStageItem (stageItems)">
+    <div th:each="stageItem : ${stageItems}" th:class="${'d-flex flex-column align-items-center mb-4 shadow col-md-10 stage-item-' + stageItem.id}">
+        <input type="text" class="form-control my-4" 
+               th:onchange="|course.onChangeCourseStageTitleorDescription(event, ${stageItem.id})|" 
+               th:id="|stage-title-${stageItem.id}|" 
+               th:value="${stageItem.title}" placeholder="Название этапа"/>
+        <textarea class="form-control" 
+                  th:onchange="|course.onChangeCourseStageTitleorDescription(event, ${stageItem.id})|" 
+                  th:id="|stage-description-${stageItem.id}|" 
+                  th:text="${stageItem.description}" 
+                  placeholder="Описание этапа" rows="4"
+                  ></textarea>
+        <button class="btn btn-outline-danger my-2" th:onclick="|course.deleteStageItem(event, ${stageItem.id})|">Удалить</button>
+    </div>
+</th:block>

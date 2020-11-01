@@ -1,6 +1,11 @@
 package ru.mospolytech.dpo.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,8 +13,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import ru.mospolytech.dpo.domain.enumeration.CourseCompetency;
@@ -19,11 +27,13 @@ import ru.mospolytech.dpo.domain.enumeration.CourseStatus;
 import ru.mospolytech.dpo.domain.enumeration.CourseStudyLocation;
 import ru.mospolytech.dpo.domain.enumeration.CourseTargetEntity;
 import ru.mospolytech.dpo.domain.enumeration.CourseType;
+import ru.mospolytech.dpo.domain.image.CourseMainImage;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "courses")
-public class Course {
+public class Course implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,6 +44,7 @@ public class Course {
     private Integer coursePrice;
     private Integer courseTime;
     private String courseDocument;
+    @Column(unique = true)
     private String urlSegment;
 
     @Enumerated(value = EnumType.STRING)
@@ -55,7 +66,13 @@ public class Course {
     private CourseTargetEntity courseTargetEntity;
     
     @Enumerated(value = EnumType.STRING)
-    private CourseStatus courseStatus;
+    private CourseStatus courseStatus = CourseStatus.UNPUBLISHED;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private CourseMainImage mainImage;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+    private List<EducationalProgramStage> educationalProgramStages = new ArrayList<>();
     
     @CreationTimestamp
     @Column(nullable = false, updatable = false)

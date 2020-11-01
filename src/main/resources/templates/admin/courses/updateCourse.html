@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'updateCourse')}">
+    
+<main class="container mb-5" >
+    <div class="row pb-5">
+        <div class="col-12">
+            <form  th:object="${course}" method="post" enctype="multipart/form-data">
+                  
+                <!-- Модальное окно для обрезки изображения -->
+                <div id="uploadimageModal" style="display:none;" class="modal" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Загрузка изображения курса</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex flex-column align-items-center justify-content-center">
+                                    <div class="h-100 text-center">
+                                        <div id="image_demo" style="width:500px; margin-top:30px"></div>
+                                    </div>
+                                    <div class="h-100 col-6" style="padding-top:30px;">
+                                        <button class="btn btn-success crop_image col-12" 
+                                                onclick="course.addCourseMainImage(event)">Загрузить</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Закрыть</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input th:replace="~{admin/fragments/adminImageInput :: adminImageInput ('Изображение курса', *{mainImage}, 'course')}" />
+                
+                
+                <input th:replace="~{admin/fragments/adminUrlInputField :: adminUrlInput ('Url курса', 'urlSegment', 'courses')}" />
+
+                <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Название курса', 'title', 'text')}" />
+
+                <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Аудитория курса(для кого предназначена программа)', 'courseAudience', 'textarea')}" />
+
+                <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Чему обучают на курсе', 'courseSubject', 'textarea')}" />
+
+                <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Цель программы', 'courseGoal', 'textarea')}" />
+
+                <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Цена курса', 'coursePrice', 'number')}" />
+
+                <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Длительность курса', 'courseTime', 'number')}" />
+                <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Выдаваемый документ курса', 'courseDocument', 'text')}" />
+
+                <select th:replace="~{admin/fragments/adminSelectField :: adminSelect ('Выберите форму обучения', 'courseForm', ${T(ru.mospolytech.dpo.domain.enumeration.CourseForm).values()})}" />
+
+                <select th:replace="~{admin/fragments/adminSelectField :: adminSelect ('Выберите сферу обучения', 'courseField', ${T(ru.mospolytech.dpo.domain.enumeration.CourseField).values()})}" />
+
+                <select th:replace="~{admin/fragments/adminSelectField :: adminSelect ('Выберите вид обучения', 'courseType', ${T(ru.mospolytech.dpo.domain.enumeration.CourseType).values()})}" />
+
+                <select th:replace="~{admin/fragments/adminSelectField :: adminSelect ('Выберите формируемые компетенции', 'courseCompetency', ${T(ru.mospolytech.dpo.domain.enumeration.CourseCompetency).values()})}" />
+
+                <select th:replace="~{admin/fragments/adminSelectField :: adminSelect ('Выберите площадку', 'courseStudyLocation', ${T(ru.mospolytech.dpo.domain.enumeration.CourseStudyLocation).values()})}" />
+
+                <select th:replace="~{admin/fragments/adminSelectField :: adminSelect ('Укажите, для кого предназначена программа', 'courseTargetEntity', ${T(ru.mospolytech.dpo.domain.enumeration.CourseTargetEntity).values()})}" />    
+
+                <!--educationalProgramStages-->
+                <div class="form-group except d-flex flex-column align-items-center justify-content-center">
+                    <h4 class="my-4" th:text="'Учебная программа курса'"></h4>
+                    <div id="listStageItems" class="d-flex flex-column align-items-center col-md-9 mb-2">
+                        <th:block th:replace="~{admin/fragments/course/courseStageItem :: courseStageItem (*{educationalProgramStages})}"></th:block>
+                     </div>
+                    <button class="btn btn-outline-primary" th:onclick="course.addStageItem(event)">
+                     Добавить этап
+                    </button>
+                </div>
+
+                <select th:replace="~{admin/fragments/adminSelectField :: adminSelect ('Статус курса', 'courseStatus', ${T(ru.mospolytech..dpo.domain.enumeration.CourseStatus).values()})}" />
+
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-primary" type="submit" th:text="'Обновить курс'"></button>
+
+                    <a th:onclick="course.deleteCourse(event)" class="btn btn-danger" th:text="'Удалить курс'"></a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+</html>

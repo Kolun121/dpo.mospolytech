@@ -1,7 +1,11 @@
 <th:block th:fragment="adminJs"><th:block th:switch="${page}">
-        <th:block th:case="home">
-        </th:block>
-        <th:block th:case="createOrUpdateCourse">
-            <script th:if="*{id}" th:src="@{/resources/js/admin/deleteCourse.js}"></script>
-        </th:block>
+    <th:block th:case="home">
+    </th:block>
+    <th:block th:case="updateCourse">
+        <script th:src="@{/webjars/croppie/2.6.3/croppie.min.js}"></script>
+        <script th:src="@{/resources/js/admin/course.js}"></script>
+    </th:block>
+    <th:block th:case="coursesList">
+        <script th:src="@{/resources/js/admin/courseAdd.js}"></script>
+    </th:block>
 </th:block></th:block>
