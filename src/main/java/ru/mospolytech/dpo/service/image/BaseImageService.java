@@ -6,5 +6,5 @@ public interface BaseImageService<T, ID> {
 
     void delete(T object);
 
-    void deleteByTId(ID id);
+    void deleteById(ID id);
 }

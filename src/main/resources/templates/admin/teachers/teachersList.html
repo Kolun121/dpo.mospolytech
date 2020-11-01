@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" 
-      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'teachers')}">
+      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'teachersList')}">
     
 <main>
     <div class="container">
         <h1 class="text-center">Страница</h1>
-        <h2 class="text-center"><a href="/admin/teachers/create/">Добавить преподавателя</a></h2>
+        <h2 class="text-center"><a th:onclick="teacher.createTeacher(event)" th:href="@{teachers/new}">Создать преподавателя</a></h2>
     </div>
     
     <table class="table">
         <thead>
-        <tr>
-            <td>ФИО</td>
-            <td>Род деятельности</td>
+        <tr class="d-flex justify-content-around">
+            <td class="col-4">ФИО</td>
+            <td class="col-4">Род деятельности</td>
+            <td class="col-4">Ссылка</td>
         </tr>
         </thead>
-        <tbody>
-        <?php foreach ($teachers as $teacher): ?>
-            <tr>
-                <th>
-                    <a href="/admin/teachers/edit/<?= $teacher['id'] ?>">
-                         <?= $teacher['name'] ?>
-                    </a>
-                </th>
-                <td><?= $teacher['profession'] ?></td>
+        <tbody>   
+            <tr class="d-flex justify-content-around" th:object="${teacher}" th:each="teacher : ${teachers}">
+                <th th:text="*{fullName}" class="col-4"></th>
+                <td th:text="*{teacherOccupation}" class="col-4"></td>
+                <td class="col-4"><a th:text="'Перейти'" th:href="@{'teachers/' + *{id}}"></a></td>
             </tr>
-        <?php endforeach; ?>
+        
         </tbody>
     </table>
 </main>

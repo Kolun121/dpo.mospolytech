@@ -26,8 +26,8 @@ public class CourseMainImageServiceImpl implements CourseMainImageService {
     }
 
     @Override
-    public void deleteByTId(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteById(Long id) {
+        courseMainImageRepository.deleteById(id);
     }
 
     @Override

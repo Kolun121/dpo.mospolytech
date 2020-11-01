@@ -1,10 +1,13 @@
 <th:block th:fragment="adminImageInput (label, image, type)">
     <div class="form-group d-flex flex-column align-items-center">
         <h4 class="text-center" th:text="${label}">Изображение</h4>
-        <div class="custom-file">
+        <div class="custom-file" th:id="file_upload_block" th:style="${image} ? 'display:none': 'display:block'">
             <th:block th:switch="${type}">
                 <input th:case="'course'" type="file" accept="image/*" class="custom-file-input" id="files" 
                    onchange="course.cropCourseMainImage()" name="files" aria-describedby="fileHelp">
+                
+                <input th:case="'teacher'" type="file" accept="image/*" class="custom-file-input" id="files" 
+                   onchange="teacher.cropTeacherMainImage()" name="files" aria-describedby="fileHelp">
             </th:block>
             <label class="custom-file-label" for="files">Выберите файл</label>
         </div>
@@ -13,6 +16,10 @@
                 <img th:case="'course'" 
                      id="courseMainImage" th:alt="${label}" class="rounded" width="400px" height="400px"
                      th:src="${image} ? '/img/courses/main_image/' + ${image.name}: '/'" >
+                
+                <img th:case="'teacher'" 
+                     id="teacherMainImage" th:alt="${label}" class="rounded" width="350px" height="350px"
+                     th:src="${image} ? '/img/teachers/' + ${image.name}: '/'" >
             </th:block>
         </div>
     </div>
@@ -21,6 +28,10 @@
             <button th:case="'course'" 
                 th:style="${image} ? 'display:block': 'display:none'" class="btn btn-danger" id="btn_del_photo"
                 onclick="course.deleteCourseMainImage(event)">Удалить</button>
+            
+            <button th:case="'teacher'" 
+                th:style="${image} ? 'display:block': 'display:none'" class="btn btn-danger" id="btn_del_photo"
+                onclick="teacher.deleteTeacherMainImage(event)">Удалить</button>
         </th:block>
     </div>
 </th:block>

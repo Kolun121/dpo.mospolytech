@@ -97,6 +97,7 @@ var course = {
                 success: function(result){
                     $('#uploadimageModal').modal('hide');
                     document.getElementById('btn_del_photo').style.display = "block";
+                    document.getElementById('file_upload_block').style.display = "none";
                     document.getElementById('courseMainImage').src = '/img/courses/main_image/' + result;            
                 }
             });
@@ -109,6 +110,7 @@ var course = {
             url: document.URL + "/image",
             type: "DELETE",
             success: function(){
+                document.getElementById('file_upload_block').style.display = "block";
                 document.getElementById('courseMainImage').src = "";            
             }
         });

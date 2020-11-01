@@ -8,4 +8,11 @@
     <th:block th:case="coursesList">
         <script th:src="@{/resources/js/admin/courseAdd.js}"></script>
     </th:block>
+    <th:block th:case="updateTeacher">
+        <script th:src="@{/webjars/croppie/2.6.3/croppie.min.js}"></script>
+        <script th:src="@{/resources/js/admin/teacher.js}"></script>
+    </th:block>
+    <th:block th:case="teachersList">
+        <script th:src="@{/resources/js/admin/teacherAdd.js}"></script>
+    </th:block>
 </th:block></th:block>

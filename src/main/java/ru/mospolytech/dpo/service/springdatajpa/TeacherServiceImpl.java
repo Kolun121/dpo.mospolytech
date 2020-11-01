@@ -2,6 +2,7 @@ package ru.mospolytech.dpo.service.springdatajpa;
 
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import ru.mospolytech.dpo.domain.Teacher;
 import ru.mospolytech.dpo.repository.TeacherRepository;
@@ -25,22 +26,28 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Optional<Teacher> teacherOptional = teacherRepository.findById(id);
+        
+        if(!teacherOptional.isPresent()){
+            throw new RuntimeException("Преподаватель не найден");
+        }
+        
+        return teacherOptional.get();
     }
 
     @Override
     public Teacher save(Teacher object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return teacherRepository.save(object);
     }
 
     @Override
     public void delete(Teacher object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        teacherRepository.delete(object);
     }
 
     @Override
     public void deleteById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        teacherRepository.deleteById(id);
     }
 
     

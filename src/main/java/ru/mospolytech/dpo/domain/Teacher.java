@@ -2,7 +2,7 @@ package ru.mospolytech.dpo.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.sql.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,12 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.mospolytech.dpo.domain.image.TeacherMainImage;
 
 @Getter
 @Setter
@@ -33,11 +33,12 @@ public class Teacher implements Serializable{
     
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
-    private Timestamp createdAt = new Timestamp(new Date().getTime());
+    private Timestamp createdAt;
     
     @UpdateTimestamp
     @Column
     private Timestamp updatedAt;
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private ImageFile teacherMainImage;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private TeacherMainImage mainImage;
 }
