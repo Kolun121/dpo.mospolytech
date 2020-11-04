@@ -3,11 +3,16 @@
         <h4 class="text-center" th:text="${label}">Изображение</h4>
         <div class="custom-file" th:id="file_upload_block" th:style="${image} ? 'display:none': 'display:block'">
             <th:block th:switch="${type}">
+                
                 <input th:case="'course'" type="file" accept="image/*" class="custom-file-input" id="files" 
                    onchange="course.cropCourseMainImage()" name="files" aria-describedby="fileHelp">
                 
                 <input th:case="'teacher'" type="file" accept="image/*" class="custom-file-input" id="files" 
                    onchange="teacher.cropTeacherMainImage()" name="files" aria-describedby="fileHelp">
+                
+                <input th:case="'news'" type="file" accept="image/*" class="custom-file-input" id="files" 
+                   onchange="news.cropNewsMainImage()" name="files" aria-describedby="fileHelp">
+                
             </th:block>
             <label class="custom-file-label" for="files">Выберите файл</label>
         </div>
@@ -20,6 +25,10 @@
                 <img th:case="'teacher'" 
                      id="teacherMainImage" th:alt="${label}" class="rounded" width="350px" height="350px"
                      th:src="${image} ? '/img/teachers/' + ${image.name}: '/'" >
+                
+                <img th:case="'news'" 
+                     id="newsMainImage" th:alt="${label}" class="rounded" width="350px" height="350px"
+                     th:src="${image} ? '/img/news/' + ${image.name}: '/'" >
             </th:block>
         </div>
     </div>
@@ -32,6 +41,10 @@
             <button th:case="'teacher'" 
                 th:style="${image} ? 'display:block': 'display:none'" class="btn btn-danger" id="btn_del_photo"
                 onclick="teacher.deleteTeacherMainImage(event)">Удалить</button>
+            
+            <button th:case="'news'" 
+                th:style="${image} ? 'display:block': 'display:none'" class="btn btn-danger" id="btn_del_photo"
+                onclick="news.deleteNewsMainImage(event)">Удалить</button>
         </th:block>
     </div>
 </th:block>

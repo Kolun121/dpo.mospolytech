@@ -36,20 +36,7 @@ public class EducationalProgramStagesController {
         mav.addObject("stageItems", Arrays.asList(educationalProgramStageService.save(educationalProgramStage)));
         return mav;
     }
-//    
-//    @GetMapping("{id}")
-//    public String getCourseById(@PathVariable String id, Model model) {
-//        model.addAttribute("course", courseService.findById(Long.parseLong(id)));
-//        return "admin/courses/updateCourse";
-//    }
-//    
-//    @PostMapping("/new")
-//    public @ResponseBody String newCourse(Model model){
-//        Course savedCourse = courseService.save(new Course());
-//
-//        return savedCourse.getId().toString();
-//    }
-//    
+
     @PostMapping("/admin/courses/{courseId}/stages/{id}")
     public @ResponseBody void updateStageById(
             @RequestParam(value = "title", required = false) String title, 

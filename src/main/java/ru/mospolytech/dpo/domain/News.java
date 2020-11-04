@@ -2,45 +2,38 @@ package ru.mospolytech.dpo.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.sql.Date;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import ru.mospolytech.dpo.domain.image.TeacherMainImage;
+import ru.mospolytech.dpo.domain.enumeration.Status;
+import ru.mospolytech.dpo.domain.image.NewsMainImage;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "teachers")
-public class Teacher implements Serializable{
+@Table(name = "news")
+public class News implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
    
-    private String fullName;
-    private String teacherOccupation;
-    private String teacherInformation;
-    private Date teacherDateOfBirth;
+    private String title;
+    private String description;
     
-    @ManyToMany@JoinTable(name = "course_teacher",
-        joinColumns = @JoinColumn(name = "teacher_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Set<Course> courses = new HashSet();
+    @Column(unique = true)
+    private String urlSegment;
     
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
@@ -51,22 +44,25 @@ public class Teacher implements Serializable{
     private Timestamp updatedAt;
     
     @OneToOne(cascade = CascadeType.ALL)
-    private TeacherMainImage mainImage;
+    private NewsMainImage newsMainImage;
+    
+    @Enumerated(value = EnumType.STRING)
+    private Status newsStatus = Status.UNPUBLISHED;
     
     @Override
     public boolean equals(Object o) {
 
         if (o == this) return true;
-        if (!(o instanceof Teacher)) {
+        if (!(o instanceof News)) {
             return false;
         }
-        Teacher teacher = (Teacher) o;
-        return id == teacher.id &&
-                Objects.equals(fullName, teacher.fullName);
+        News news = (News) o;
+        return id == news.id &&
+                Objects.equals(title, news.title);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(fullName, id);
+        return Objects.hash(title, id);
     }
 }

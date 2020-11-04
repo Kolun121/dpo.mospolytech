@@ -6,7 +6,7 @@
     <div class="row pb-5">
         <div class="col-12">
             <form  th:object="${course}" method="post" enctype="multipart/form-data">
-                  
+  
                 <!-- Модальное окно для обрезки изображения -->
                 <div id="uploadimageModal" style="display:none;" class="modal" role="dialog">
                     <div class="modal-dialog modal-lg">
@@ -32,11 +32,12 @@
                         </div>
                     </div>
                 </div>
-                <input th:replace="~{admin/fragments/adminImageInput :: adminImageInput ('Изображение курса', *{mainImage}, 'course')}" />
-                
+                <input th:replace="~{admin/fragments/adminImageInput :: adminImageInput ('Изображение курса', *{mainImage}, 'course')}" /> 
+              
                 
                 <input th:replace="~{admin/fragments/adminUrlInputField :: adminUrlInput ('Url курса', 'urlSegment', 'courses')}" />
 
+                
                 <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Название курса', 'title', 'text')}" />
 
                 <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Аудитория курса(для кого предназначена программа)', 'courseAudience', 'textarea')}" />
@@ -61,19 +62,51 @@
                 <select th:replace="~{admin/fragments/adminSelectField :: adminSelect ('Выберите площадку', 'courseStudyLocation', ${T(ru.mospolytech.dpo.domain.enumeration.CourseStudyLocation).values()})}" />
 
                 <select th:replace="~{admin/fragments/adminSelectField :: adminSelect ('Укажите, для кого предназначена программа', 'courseTargetEntity', ${T(ru.mospolytech.dpo.domain.enumeration.CourseTargetEntity).values()})}" />    
-
+                
+                
+                <!--course gallery-->
+                <div class="d-flex flex-column justify-content-center align-items-center mb-5">
+                    <h4 class="text-center my-4">Галерея курса</h4>
+                    <div id="listGalleryItems" class="row edit-menu">
+                        <th:block th:replace="~{admin/fragments/course/courseGalleryImageItem :: courseGalleryImageItem (*{courseGalleryImages})}"></th:block>
+                    </div>
+                    <div class="d-flex col-md-12 justify-content-center">
+                        <div class="custom-file">
+                            <input type="file" accept="image/*" class="custom-file-input" 
+                                   th:onchange="|course.uploadCourseGalleryImage(event)|" 
+                                   id="galleryImageFile" name="galleryImageFile">
+                            <label class="custom-file-label" for="galleryImageFile">Выберите файл</label>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                <!--Преподаватели курса-->
+                <h4 class="text-center">Преподаватели курса</h4>
+                <div class="form-check checkbox-styling d-flex flex-column justify-content-center align-items-center">
+                    <div id="checkboxList">
+                        <div th:each="teacher : ${teachers}" class="form-check checkbox-success col-md-7">
+                            <input type="checkbox"  th:id="${teacher.id}" th:field="*{teachers}" th:value="${teacher.id}"/>
+                            <label th:for="${teacher.id}"><a th:text="${teacher.fullName}" th:href="@{'/admin/teachers/' + ${teacher.id}}"></a></label>
+                        </div> 
+                    </div>
+                    <button type="button" id="show_course_teachers_btn"
+                        onclick="toggle('#checkboxList');" class="btn btn-primary">Показать преподавателей</button>
+                </div> 
+           
                 <!--educationalProgramStages-->
-                <div class="form-group except d-flex flex-column align-items-center justify-content-center">
-                    <h4 class="my-4" th:text="'Учебная программа курса'"></h4>
+                <div class="form-group except d-flex flex-column justify-content-center align-items-center">
                     <div id="listStageItems" class="d-flex flex-column align-items-center col-md-9 mb-2">
+                        <h4 class="my-4 text-center" th:text="'Учебная программа курса'"></h4>
                         <th:block th:replace="~{admin/fragments/course/courseStageItem :: courseStageItem (*{educationalProgramStages})}"></th:block>
                      </div>
-                    <button class="btn btn-outline-primary" th:onclick="course.addStageItem(event)">
+                    <button class="btn btn-outline-primary col-3" th:onclick="course.addStageItem(event)">
                      Добавить этап
                     </button>
                 </div>
 
-                <select th:replace="~{admin/fragments/adminSelectField :: adminSelect ('Статус курса', 'courseStatus', ${T(ru.mospolytech..dpo.domain.enumeration.CourseStatus).values()})}" />
+                <select th:replace="~{admin/fragments/adminSelectField :: adminSelect ('Статус курса', 'courseStatus', ${T(ru.mospolytech..dpo.domain.enumeration.Status).values()})}" />
 
                 <div class="col-sm-offset-2 col-sm-10">
                     <button class="btn btn-primary" type="submit" th:text="'Обновить курс'"></button>

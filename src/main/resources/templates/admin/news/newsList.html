@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'newsList')}">
+    
+<main>
+    <div class="container">
+        <h1 class="text-center">Новости</h1>
+        <h2 class="text-center"><a th:onclick="news.createNews(event)" th:href="@{news/new}">Добавить новость</a></h2>
+    </div>
+    
+    <table class="table">
+        <thead>
+        <tr class="d-flex justify-content-around">
+            <td class="col-4">Название</td>
+            <td class="col-4">Содержание</td>
+            <td class="col-4">Ссылка</td>
+        </tr>
+        </thead>
+        <tbody>   
+            <tr class="d-flex justify-content-around" th:object="${news}" th:each="newsItem : ${news}">
+                <th th:text="*{title}" class="col-4"></th>
+                <td th:text="*{description}" class="col-4"></td>
+                <td class="col-4"><a th:text="'Перейти'" th:href="@{'news/' + *{id}}"></a></td>
+            </tr>
+        
+        </tbody>
+    </table>
+</main>
+
+</html>

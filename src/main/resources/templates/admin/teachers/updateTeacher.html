@@ -6,7 +6,6 @@
     <div class="row pb-5">
         <div class="col-12">
             <form  th:object="${teacher}" method="post" enctype="multipart/form-data">
-                  
                 <!-- Модальное окно для обрезки изображения -->
                 <div id="uploadimageModal" style="display:none;" class="modal" role="dialog">
                     <div class="modal-dialog modal-lg">
@@ -33,6 +32,19 @@
                     </div>
                 </div>
                 <input th:replace="~{admin/fragments/adminImageInput :: adminImageInput ('Фото преподавателя', *{mainImage}, 'teacher')}" />
+                
+                <!--Курсы преподавателя-->
+                 <h4 class="text-center">Курсы преподавателя</h4>
+                <div class="form-check checkbox-styling d-flex flex-column justify-content-center align-items-center">
+                    <div id="checkboxList">
+                        <div th:each="course : ${courses}" class="form-check checkbox-success col-md-7">
+                        <input type="checkbox"  th:id="${course.id}" th:field="*{courses}" th:value="${course.id}"/>
+                        <label th:for="${course.id}"><a th:text="${course.title}" th:href="@{'/admin/courses/' + ${course.id}}"></a></label>
+                        </div>   
+                    </div>
+                    <button type="button" id="show_teacher_courses_btn" 
+                        onclick="toggle('#checkboxList');" class="btn btn-primary">Показать курсы</button>
+                </div>
                 
                 <input th:replace="~{admin/fragments/adminInputField :: adminInput ('ФИО преподавателя', 'fullName', 'text')}" />
 

@@ -3,8 +3,10 @@ package ru.mospolytech.dpo.domain;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -23,10 +28,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import ru.mospolytech.dpo.domain.enumeration.CourseCompetency;
 import ru.mospolytech.dpo.domain.enumeration.CourseField;
 import ru.mospolytech.dpo.domain.enumeration.CourseForm;
-import ru.mospolytech.dpo.domain.enumeration.CourseStatus;
+import ru.mospolytech.dpo.domain.enumeration.Status;
 import ru.mospolytech.dpo.domain.enumeration.CourseStudyLocation;
 import ru.mospolytech.dpo.domain.enumeration.CourseTargetEntity;
 import ru.mospolytech.dpo.domain.enumeration.CourseType;
+import ru.mospolytech.dpo.domain.image.CourseGalleryImage;
 import ru.mospolytech.dpo.domain.image.CourseMainImage;
 
 @Getter
@@ -44,6 +50,13 @@ public class Course implements Serializable{
     private Integer coursePrice;
     private Integer courseTime;
     private String courseDocument;
+    
+    @ManyToMany
+    @JoinTable(name = "course_teacher",
+        joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "teacher_id"))
+    private Set<Teacher> teachers = new HashSet<>();
+    
     @Column(unique = true)
     private String urlSegment;
 
@@ -66,13 +79,16 @@ public class Course implements Serializable{
     private CourseTargetEntity courseTargetEntity;
     
     @Enumerated(value = EnumType.STRING)
-    private CourseStatus courseStatus = CourseStatus.UNPUBLISHED;
+    private Status courseStatus = Status.UNPUBLISHED;
     
     @OneToOne(cascade = CascadeType.ALL)
     private CourseMainImage mainImage;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
     private List<EducationalProgramStage> educationalProgramStages = new ArrayList<>();
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+    private List<CourseGalleryImage> courseGalleryImages = new ArrayList<>();
     
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
@@ -81,10 +97,21 @@ public class Course implements Serializable{
     @UpdateTimestamp
     @Column
     private Timestamp updatedAt;
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof Course)) {
+            return false;
+        }
+        Course course = (Course) o;
+        return id == course.id &&
+                Objects.equals(title, course.title);
+    }
     
-//    @PrePersist
-//    void placedAt() {
-//        this.createdAt = new Timestamp(new Date().getTime());
-////        this.createdAt = new Date();
-//    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, id);
+    }
 }

@@ -1,10 +1,15 @@
 <th:block th:fragment="adminCss"><th:block th:switch="${page}">
-        <!--<th:block th:case="courses"><link th:href="@{/resources/css/admin/courses.css}" rel="stylesheet"></th:block>-->
         <th:block th:case="updateCourse">
             <link th:href="@{/resources/css/admin/courses.css}" rel="stylesheet">
+            <link th:href="@{/resources/css/admin/checkboxStyling.css}" rel="stylesheet">
             <link th:href="@{/webjars/croppie/2.6.3/croppie.css}" rel="stylesheet">
         </th:block>
         <th:block th:case="updateTeacher">
+            <link th:href="@{/resources/css/admin/checkboxStyling.css}" rel="stylesheet">
             <link th:href="@{/webjars/croppie/2.6.3/croppie.css}" rel="stylesheet">
+        </th:block>
+        <th:block th:case="updateNews">
+            <link th:href="@{/webjars/croppie/2.6.3/croppie.css}" rel="stylesheet">
+            <link th:href="@{/resources/css/admin/courses.css}" rel="stylesheet">
         </th:block>
 </th:block></th:block>

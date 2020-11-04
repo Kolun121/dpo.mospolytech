@@ -12,15 +12,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.mospolytech.dpo.domain.Teacher;
+import ru.mospolytech.dpo.service.CourseService;
 import ru.mospolytech.dpo.service.TeacherService;
 
 @Controller("adminTeachersController")
 @RequestMapping("/admin/teachers")
 public class TeachersController {
     private final TeacherService teacherService;
+    private final CourseService courseService;
 
-    TeachersController(TeacherService teacherService) {
+    TeachersController(TeacherService teacherService, CourseService courseService) {
         this.teacherService = teacherService;
+        this.courseService = courseService;
     }
     
     @InitBinder
@@ -37,6 +40,7 @@ public class TeachersController {
     @GetMapping("{id}")
     public String getTeacherById(@PathVariable Long id, Model model) {
         model.addAttribute("teacher", teacherService.findById(id));
+        model.addAttribute("courses", courseService.findAll());
         return "admin/teachers/updateTeacher";
     }
     
