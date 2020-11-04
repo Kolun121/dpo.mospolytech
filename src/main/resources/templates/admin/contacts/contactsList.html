@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'contactsList')}">
+    
+<main>
+    <div class="container">
+        <h1 class="text-center">Контакты</h1>
+        <h2 class="text-center"><a th:onclick="contact.createContact(event)" th:href="@{contacts/new}">Добавить новый контакт</a></h2>
+    </div>
+    
+    <table class="table">
+        <thead>
+        <tr class="d-flex justify-content-around">
+            <td class="col-4">ФИО</td>
+            <td class="col-4">Род деятельности</td>
+            <td class="col-4">Ссылка</td>
+        </tr>
+        </thead>
+        <tbody>   
+            <tr class="d-flex justify-content-around" th:object="${contact}" th:each="contact : ${contacts}">
+                <th th:text="*{fullName}" class="col-4"></th>
+                <td th:text="*{occupation}" class="col-4"></td>
+                <td class="col-4"><a th:text="'Перейти'" th:href="@{'contacts/' + *{id}}"></a></td>
+            </tr>
+        
+        </tbody>
+    </table>
+</main>
+
+</html>

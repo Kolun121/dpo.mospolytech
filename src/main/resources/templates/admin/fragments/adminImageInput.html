@@ -13,6 +13,9 @@
                 <input th:case="'news'" type="file" accept="image/*" class="custom-file-input" id="files" 
                    onchange="news.cropNewsMainImage()" name="files" aria-describedby="fileHelp">
                 
+                <input th:case="'contact'" type="file" accept="image/*" class="custom-file-input" id="files" 
+                   onchange="contact.cropContactMainImage()" name="files" aria-describedby="fileHelp">
+                
             </th:block>
             <label class="custom-file-label" for="files">Выберите файл</label>
         </div>
@@ -29,6 +32,10 @@
                 <img th:case="'news'" 
                      id="newsMainImage" th:alt="${label}" class="rounded" width="350px" height="350px"
                      th:src="${image} ? '/img/news/' + ${image.name}: '/'" >
+                
+                <img th:case="'contact'" 
+                     id="contactMainImage" th:alt="${label}" class="rounded" width="350px" height="350px"
+                     th:src="${image} ? '/img/contacts/' + ${image.name}: '/'" >
             </th:block>
         </div>
     </div>
@@ -45,6 +52,10 @@
             <button th:case="'news'" 
                 th:style="${image} ? 'display:block': 'display:none'" class="btn btn-danger" id="btn_del_photo"
                 onclick="news.deleteNewsMainImage(event)">Удалить</button>
+            
+            <button th:case="'contact'" 
+                th:style="${image} ? 'display:block': 'display:none'" class="btn btn-danger" id="btn_del_photo"
+                onclick="contact.deleteContactMainImage(event)">Удалить</button>
         </th:block>
     </div>
 </th:block>

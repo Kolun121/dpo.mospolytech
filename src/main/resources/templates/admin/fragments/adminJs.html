@@ -16,10 +16,17 @@
         <script th:src="@{/webjars/croppie/2.6.3/croppie.min.js}"></script>
         <script th:src="@{/resources/js/admin/news.js}"></script>
     </th:block>
+    <th:block th:case="updateContact">
+        <script th:src="@{/webjars/croppie/2.6.3/croppie.min.js}"></script>
+        <script th:src="@{/resources/js/admin/contact.js}"></script>
+    </th:block>
     <th:block th:case="teachersList">
         <script th:src="@{/resources/js/admin/teacherAdd.js}"></script>
     </th:block>
     <th:block th:case="newsList">
         <script th:src="@{/resources/js/admin/newsAdd.js}"></script>
+    </th:block>
+    <th:block th:case="contactsList">
+        <script th:src="@{/resources/js/admin/contactAdd.js}"></script>
     </th:block>
 </th:block></th:block>

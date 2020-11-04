@@ -79,7 +79,7 @@ var news = {
 
             },
             success: function(){
-                window.location = '/admin/news/';           
+                window.location = '/admin/news';           
             },
             error: function (e) {
                 console.log(e);

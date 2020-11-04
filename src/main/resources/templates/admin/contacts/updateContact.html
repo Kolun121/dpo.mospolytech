@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'updateContact')}">
+    
+<main class="container mb-5" >
+    <div class="row pb-5">
+        <div class="col-12">
+            <form  th:object="${contact}" method="post" enctype="multipart/form-data">
+                <!-- Модальное окно для обрезки изображения -->
+                <div id="uploadimageModal" style="display:none;" class="modal" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Загрузка фотографии контакта</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex flex-column align-items-center justify-content-center">
+                                    <div class="h-100 text-center">
+                                        <div id="image_demo" style="width:500px; margin-top:30px"></div>
+                                    </div>
+                                    <div class="h-100 col-6" style="padding-top:30px;">
+                                        <button class="btn btn-success crop_image col-12" 
+                                                onclick="contact.addContactMainImage(event)">Загрузить</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Закрыть</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input th:replace="~{admin/fragments/adminImageInput :: adminImageInput ('Фотография контакта', *{contactMainImage}, 'contact')}" />
+                
+                <input th:replace="~{admin/fragments/adminInputField :: adminInput ('ФИО сотрудника', 'fullName', 'text')}" />
+
+                <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Род занятий', 'occupation', 'text')}" />
+                
+                <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Телефон сотрудника', 'phone', 'text')}" />
+                
+                <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Email сотрудника', 'email', 'text')}" />
+                
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-primary" type="submit" th:text="'Обновить информацию'"></button>
+
+                    <a th:onclick="contact.deleteContact(event)" class="btn btn-danger" th:text="'Удалить сотрудника'"></a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+</html>

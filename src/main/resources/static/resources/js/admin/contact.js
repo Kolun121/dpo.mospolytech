@@ -11,22 +11,8 @@ $image_crop = $('#image_demo').croppie({
     }
 });
 
-function toggle(objName) {
- var obj = $(objName);
- 
- if (obj.css("display") != "none") {
-    obj.animate({ height: 'hide' }, 500);
-    $('#show_teacher_courses_btn').html("Показать программу");
-    $('html,body').stop().animate({ scrollTop: $('#teacherCourses').offset().top - 150 }, 500);
- } else {
-     obj.animate({ height: 'show' }, 500);
-     $('#show_teacher_courses_btn').html("Скрыть курсы");
- }
- 
-};
-
-var teacher = {
-    cropTeacherMainImage: function() {
+var contact = {
+    cropContactMainImage: function() {
         const files = document.getElementById('files').files;
         
         var reader = new FileReader();
@@ -41,7 +27,7 @@ var teacher = {
         reader.readAsDataURL(files[0]);
         $('#uploadimageModal').modal('show');
     },
-    addTeacherMainImage: function(event) {   
+    addContactMainImage: function(event) {   
         event.preventDefault();
         $image_crop.croppie('result', {
             type: 'blob',
@@ -63,12 +49,12 @@ var teacher = {
                     $('#uploadimageModal').modal('hide');
                     document.getElementById('btn_del_photo').style.display = "block";
                     document.getElementById('file_upload_block').style.display = "none";
-                    document.getElementById('teacherMainImage').src = '/img/teachers/' + result;            
+                    document.getElementById('contactMainImage').src = '/img/contacts/' + result;            
                 }
             });
           });
     },
-    deleteTeacherMainImage: function(evnt) {
+    deleteContactMainImage: function(evnt) {
         evnt.preventDefault();
         evnt.target.style.display = 'none';
         $.ajax({
@@ -76,14 +62,14 @@ var teacher = {
             type: "DELETE",
             success: function(){
                 document.getElementById('file_upload_block').style.display = "block";
-                document.getElementById('teacherMainImage').src = "";            
+                document.getElementById('contactMainImage').src = "";            
             }
         });
         
     },
-    deleteTeacher: function(event) {
+    deleteContact: function(event) {
         event.preventDefault;
-        if(!confirm('Вы действительно хотите удалить данного преподавателя и все связанные с ним данные?')) {
+        if(!confirm('Вы действительно хотите удалить данный контакт?')) {
             return false;
         }
         $.ajax({
@@ -93,7 +79,7 @@ var teacher = {
 
             },
             success: function(){
-                window.location = '/admin/teachers';           
+                window.location = '/admin/contacts';           
             },
             error: function (e) {
                 console.log(e);
