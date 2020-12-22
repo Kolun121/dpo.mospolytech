@@ -3,6 +3,9 @@ package ru.mospolytech.dpo.service.springdatajpa;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.mospolytech.dpo.domain.News;
 import ru.mospolytech.dpo.repository.NewsRepository;
@@ -50,5 +53,20 @@ public class NewsServiceImpl implements NewsService {
         newsRepository.deleteById(id);
     }
 
+    @Override
+    public Page<News> findAllPageableSpec(Specification<News> filter, Pageable pageable) {
+        return newsRepository.findAll(filter, pageable);
+    }
+
+    @Override
+    public News findByUrlSegment(String urlSegment) {
+        Optional<News> newsOptional = newsRepository.findByUrlSegment(urlSegment);
+        
+        if(!newsOptional.isPresent()){
+            throw new RuntimeException("Новость не найдена");
+        }
+        
+        return newsOptional.get();
+    }
     
 }

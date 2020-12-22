@@ -3,6 +3,9 @@ package ru.mospolytech.dpo.service.springdatajpa;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.mospolytech.dpo.domain.Course;
 import ru.mospolytech.dpo.repository.CourseRepository;
@@ -59,6 +62,21 @@ public class CourseServiceImpl implements CourseService {
         }
         
         return courseOptional.get();
+    }
+
+    @Override
+    public Integer min() {
+        return courseRepository.min();
+    }
+
+    @Override
+    public Integer max() {
+        return courseRepository.max();
+    }
+
+    @Override
+    public Page<Course> findAllPageableSpec(Specification<Course> filter, Pageable pageable) {
+        return courseRepository.findAll(filter, pageable);
     }
     
 }

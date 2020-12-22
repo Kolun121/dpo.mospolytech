@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
+import javax.validation.constraints.NotBlank;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -59,22 +60,28 @@ public class Course implements Serializable{
     
     @Column(unique = true)
     private String urlSegment;
-
+    
+    @NotBlank
     @Enumerated(value = EnumType.STRING)
     private CourseField courseField;
     
+    @NotBlank
     @Enumerated(value = EnumType.STRING)
     private CourseType courseType;
     
+    @NotBlank    
     @Enumerated(value = EnumType.STRING)
     private CourseCompetency courseCompetency;
     
+    @NotBlank 
     @Enumerated(value = EnumType.STRING)
     private CourseForm courseForm;
     
+    @NotBlank 
     @Enumerated(value = EnumType.STRING)
     private CourseStudyLocation courseStudyLocation;
     
+    @NotBlank 
     @Enumerated(value = EnumType.STRING)
     private CourseTargetEntity courseTargetEntity;
     
