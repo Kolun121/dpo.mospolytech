@@ -51,22 +51,27 @@ var index = {
             alert('Заполните необходимые поля!');
             return;
         }
-        var formData = new FormData();
-        
+
+        var data = {
+            "fullName": $('#fio_feedback').val(), 
+            "email": $('#email_feedback').val(), 
+            "phone": $('#number_feedback').val(),
+            "question": $('#question_feedback').val()
+        };
 //        var g_captcha_response = $("#g-recaptcha-response").val();
-        formData.append('fio', $('#fio_feedback').val());
-        formData.append('email', $('#email_feedback').val());
-        formData.append('number', $('#number_feedback').val());
-        formData.append('user_msg', $('#question_feedback').val());
+//        formData.append('fullName', $('#fio_feedback').val());
+//        formData.append('email', $('#email_feedback').val());
+//        formData.append('phone', $('#number_feedback').val());
+//        formData.append('question', $('#question_feedback').val());
 //        formData.append('select_face', $('#select_face_feedback').val());
 //        formData.append('captcha',g_captcha_response);
         
         $.ajax({
             url: '/ajaxSendFeedback/',
-            type: this.ajaxMethod,
-            data: formData,
-            processData: false,
-            contentType: false,
+            type: 'POST',
+    //        data: data,
+            data: JSON.stringify(data),
+            contentType : 'application/json; charset=utf-8',
             beforeSend: function(){
 
             },

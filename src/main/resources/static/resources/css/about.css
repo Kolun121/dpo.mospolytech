@@ -1,0 +1,116 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+@font-face {
+    font-family: GilroyBold; 
+    src: url(../fonts/Gilroy-ExtraBold.otf); 
+}
+@font-face {
+    font-family: GilroyThin;
+    src: url(../fonts/Gilroy-Light.otf); 
+}
+body {
+    display: flex;
+	min-height: 100vh;
+    flex-direction: column;
+    height: 100%;
+}
+main {
+    flex: 1 0 auto;
+}
+footer {
+	flex: 0 0 auto;
+}
+
+main {
+    font-family: GilroyThin;
+    font-size: 16pt;
+    padding-bottom: 50px;
+    text-align: center;
+    /* width: 100%;
+    max-width: 1500px;
+    margin: 0 auto; */
+}
+main p  {
+    margin: 0 auto
+}
+h1 {
+    margin: 20px;
+    font-family:  GilroyBold;
+    text-align: center; 
+    font-size: 33px
+}
+ul li {
+    list-style: none;
+}
+/* h1 {
+    padding-bottom: 30px; 
+    font-family:  GilroyBold; 
+}
+main ul li {
+    list-style-type: none;
+} */
+.aboutus {
+	width: 100%;
+	max-width: 1500px;
+	margin: 0 auto;
+	text-align: center;
+}
+.aboutus p{text-align: justify;
+width: 75%}
+@media only screen and (max-width: 600px) {
+    .aboutus p {width:99%}
+}
+.map {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.aboutimg {
+    width: 100%;
+    max-width: 470px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+/* .card-header {
+    background-color:  rgba(94, 94, 94, 0.103); 
+}
+.card-body {
+    font-family: GilroyThin;
+    font-size: 17pt;
+} */
+.btn-link {
+    color: black;
+    font-size: 20pt;
+}
+.btn-link:hover {
+    color: rgb(134, 75, 160); 
+    text-decoration: none;
+}
+.links {
+    margin-top: 30px;
+	text-align: center;
+}
+
+.documents a{
+    text-decoration: none;
+}
+
+.links a {
+    color: black;
+    text-decoration: underline;
+    font-family: GilroyBold;
+    
+}
+.links a:hover {
+    color: #874BA0;
+    text-decoration: underline;
+}
+.where {
+    background-color:  rgba(94, 94, 94, 0.103);
+}
+.where h1 {
+    padding-top: 30px;
+}

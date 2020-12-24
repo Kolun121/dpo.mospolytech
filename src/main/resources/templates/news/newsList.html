@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::main}, 'newsList', 'Новости')}">
+<main>
+    <h1>Новости</h1>
+    <div class="news">
+        <div class='news_item' th:object="${newsItem}" th:each="newsItem: ${news}">                            
+            <div class="wrapper">
+                <div class='title'th:text="*{title}"></div>
+                <div class='date'>
+                    <p>Дата публикации: [[*{createdAt}]]</p>          
+                </div>    
+                <div class='text'th:text="${#strings.abbreviate(newsItem.description, 50)}"></div> 
+                <div class='more'>                                    
+                     <a th:href="@{'news/' + *{urlSegment}}">Подробнее</a>
+                </div>
+            </div>
+           <div class="img_news">
+               <img th:src="*{newsMainImage} ? '/img/news/' + *{newsMainImage.name}: '/'">
+           </div>
+        </div>
+        <th:block th:if="${news.getTotalPages() > 1}">
+            <th:block th:each="pageNumber : ${#numbers.sequence( 0, news.getTotalPages() - 1)}">
+                <a th:href="@{/news?page={page}(page=${pageNumber})}" th:id="${pageNumber}" th:class="${'pagination_link' + (news.getPageable().getPageNumber() == pageNumber ? ' checked' : '')}">[[${pageNumber} + 1]]</a>
+            </th:block>
+        </th:block>
+    </div>
+    
+</main>
+
+</html>

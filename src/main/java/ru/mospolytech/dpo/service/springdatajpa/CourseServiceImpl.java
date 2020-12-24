@@ -3,14 +3,18 @@ package ru.mospolytech.dpo.service.springdatajpa;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.mospolytech.dpo.domain.Course;
+import ru.mospolytech.dpo.domain.EntityId;
 import ru.mospolytech.dpo.repository.CourseRepository;
 import ru.mospolytech.dpo.service.CourseService;
 
+//@Transactional
 @Service
 public class CourseServiceImpl implements CourseService {
     
@@ -29,7 +33,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course findById(Long id) {
-        Optional<Course> courseOptional = courseRepository.findById(id);
+        EntityId entityId = new EntityId(id, 0l);
+
+        Optional<Course> courseOptional = courseRepository.findById(entityId);
         
         if(!courseOptional.isPresent()){
             throw new RuntimeException("Курс не найден");
@@ -45,12 +51,14 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void delete(Course object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        courseRepository.delete(object);
     }
 
+    
     @Override
-    public void deleteById(Long id) {
-        courseRepository.deleteById(id);
+    public void deleteByIdAndVersion(Long id, Long version) {
+        EntityId entityId = new EntityId(id, version);
+        courseRepository.deleteById(entityId);
     }
 
     @Override
@@ -77,6 +85,52 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Page<Course> findAllPageableSpec(Specification<Course> filter, Pageable pageable) {
         return courseRepository.findAll(filter, pageable);
+    }
+
+    @Override
+    public Long maxId() {
+        Optional<Long> maxId = courseRepository.maxId();
+        
+        if(!maxId.isPresent()){
+            return 0l;
+        }
+        
+        return maxId.get();
+    }
+
+    @Override
+    public Long maxVersionWhereId(Long id) {
+        Optional<Long> maxVersion = courseRepository.maxVersionWhereId(id);
+        
+        if(!maxVersion.isPresent()){
+            throw new RuntimeException("Ошибка!");
+        }
+        
+        return maxVersion.get();
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        EntityId entityId = new EntityId(id, 0l);
+        courseRepository.deleteById(entityId);
+    }
+
+    @Override
+    public List<Course> findAllByIdByOrderByCreatedAtAsc(Long id) {
+        return courseRepository.findAllByIdOrderByUpdatedAtDesc(id);
+    }
+
+    @Override
+    public Course findByIdAndVersion(Long id, Long version) {
+        EntityId entityId = new EntityId(id, version);
+
+        Optional<Course> courseOptional = courseRepository.findById(entityId);
+        
+        if(!courseOptional.isPresent()){
+            throw new RuntimeException("Курс не найден");
+        }
+        
+        return courseOptional.get();
     }
     
 }

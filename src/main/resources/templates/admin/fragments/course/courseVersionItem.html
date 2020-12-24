@@ -1,0 +1,13 @@
+<th:block th:fragment="courseVersionItem (name, value, type)">
+    <div class="card">
+        <h5 class="card-header" th:text="${name}"></h5>
+        <div class="card-body">
+            <th:block th:switch="${type}">
+                <p th:case="'text'" type="text" class="card-text" th:text="${value}"></p>
+                <p th:case="'enum'" type="text" class="card-text" th:text="${value?.getValue()}"></p>
+                <p th:case="'number'" type="number" class="card-text" th:text="${value}"></p>
+                <p th:case="'date'" class="card-text" th:text="${#dates.format(value, 'dd/MMM/yyyy HH:mm')}"></p>
+            </th:block>
+        </div>
+    </div> 
+</th:block>

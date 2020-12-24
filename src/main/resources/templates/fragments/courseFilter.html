@@ -1,0 +1,26 @@
+<th:block th:fragment="courseFilter (label, name, enumItems, appliedFilters)">
+<div class="card">
+    <div class="card-header" th:id="|heading_${name}|">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" 
+                th:attr="data-target='#collapse_'+ ${name}" 
+                th:attrappend="aria-controls='collapse_'+ ${name}" aria-expanded="false">
+          [[${label}]]
+          <img th:src="@{/resources/image/icons/arrow_down.png}" style="width: 15px;">
+        </button>
+      </h2>
+    </div>
+    <div th:id="'collapse_' + ${name}" class="collapse" th:attr="aria-labelledby='heading_'+ ${name}" data-parent="#accordionExample">
+      <div class="card-body">
+
+        <label th:if="${enumItems != ''}" th:each="enumItem : ${enumItems}">
+            <input type="checkbox" th:class="|common_selector ${name}|" th:value="${enumItem}" 
+                   th:checked="${#lists.contains(appliedFilters?.get(name), enumItem)}"/> 
+            <span class="checkbox-custom"></span>
+            [[${enumItem.getValue()}]]
+        </label>
+
+      </div>
+    </div>
+</div>
+</th:block>

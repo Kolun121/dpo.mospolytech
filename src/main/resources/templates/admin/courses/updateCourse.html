@@ -3,6 +3,7 @@
       th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'updateCourse')}">
     
 <main class="container mb-5" >
+    <a th:href="@{${course.id} +'/versions'}" class="btn btn-outline-primary">История изменений</a>
     <div class="row pb-5">
         <div class="col-12">
             <form  th:object="${course}" method="post" enctype="multipart/form-data">
@@ -37,6 +38,7 @@
                 
                 <input th:replace="~{admin/fragments/adminUrlInputField :: adminUrlInput ('Url курса', 'urlSegment', 'courses')}" />
 
+                <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Дата начала курса', 'courseStartDate', 'date')}" />
                 
                 <input th:replace="~{admin/fragments/adminInputField :: adminInput ('Название курса', 'title', 'text')}" />
 

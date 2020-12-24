@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::main}, 'aboutPage', 'О нас')}">
+<main>
+    <div>
+        <div class="aboutus">
+            <h1>О центре</h1>
+            <p><b>Центр профессиональной переподготовки и повышения квалификации Московского политехнического университета (Московский Политех)</b> ведет обучение по самым востребованным программам дополнительного образования. Мы готовим слушателей по программам в сфере промышленной, экологической и информационной безопасности, диагностики автомототранспортных средств и безопасности дорожного движения, охраны труда, оценочной деятельности, экономики, строительства и многих других.  
+            <br><b>ФГБОУ ВО «Московский политехнический университет»</b> - современный крупный многопрофильный государственный политехнический вуз. <br>В соответствии с приказом Минобрнауки России от 21 марта 2016 г.  Московский Политех создан путем реорганизации в форме слияния Университета машиностроения (МАМИ) и Московского государственного университета печати имени Ивана Федорова (МГУП).
+            <br><br>Лицензия № 2398 от 22 сентября 2016 г. на осуществление образовательной деятельности.
+            <br>Свидетельство № 2292 от 11 октября 2016 г. о государственной аккредитации.</p>
+            <div class="links">
+                <a href="/about/bank_documents">БАНКОВСКИЕ РЕКВИЗИТЫ</a>
+                <!-- <br><a href="rights_documents.php">ПРАВОВЫЕ ДОКУМЕНТЫ</a> -->
+            </div>    
+            <div>
+                <img th:src="@{/resources/image/group1.jpg}" class="aboutimg">
+                <img th:src="@{/resources/image/group2.jpg}" class="aboutimg">
+                <img th:src="@{/resources/image/group3.jpg}" class="aboutimg">    
+            </div>
+        </div>
+        <div class="where">
+            <h1>На каких площадках проходит обучение?</h1>
+            <ul>
+                <li>Ул. Большая Семеновская, 38 (метро «Электрозаводская»)</li>
+                <li>Ул. Автозаводская, 16 (метро «Автозаводская»)</li>
+                <li>Ул. Павла Корчагина, 22 (метро «ВДНХ»)</li>
+                <li>Ул. 1-я Дубровская, д. 16а (метро «Дубровка»)</li>
+            </ul>
+            <div class="map">
+                <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aa5aad5d82fb26d01db1de8be8bd3bad62adeef8a18a8cca3b5c92ef190d6a70e&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+            </div>
+        </div>
+        <div class="certificates">
+            <h1>Какие документы мы выдаем?</h1>
+            <ul>
+               <li>Диплом о профессиональной переподготовке</li>
+                <li>Удостоверение о повышении квалификации</li>
+                <li>Сертификат</li>
+            </ul>  
+            <div class="documents">
+                <a data-fancybox="gallery" th:href="@{'/resources/image/doc1.jpg'}">
+                    <img class="aboutimg" th:src="@{/resources/image/doc1.jpg}" alt="...">
+                </a>
+                <a data-fancybox="gallery" th:href="@{'/resources/image/doc3.jpg'}">
+                    <img class="aboutimg" th:src="@{/resources/image/doc3.jpg}" alt="...">
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+</html>

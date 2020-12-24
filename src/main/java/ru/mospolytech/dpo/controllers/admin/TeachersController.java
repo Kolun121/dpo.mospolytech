@@ -1,7 +1,9 @@
 package ru.mospolytech.dpo.controllers.admin;
 
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,7 +53,7 @@ public class TeachersController {
     }
     
     @PostMapping("{id}")
-    public String updateTeacherById(@PathVariable Long id, @ModelAttribute Teacher teacher){
+    public String updateTeacherById(@PathVariable Long id, @Valid Teacher teacher, BindingResult result){
         teacher.setId(id);
         Teacher savedTeacher = teacherService.save(teacher);
 

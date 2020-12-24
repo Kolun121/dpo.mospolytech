@@ -1,0 +1,73 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+@font-face {
+    font-family: GilroyBold; 
+    src: url(../fonts/Gilroy-ExtraBold.otf); 
+}
+@font-face {
+    font-family: GilroyThin;
+    src: url(../fonts/Gilroy-Light.otf); 
+}
+body {
+    display: flex;
+	min-height: 100vh;
+    flex-direction: column;
+    height: 100%;
+}
+main {
+    flex: 1 0 auto;
+}
+main h1{font-size: 33px}
+footer {
+	flex: 0 0 auto;
+}
+
+main {
+    text-align: center;
+    margin-bottom: 50px;
+} 
+h1 {
+    margin: 20px;
+} 
+.colleague div {
+    width: 100%; 
+    max-width: 500px;
+}
+.colleague {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.colleague img {
+    width: 100%;
+    max-width: 200px;
+    height: 100%;
+	margin-bottom: 10px;
+}
+.map {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+h4, h1 {
+    font-family: GilroyBold; 
+}
+.colleague p, .adress p, .grafic p {
+    font-family: GilroyThin;
+    font-size: 17pt;
+}
+.adress {
+    background-color:  rgba(94, 94, 94, 0.103); 
+}
+.adress h1, .grafic h1 {
+    margin: 0;
+    padding-top: 50px;
+    margin-bottom: 30px;
+}

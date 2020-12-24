@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{admin/fragments/adminLayout :: adminLayout (~{::main},'courseVersions')}">
+    
+<main class="container mb-5 justify-content-between align-items-start col-12 d-flex" >
+    <div class="d-flex flex-column col-3 justify-content-around mt-5">
+        <div th:object="${courseVer}" th:each="courseVer : ${courseVersions}" 
+             th:class="${'card mb-3' + (courseVer.getVersion() == 0 ? ' text-white bg-primary' : ' border-primary')}">
+            <div class="card-header" th:if="*{createdBy != null}">
+              Создано: [[*{#dates.format(updatedAt, 'dd/MMM/yyyy HH:mm')}]]
+            </div>
+            <div class="card-header" th:if="*{createdBy == null}">
+              Редактировано: [[*{#dates.format(updatedAt, 'dd/MMM/yyyy HH:mm')}]]
+            </div>
+            <div class="card-body">
+              <p class="card-text" th:if="*{createdBy != null}">Автор: [[*{createdBy}]]</p>
+              <p class="card-text" th:if="*{edditedBy != null}">Автор: [[*{edditedBy}]]</p>
+              <a th:href="@{'/admin/courses/' + *{id} + '/versions/' + *{version}}" class="btn btn-light col-12">Просмотр</a>
+            </div>
+        </div>
+    </div>
+    <div class="flex-column col-9 mt-5" th:if="${chosenCourse}">  
+            <div class="left-toolbar" th:if="${chosenCourse.version != 0}">
+                <form th:action="@{'/admin/courses/' + ${chosenCourse.id} + '/versions/' + ${chosenCourse.version}}" method="POST">
+                    <button type="submit" class="btn btn-outline-primary">Восстановить версию</button>
+                </form>
+            </div>
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Дата начала курса', ${chosenCourse.courseStartDate}, 'date')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Название курса', ${chosenCourse.title}, 'text')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Для кого предназначена программа', ${chosenCourse.courseAudience}, 'text')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Чему обучают на курсе', ${chosenCourse.courseSubject}, 'text')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Цель программы', ${chosenCourse.courseGoal}, 'text')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Длительность курса', ${chosenCourse.courseTime}, 'number')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Выдаваемый документ курса', ${chosenCourse.courseDocument}, 'text')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Выдаваемый документ курса', ${chosenCourse.courseDocument}, 'text')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Форма обучения', ${chosenCourse.courseForm}, 'enum')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Сфера обучения', ${chosenCourse.courseField}, 'enum')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Вид обучения', ${chosenCourse.courseType}, 'enum')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Формируемые компетенции', ${chosenCourse.courseCompetency}, 'enum')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Площадка', ${chosenCourse.courseStudyLocation}, 'enum')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Для кого предназначена программа', ${chosenCourse.courseTargetEntity}, 'enum')}" />
+            <th:block th:replace="~{admin/fragments/course/courseVersionItem :: courseVersionItem ('Статус курса', ${chosenCourse.courseStatus}, 'enum')}" />
+            
+                <!--Преподаватели курса-->
+                <h4 class="text-center">Преподаватели курса</h4>
+                <div class="form-check checkbox-styling d-flex flex-column justify-content-center align-items-center">
+                    <div id="checkboxList">
+                        <div th:each="teacher : ${chosenCourse.teachers}" class="form-check checkbox-success col-md-7">
+                            <label th:for="${teacher.id}"><a th:text="${teacher.fullName}" th:href="@{'/admin/teachers/' + ${teacher.id}}"></a></label>
+                        </div> 
+                    </div>
+                </div> 
+    </div>
+</main>
+
+</html>

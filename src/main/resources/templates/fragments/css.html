@@ -1,7 +1,43 @@
 <th:block th:fragment="css"><th:block th:switch="${page}">
-        <th:block th:case="home"><link th:href="@{/resources/css/index.css}" rel="stylesheet"></th:block>
-<!--        <th:block th:case="hsome"></th:block>
-        <th:block th:case="homse"></th:block>
-        <th:block th:case="homes"></th:block>
-        <th:block th:case="haaome"></th:block>-->
+        <th:block th:case="home">
+            <link th:href="@{/resources/css/index.css}" rel="stylesheet">
+        </th:block>
+        <th:block th:case="coursesList">
+            <link th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.css}"  rel="stylesheet">
+            <link th:href="@{/resources/css/catalog.css}" rel="stylesheet">
+            <link th:href="@{/resources/css/header.css}" rel="stylesheet">
+            <link th:href="@{/resources/css/courses_filter.css}" rel="stylesheet">
+        </th:block>
+        <th:block th:case="showCourse">
+            <link th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.css}"  rel="stylesheet">
+            <link th:href="@{/webjars/fancybox/3.2.5/jquery.fancybox.min.css}"  rel="stylesheet">
+            <link th:href="@{/resources/css/course.css}" rel="stylesheet">
+            <link th:href="@{/resources/css/header.css}" rel="stylesheet">
+            
+        </th:block>
+        <th:block th:case="newsList">
+            <link th:href="@{/resources/css/news.css}" rel="stylesheet">
+            <link th:href="@{/resources/css/header.css}" rel="stylesheet">
+        </th:block>
+        <th:block th:case="showNews">
+            <link th:href="@{/resources/css/news.css}" rel="stylesheet">
+            <link th:href="@{/resources/css/header.css}" rel="stylesheet">
+        </th:block>
+        <th:block th:case="contactsList">
+            <link th:href="@{/resources/css/contacts.css}" rel="stylesheet">
+            <link th:href="@{/resources/css/header.css}" rel="stylesheet">
+        </th:block>
+        <th:block th:case="aboutPage">
+            <link th:href="@{/resources/css/about.css}" rel="stylesheet">
+            <link th:href="@{/resources/css/header.css}" rel="stylesheet">
+            <link th:href="@{/webjars/fancybox/3.2.5/jquery.fancybox.min.css}"  rel="stylesheet">
+        </th:block>
+        <th:block th:case="bankDocumentsPage">
+            <link th:href="@{/resources/css/bank_documents.css}" rel="stylesheet">
+            <link th:href="@{/resources/css/header.css}" rel="stylesheet">
+        </th:block>
+        <th:block th:case="calendarList">
+            <link th:href="@{/resources/css/calendar.css}" rel="stylesheet">
+            <link th:href="@{/resources/css/header.css}" rel="stylesheet">
+        </th:block>
 </th:block></th:block>

@@ -1,0 +1,49 @@
+<th:block th:fragment="courseFilterList (courses, appliedFilters, userCoursePrice)">
+    <div class="checked_filters_block">
+        <button th:if="${not #lists.isEmpty(userCoursePrice)}" class="checked_filters price">
+            Цена: [[${userCoursePrice[0]}]] руб. - [[${userCoursePrice[1]}]] руб.
+        </button>
+        <th:block th:each="entry: ${appliedFilters.entrySet()}">
+            <button th:if="${not #lists.isEmpty(entry.getValue())}" th:class="${'checked_filters ' + entry.getKey()}">
+                <th:block th:if="${entry.getKey() == 'course_target_entity'}">
+                    Для кого: [[${#lists.size(entry.getValue())}]] знач.
+                </th:block>
+                <th:block th:if="${entry.getKey() == 'course_field'}">
+                    СФера обучения: [[${#lists.size(entry.getValue())}]] знач.
+                </th:block>
+                <th:block th:if="${entry.getKey() == 'course_type'}">
+                    Тип обучения: [[${#lists.size(entry.getValue())}]] знач.
+                </th:block>
+                <th:block th:if="${entry.getKey() == 'course_competency'}">
+                    Формируемые компетенции: [[${#lists.size(entry.getValue())}]] знач.
+                </th:block>
+                <th:block th:if="${entry.getKey() == 'course_study_location'}">
+                    Площадка: [[${#lists.size(entry.getValue())}]] знач.
+                </th:block>
+                <th:block th:if="${entry.getKey() == 'course_form'}">
+                    Форма обучения: [[${#lists.size(entry.getValue())}]] знач.
+                </th:block>
+            </button>
+        </th:block>
+    </div>
+    <table class="table table-hover">
+        <tbody class="course-element"> 
+            <tr th:each="course: ${courses}">
+                <th scope="row" class="img"><a th:href="@{'courses/' + ${course.urlSegment}}">
+                        <img th:src="${course.mainImage} ? '/img/courses/main_image/' + ${course.mainImage.name}: '/'"></a></th>
+                <td class="name">
+                    <a th:href="@{'courses/' + ${course.urlSegment}}" th:text="${course.title}"></a>
+                </td>
+                <td class="vid" th:text="${course.courseForm.getValue()}"></td>
+
+                <td class="time">[[${course.courseTime}]] часов</td>
+                <td class="pr">[[${course.coursePrice}]] рублей</td>
+            </tr>
+        </tbody>
+    </table>
+    <th:block th:if="${courses.getTotalPages() > 1}">
+        <th:block th:each="pageNumber : ${#numbers.sequence( 0, courses.getTotalPages() - 1)}">
+            <div th:id="${pageNumber}" th:class="${'pagination_link' + (courses.getPageable().getPageNumber() == pageNumber ? ' checked' : '')}">[[${pageNumber} + 1]]</div>
+        </th:block>
+    </th:block>
+</th:block>

@@ -1,7 +1,8 @@
-<header th:fragment="header">
+<header th:fragment="header(page)">
     <div class="header">
         <a href="/"><div class='logo'>
-            <!--<img src="<?= $themePath ?>/img/logo.png">-->
+             
+            <img th:if="${page != 'home'}" th:src="@{/resources/image/logo_black.png}">
             <div>
                 <p>Дополнительное профессиональное образование</p>
                 <p>Московский Политех</p>
@@ -11,7 +12,7 @@
             <p>+7 (495) 223-05-21, <a href="mailto:dpo@mospolytech.ru">dpo@mospolytech.ru</a></p>
             <li><a href="/courses">Каталог программ</a></li>
             <li><a href="/calendar">Календарь обучения</a></li>
-            <li><a href="/about">О центре</a></li>
+            <li><a href="/about">О нас</a></li>
             <li><a href="/news">Новости</a></li>
             <!--<li><a href="/signin" class="signin">Записаться</a></li>-->
             <li><a href="/contacts">Контакты</a></li>
@@ -24,7 +25,7 @@
                     <li class="pushy-link"><a href="/">Главная</a></li>
                     <li class="pushy-link"><a href="/courses">Каталог программ</a></li>
                     <li class="pushy-link"><a href="/calendar">Календарь обучения</a></li>
-                    <li class="pushy-link"><a href="/about">О центре</a></li>
+                    <li class="pushy-link"><a href="/about">О нас</a></li>
                     <li class="pushy-link"><a href="/news">Новости</a></li>
                     <!--<li class="pushy-link"><a href="/signin">Записаться</a></li>-->
                     <li class="pushy-link"><a href="/contacts">Контакты</a></li>
@@ -35,10 +36,11 @@
         <a class="menu-btn">&#9776;</a>
 
     </div>
-    <div class="header_text">
-        <h1>Пройди курсы дополнительного образования у нас</h1>
-        <p>Стань профессионалом в своем деле</p>
-        <div><a  href="/courses">Записаться на курс</a></div>
+    <div th:if="${page == 'home'}" class="header_text">
+        <h1>Повысьте свои компетенции и станьте профессионалом в своём деле</h1>
+        <p></p>
+        <div><a  href="/courses">Подобрать курс</a></div>
     </div>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    
+    <div th:if="${page != 'home'}" class="stripe"></div>   
 </header>

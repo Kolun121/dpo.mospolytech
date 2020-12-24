@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::main}, 'showNews', ${news.title})}">
+<main th:object="${news}">
+    <div class="news">
+        <div class='news_item'>             
+            <div class="wrapper">
+                <div class='title' th:text="*{title}">
+                </div>
+                <div class='date'>
+                    <p>Дата публикации: [[*{createdAt}]]</p>
+                </div> 
+                <div class="img_news">
+                    <img th:src="*{newsMainImage} ? '/img/news/' + *{newsMainImage.name}: '/'">
+                </div>
+                <div class='text' th:text="*{description}">     
+                </div>
+            </div>                               
+        </div>
+    </div>
+</main>
+</html>

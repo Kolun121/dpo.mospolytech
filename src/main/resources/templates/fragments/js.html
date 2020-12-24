@@ -2,6 +2,18 @@
         <th:block th:case="home">
             <script th:src="@{/resources/js/index.js}"></script>
         </th:block>
+        <th:block th:case="coursesList">
+            <script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+            <script th:src="@{/resources/js/courses_filter.js}"></script>
+        </th:block>
+        <th:block th:case="showCourse">
+            <script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+            <script th:src="@{/webjars/fancybox/3.2.5/jquery.fancybox.min.js}"></script>
+            <script th:src="@{/resources/js/course.js}"></script>
+        </th:block>
+        <th:block th:case="aboutPage">
+            <script th:src="@{/webjars/fancybox/3.2.5/jquery.fancybox.min.js}"></script>
+        </th:block>
 <!--        <th:block th:case="hsome"></th:block>
         <th:block th:case="homse"></th:block>
         <th:block th:case="homes"></th:block>

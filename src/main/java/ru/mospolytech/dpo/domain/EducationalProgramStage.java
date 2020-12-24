@@ -1,6 +1,7 @@
 package ru.mospolytech.dpo.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,4 +24,22 @@ public class EducationalProgramStage implements Serializable{
     
     @ManyToOne
     private Course course;
+    
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof EducationalProgramStage)) {
+            return false;
+        }
+        EducationalProgramStage educationalProgramStage = (EducationalProgramStage) o;
+        return Objects.equals(id, educationalProgramStage.id) &&
+                Objects.equals(title, educationalProgramStage.title) &&
+                Objects.equals(description, educationalProgramStage.description);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, id, title);
+    }
 }

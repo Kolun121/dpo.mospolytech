@@ -17,9 +17,9 @@
         </tr>
         </thead>
         <tbody>   
-            <tr class="d-flex justify-content-around" th:object="${news}" th:each="newsItem : ${news}">
+            <tr class="d-flex justify-content-around" th:object="${newsItem}" th:each="newsItem : ${news}">
                 <th th:text="*{title}" class="col-4"></th>
-                <td th:text="*{description}" class="col-4"></td>
+                <td th:text="*{#strings.abbreviate(description, 50)}" class="col-4"></td>
                 <td class="col-4"><a th:text="'Перейти'" th:href="@{'news/' + *{id}}"></a></td>
             </tr>
         

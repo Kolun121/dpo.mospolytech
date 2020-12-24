@@ -16,6 +16,8 @@ import ru.mospolytech.dpo.domain.enumeration.CourseForm;
 import ru.mospolytech.dpo.domain.enumeration.CourseStudyLocation;
 import ru.mospolytech.dpo.domain.enumeration.CourseTargetEntity;
 import ru.mospolytech.dpo.domain.enumeration.CourseType;
+import java.sql.Date;
+import java.util.Calendar;
 import ru.mospolytech.dpo.domain.enumeration.Status;
 
 public class CourseSpecification {
@@ -29,6 +31,29 @@ public class CourseSpecification {
                 builder.lessThanOrEqualTo(
                    coursePrice, max)
             );
+        };
+    }
+    
+    public static Specification<Course> hasVersion(Long version) {
+        return (Root<Course> root, CriteriaQuery<?> query, CriteriaBuilder builder) -> {
+            Path<Long> courseVersion = root.get(Course_.version);
+            return builder.equal(courseVersion, version);
+        };
+    }
+    
+    public static Specification<Course> hasDateBetweenCurrentDateAndYear() {
+        return (Root<Course> root, CriteriaQuery<?> query, CriteriaBuilder builder) -> {
+            Path<Date> courseDate = root.get(Course_.courseStartDate);
+            
+            Calendar c1 = Calendar.getInstance();
+            Calendar c2 = Calendar.getInstance();
+            
+            Date currentDate = new Date(c1.getTime().getTime());
+            
+            c2.add(Calendar.YEAR, 1);
+            Date inYearDate = new Date(c2.getTime().getTime());
+            
+            return builder.between(courseDate, currentDate, inYearDate);
         };
     }
     

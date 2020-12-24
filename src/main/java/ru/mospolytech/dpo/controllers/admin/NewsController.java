@@ -1,7 +1,9 @@
 package ru.mospolytech.dpo.controllers.admin;
 
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +50,7 @@ public class NewsController {
     }
     
     @PostMapping("{id}")
-    public String updateNewsItemById(@PathVariable Long id, @ModelAttribute News news){
+    public String updateNewsItemById(@PathVariable Long id, @Valid News news, BindingResult result){
         news.setId(id);
         News savedNewsItem = newsService.save(news);
 

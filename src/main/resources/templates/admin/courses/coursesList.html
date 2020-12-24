@@ -32,6 +32,13 @@
         
         </tbody>
     </table>
+    <th:block th:if="${courses.getTotalPages() > 1}">
+        <div class="container d-flex justify-content-around col-4">
+            <div class="" th:each="pageNumber : ${#numbers.sequence( 0, courses.getTotalPages() - 1)}">
+                <a th:href="@{courses?page={page}(page=${pageNumber})}" th:id="${pageNumber}" th:class="${'pagination_link' + (courses.getPageable().getPageNumber() == pageNumber ? ' checked' : '')}">[[${pageNumber} + 1]]</a>
+            </div>
+        </div>
+    </th:block>  
 </main>
 
 </html>

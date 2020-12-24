@@ -1,6 +1,7 @@
 package ru.mospolytech.dpo.domain.image;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import ru.mospolytech.dpo.domain.Course;
@@ -23,4 +24,21 @@ public class CourseGalleryImage implements Serializable{
     
     @ManyToOne
     private Course course;
+    
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof CourseGalleryImage)) {
+            return false;
+        }
+        CourseGalleryImage courseGalleryImage = (CourseGalleryImage) o;
+        return Objects.equals(id, courseGalleryImage.id) &&
+                Objects.equals(name, courseGalleryImage.name);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
 }

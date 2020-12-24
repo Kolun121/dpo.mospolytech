@@ -1,0 +1,120 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+@font-face {
+    font-family: GilroyBold; 
+    src: url(../fonts/Gilroy-ExtraBold.otf); 
+}
+@font-face {
+    font-family: GilroyThin;
+    src: url(../fonts/Gilroy-Light.otf); 
+}
+header {
+    width: 100%;
+    max-width: 3000px;
+    margin: 0 auto;
+    padding-top: 10px;
+
+    font-family: GilroyBold; 
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.header p {
+    margin: 0;
+}
+.header div, .header ul {
+    padding: 20px;
+}
+header a {
+    text-decoration: none;
+}
+header a:hover {
+    text-decoration: none;
+}
+.logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;   
+    align-items: center; 
+    font-size: 16pt;
+    color:black;
+}
+.logo div {
+    margin-left: 10px;
+}
+.menu {
+    margin-top: 15px;
+}
+.menu p {
+    padding: 8px;
+    padding-right: 0;
+    padding-bottom: 0;
+    text-align: right;
+    font-size: 15pt;
+    color: black;
+}
+.menu a {
+    color:black;
+    font-size: 15pt;
+}
+.menu a:hover {
+    color:#874BA0;
+}
+.menu li {
+    display: inline;
+    padding-left: 10px;
+    color: black;
+}
+header img {
+    max-width: 100px;
+    width: 100%;
+}
+.menu-btn {
+    display: none;
+    color: black;
+}
+.signin a {
+    color: #E63246;
+}
+.stripe {
+    height: 2px;
+    background-color: rgba(116, 116, 116, 0.397);
+    width: 100%;
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+@media only screen and (max-width: 2000px) {
+    .menu a, .menu p {
+        font-size: 15pt;
+    }
+    .logo div {
+        font-size: 15pt;
+    }
+}
+@media only screen and (max-width: 1550px) {
+    .menu a, .menu p {
+        font-size: 11pt;
+    }
+    .logo div {
+        font-size: 11pt;
+    }
+}
+@media only screen and (max-width: 1245px) {
+    .menu {
+        display: none;
+    }
+    .menu-btn {
+        display: block;
+    }
+    .header div {
+        padding: 0;
+        padding-bottom: 25px;
+    }
+    .logo div  {
+        display: none;
+    }
+}

@@ -1,16 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::main}, 'home')}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::main}, 'home', 'Главная')}">
 <main>
    <div class="popular_blocks">
-        <h1>Популярные сферы обучения</h1>
+        <h1>Курсы и программы обучения</h1>
+<!--        <div class="popular_courses">
+        </div>-->
         <div class="popular_courses">
-        </div>
+                        <a href="/courses?study_field=work_with_software_products"><div>
+                <img src="">
+                <p>Программные продукты</p>
+        </div></a>
+                        <a href="/courses?study_field=economics_and_managment"><div>
+                <img src="">
+                <p>Экономика и управление</p>
+        </div></a>
+                        <a href="/courses?study_field=industry_and_ecological_safety"><div>
+                <img src="">
+                <p>Техносферная безопасность</p>
+        </div></a>
+                        <a href="/courses?study_field=transport"><div>
+                <img src="">
+                <p>Транспорт</p>
+        </div></a>
+                        <a href="/courses?study_field=metal_working"><div>
+                <img src="">
+                <p>Машиностроение</p>
+        </div></a>
+                        <a href="/courses?study_field=worldskills_russia"><div>
+                <img src="">
+                <p>Worldskills Russia</p>
+        </div></a>
+
+    </div>
     </div>
 
-    <div class="innumbers">
-        <h1>Мы в цифрах</h1>
+<!--    <div class="innumbers">
+        <h1>Наши преимущества</h1>
         <div class="innumbers_blocks"> 
-
+            <img  th:src="'/img/our_super.PNG'">
+        </div>
+    </div>-->
+    
+<!--ИСПРАВИТЬ !!!!!!!!!!!!!-->
+    <div class="popular_blocks">
+        <h1>Наши преимущества</h1>
+        <div class="innumbers_blocks"> 
+            <img  th:src="'/img/our_super.PNG'">
         </div>
     </div>
 
@@ -29,7 +64,7 @@
     <div class="nextcourses">
         <h1>Идет набор на курсы</h1>
         <div class="calendar">
-
+            <th:block th:replace="~{fragments/nearestCourses :: nearestCourses(${courses})}"></th:block>
         </div>
         <div class="calendar_btn_div">
             <a href="/calendar" class="calendar_btn">Календарь обучения</a>
@@ -38,6 +73,67 @@
 
         <a id="success"></a>
 
+        <div class="mainpage_registration_form" id="mainpage_registration_form">
+        <h1>Остались вопросы?</h1>
+            <div id="form_content">
+            <div class="d-flex align-items-center justify-content-center flex-wrap">
+                <label for="fio">ФИО:</label>
+                <input name="fio" type="text" class="form-control" id="fio_feedback" placeholder="Введите ФИО">
+                <div class="valid-feedback">
+                    Поле заполнено
+                </div>
+                <div class="invalid-feedback">
+                    Заполните поле
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center flex-wrap">
+                    <label for="email">Email:</label>
+                    <input name="email" type="email" class="d-inline form-control" id="email_feedback" placeholder="Введите ваш email">
+                    <div class="valid-feedback">
+                        Поле заполнено
+                    </div>
+                    <div class="invalid-feedback">
+                        Заполните поле
+                    </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-center flex-wrap">
+                    <label for="number">Телефон:</label>
+                    <input name="number" type="telephone" class="form-control" id="number_feedback" placeholder="Введите ваш номер телефона">
+                    <div class="valid-feedback">
+                        Поле заполнено
+                    </div>
+                    <div class="invalid-feedback">
+                        Заполните поле
+                    </div>
+            </div>
+            <div class="mt-1 d-flex align-items-center justify-content-center flex-wrap">
+                    <label for="question">Вопрос:</label>
+                    <textarea name="question" type="text" class="d-inline form-control" id="question_feedback" placeholder="Задайте Ваш вопрос"></textarea>
+                    <div class="valid-feedback">
+                        Поле заполнено
+                    </div>
+                    <div class="invalid-feedback">
+                        Заполните поле
+                    </div>
+            </div>
+
+           <!-- <div class='d-flex justify-content-center mt-4'>
+                <div class="g-recaptcha" id="captcha" data-sitekey="6LcSEIcUAAAAAOalkl-Cxwj4pVpRPO62kdri_sR0"></div>
+            </div>-->
+
+            <div class='d-flex justify-content-center'>
+                    <div class="btn_mainpage_r_form">
+                        <button onclick="index.sendMail(event)" name="button_request" class="btn">Отправить</button>
+                    </div>
+            </div>
+
+            <div class="personal_agree">
+                <p>Нажимая эту кнопку, Вы даете Московскому политехническому университету согласие на сбор и обработку Ваших персональных данных. Ознакомлен с Положением Московского Политеха об <a href="https://mospolytech.ru/storage/files/Polozhenie_v_otnoshenii_obrabotki_personalnyh_dannyh__(377893_v2_).pdf">обработке и защите персональных данных.</a></p>
+            </div>
+    </div>
+        
+</div>
 </main>
 
 </html>

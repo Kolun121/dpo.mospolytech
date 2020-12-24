@@ -1,0 +1,467 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+@font-face {
+    font-family: GilroyBold; 
+    src: url(../fonts/Gilroy-ExtraBold.otf); 
+}
+@font-face {
+    font-family: GilroyThin;
+    src: url(../fonts/Gilroy-Light.otf); 
+}
+body {
+    display: flex;
+	min-height: 100vh;
+    flex-direction: column;
+    height: 100%;
+}
+main {
+    flex: 1 0 auto;
+}
+footer {
+	flex: 0 0 auto;
+}
+
+.name_course {
+    text-align: center;
+    margin: 20px;
+    font-family:  GilroyBold; 
+    font-size: 38pt;
+}
+.course_header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+	padding-top: 50px;
+	padding-bottom: 100px;
+	
+	margin-top: -20px;
+	
+	
+	background-image: url(../image/course_back.png);
+    background-position: center center;   
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    background-size: cover;
+    background-color: #464646; 
+}
+.course_info {
+	width: 100%;
+    max-width: 1500px;
+    font-size: 20pt;
+    padding-top: 10px;
+	padding-left: 20px;
+    font-family: GilroyThin;
+}
+.course_info img {
+	margin-right: 10px;
+	width: 30px;
+}
+.about_course img {
+	width: 50px;
+	margin-right: 10px;
+}
+.about_course {
+	padding-top: 30px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 100%;
+    max-width: 1470px;
+    font-size: 16pt;
+	margin: 0 auto;
+	font-family: GilroyThin;
+}
+.about_course div {
+	width: 100%;
+	max-width: 400px;
+}
+.about_course div p {
+	margin-bottom: 0;
+}
+.about_course div div {
+	text-align: justify;
+	padding: 10px;
+}
+.about_course h1 {
+	text-align: center;
+	width: 100%;
+	max-width: 1500px;
+	font-family: GilroyBold;
+	margin-bottom: 45px;
+	padding-top: 30px;
+    
+}
+.about_course_back {
+	/*background-color:  rgba(94, 94, 94, 0.103); */
+    padding-bottom: 70px;
+}
+
+.plan_back {
+	background-color:  rgba(94, 94, 94, 0.103); 
+    padding-bottom: 80px;
+}
+.plan {
+	text-align: center;
+}
+.plan h1 {
+	font-family: GilroyBold;
+	margin-bottom: 45px;
+	padding-top: 60px;
+}
+.plan .one_step {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 100%;
+	max-width: 1000px;
+	margin: 0 auto;
+	text-align: start;
+	margin-bottom: 40px;
+}
+.plan .one_step .title{
+	width: 100%;
+	max-width:400px;
+	font-size: 18pt;
+	font-family: GilroyThin;
+}
+.plan .one_step .title:last-child{
+	width:400px
+}
+.plan .one_step .desc {
+	width: 100%;
+	max-width: 500px;
+	font-size: 18pt;
+	font-family: GilroyThin;
+	text-align: justify;
+}
+.plan .one_step::before{
+    border-left: 3px solid rgba(134, 75, 160, 0.842);
+    width: 1px;
+    bottom: 9px;
+    content: "";
+    left: 37px;
+    top: 40px;
+    position: relative;
+}
+.plan .one_step:last-child::before{
+    border-left: 3px solid rgba(0, 0, 0, 0);
+    width: 1px;
+    bottom: 9px;
+    content: "";
+    left: 37px;
+    top: 40px;
+    position: relative;
+}
+.speakers {
+	text-align: center;
+	padding-top: 30px;
+	width: 100%;
+    max-width: 1470px;
+    font-size: 20pt;
+	margin: 0 auto;
+	font-family: GilroyThin;
+}
+.speakers h1 {
+	font-family: GilroyBold;
+	margin-bottom: 45px;
+	padding-top: 30px;
+}
+.speakers_items {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 100%;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+.speakers_item {
+	width: 100%;
+	max-width: 120px;
+	margin: 10px;
+}
+.speakers_name  {
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	font-size: 16pt;
+	font-family: GilroyThin;
+}
+.speakers_name:hover {
+    color: #874BA0; 
+    text-decoration: none;
+}
+#speakers_img {
+	width: 110px;
+	margin: 0 auto;
+    height: 110px;
+    border-radius: 100%;
+}
+
+main h1{font-size:33px}
+
+
+.coursepage_registration_form h1, .comments h1, .add_comment h1, .gallery h1 {
+    text-align: center;
+    margin: 20px;
+    font-family:  GilroyBold; 
+    
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+
+
+.coursepage_registration_form, .add_comment_form {
+    text-align: center;
+}
+.coursepage_registration_form {
+    background-color:  rgba(94, 94, 94, 0.103); 
+    padding-bottom: 80px;
+}
+.coursepage_registration_form label, .add_comment_form label {
+	font-size: 20pt;
+	width:130px;
+	text-align: right;
+	margin-right: 35px;
+    vertical-align: top;
+    font-family:  GilroyThin;
+}
+.coursepage_registration_form input, .coursepage_registration_form select, .add_comment_form input, .add_comment_form textarea {
+	width:250px;
+	text-align: left;
+	border-radius: 8px;
+    padding: 5px;
+    font-family: GilroyThin;
+}
+.coursepage_registration_form button, .add_comment_form button, #plan_btn {
+    padding: 15px 40px 15px 40px; 
+    border-radius: 8px;
+    background-color: rgba(134, 75, 160, 0.842); 
+    color: white;
+    font-size: 15pt;
+}
+.coursepage_registration_form button:hover, .add_comment_form button:hover {
+    color: white;
+    background-color: rgba(191, 107, 230, 0.842); 
+}
+.btn_coursepage_r_form, .btn_add_comment_form {
+	width:100%;
+	max-width: 400px;
+	margin-top: 30px;
+}
+.personal_agree {
+    width: 100%;
+    max-width: 700px;
+    margin: 10px auto;
+    font-family: GilroyThin;
+}
+#plan{
+    display: none;
+}
+.add_comment {
+    margin-bottom: 80px;
+}
+.comments_item {
+    width: 100%;
+    max-width: 1200px;
+    margin: 5px auto; 
+    border-radius: 8px;
+    background-color:  white;
+    padding: 10px 26px 10px 26px;
+}
+.comments {
+	 background-color:  rgba(94, 94, 94, 0.103); 
+	 padding-bottom: 20px;
+}
+.comments h2 {
+    font-family: GilroyBold;
+    font-size: 24pt;
+    margin: 5px 10px 5px 0; 
+}
+.comments h3 {
+    font-family: GilroyThin;
+    font-size: 13pt;
+    margin: 0;
+    color: rgb(95, 95, 95);
+}
+.comments p {
+    font-family: GilroyThin;
+    font-size: 16pt;
+    margin: 0;
+    padding-bottom: 10px;
+    padding-top: 8px;
+}
+
+
+#demo {
+  height:100%;
+  position:relative;
+  overflow:hidden;
+}
+
+
+.green{
+  background-color:#6fb936;
+}
+.thumb{
+    margin-bottom: 30px;
+}
+
+.page-top{
+    margin-top:85px;
+}
+
+   
+img.zoom {
+    width: 100%;
+    height: 200px;
+    border-radius:5px;
+    object-fit:cover;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+}
+        
+ 
+.transition {
+    -webkit-transform: scale(1.2); 
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
+    .modal-header {
+   
+     border-bottom: none;
+}
+    .modal-title {
+        color:#000;
+    }
+    .modal-footer{
+      display:none;  
+    }
+	
+	
+@media only screen and (max-width: 1050px) {
+	.title {
+		margin-left: 20px;
+	}
+	.about_course div {
+	  padding-bottom: 50px;
+	  padding: 20px;
+   }
+   .plan .one_step{
+	   justify-content: flex-start;
+   }
+   .course_info {
+	  padding-right: 20px;
+   }
+   svg{display: none}
+   .plan .one_step::before{border: none}
+   .plan .one_step .title{
+	max-width:99%
+}
+.plan .one_step .title:last-child{
+	width: 98%
+}
+
+.plan .one_step .desc{max-width:98%;
+	width:98%;
+	margin-left:2%
+	}
+
+}	
+@media only screen and (max-width: 970px) {
+	.plan .one_step .desc{max-width:98%;
+		width:98%
+		}
+}
+@media only screen and (max-width: 837px) {
+   .one_step p {
+	   padding: 20px;
+   }
+   .title {
+		margin-left: 0px;
+	}
+	.plan .one_step .title{
+		max-width:99%
+	}
+	.plan .one_step .title:last-child{
+		width: 98%
+	}
+	.plan .one_step .desc{margin-left:0%}
+
+}
+@media only screen and (max-width: 818px) {
+   .about_course {
+	   justify-content: center;
+   }
+   .one_step p {
+	   padding-top: 0;
+	   padding-bottom: 0;
+   }
+   .plan .one_step .title{
+	max-width:99%
+}
+.plan .one_step .title:last-child{
+	width: 98%
+}
+   
+}
+
+@media only screen and (max-width: 780px) {
+    .course_info {
+        padding-top: 20px;
+    }
+}
+@media only screen and (max-width: 570px) {
+    .name_course {
+		font-size: 20pt;
+	}
+	.course_info, .about_course, .plan .one_step .title, .plan .one_step .desc {
+		font-size: 13pt;
+	}
+	.plan .one_step .title{
+		max-width:99%
+	}
+
+	/*#speakers_img {
+		display: none;
+	}
+	.speakers_item {
+		width: 100%;
+		max-width: 570px;
+	}
+	.speakers_name {
+		text-align: start;
+	}
+	.speakers_name p {
+		margin-bottom: 6px;
+	}
+	.speakers_items {
+		margin-left: 0px;
+	}
+	.speakers_name {
+		font-size: 13pt;
+	}
+	.speakers_item {
+		margin: 2px;
+	}*/
+}
+@media only screen and (max-width: 426px) {
+    .coursepage_registration_form label, .add_comment_form label{
+        text-align: center;
+		margin: 0;
+		
+	}
+	.course_header{
+		background-image: none;
+		background-color:  rgba(94, 94, 94, 0.103);
+	}
+}

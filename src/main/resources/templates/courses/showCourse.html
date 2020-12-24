@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::main}, 'showCourse', ${course.title})}">
+<main th:object="${course}">
+    <div class="course_header">
+        <h1 id="name_course" class="name_course" th:text="*{title}"></h1>
+        <div class="course_info">
+            <p><img th:src="@{/resources/image/icons/hat.png}"><b>Направление:</b> [[*{courseField.getValue()}]]</p>
+            <p><img th:src="@{/resources/image/icons/money.png}"><b>Стоимость:</b> [[*{coursePrice}]] рублей</p>
+            <p><img th:src="@{/resources/image/icons/time.png}"><b>Объем часов:</b> [[*{courseTime}]] часов</p>
+            <!--<p><img src="/img/icons/calendar.png"><b>Месяцев обучения:</b> кол-во месяцев</p>-->
+            <p><img th:src="@{/resources/image/icons/document.png}"><b>Выдаваемый документ:</b> [[*{courseDocument}]]</p>
+        </div>
+    </div>
+    <div class="about_course_back">
+            <div class="about_course">
+                    <h1>О курсе</h1>
+                    <div class="aim">
+                            <p><img th:src="@{/resources/image/icons/aim.png}"><b>Цель программы</b></p>
+                            <div> 
+                                [[*{courseGoal}]]
+                            </div>
+                    </div>
+                    <div class="listeners">
+                            <p><img th:src="@{/resources/image/icons/listener.png}"><b>Для кого</b></p>
+                            <div> 
+                                [[*{courseAudience}]]
+                            </div>
+                    </div>
+                    <div class="skills">
+                        <p><img th:src="@{/resources/image/icons/books.png}"><b>Чему учат</b></p>
+                        <div> 
+                            [[*{courseSubject}]]
+                        </div>
+                    </div>
+            </div>
+    </div>
+    <div class="plan_back">
+        <th:block th:replace="~{fragments/course/courseProgram :: courseProgram (*{educationalProgramStages})}"></th:block>
+    </div>
+    <div class="speakers">
+        <th:block th:replace="~{fragments/course/courseTeachers :: courseTeachers (*{teachers})}"></th:block>
+    </div>
+<!--    <div class="comments">
+        <h1 class="text-center my-5">Отзывы о курсе</h1>
+
+        <div class="d-flex flex-column col-12" id="comments">
+        <?php
+        if(!empty($comments)){
+            Theme::block('courses/course_reviews', [
+                        'comments' => $comments
+                    ]);
+        }else{
+            echo '<h4 class="text-center" id="removableSign">Отзывов пока нет.</h4>';
+        }
+        ?>
+        </div>
+        <div class="add_comment" id="add_comment_item">
+            <h1>Написать отзыв</h1>
+            <form class="add_comment_form" enctype="multipart/form-data" name="request" method="post"> 
+                <div class="d-flex lign-items-center justify-content-center flex-wrap mb-2">
+                    <label for="name">Имя:</label>
+                    <input name="name" type="text" id="review_name" class="form-control" placeholder="Введите ваше имя">
+                    <div class="valid-feedback">
+                        Поле заполнено
+                    </div>
+                    <div class="invalid-feedback">
+                        Заполните поле
+                    </div>
+                </div>
+
+                <div class="d-flex lign-items-center justify-content-center flex-wrap mb-2">
+                    <label for="comment">Отзыв:</label>
+                    <textarea name="comment" id="review_comment" class="form-control" type="text" placeholder="Ваш отзыв"></textarea>
+                    <div class="valid-feedback">
+                        Поле заполнено
+                    </div>
+                    <div class="invalid-feedback">
+                        Заполните поле
+                    </div>
+                </div>
+                <div class='d-flex justify-content-center'>
+                    <div class="btn_add_comment_form">
+                        <button type="submit" name="button_request" class="btn" onclick="course.addReviewItem(event, <?= $course['id'] ?>)">Отправить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> -->
+    <div class="container gallery">
+        <th:block th:replace="~{fragments/course/courseGallery :: courseGallery (*{courseGalleryImages})}"></th:block>
+    </div>
+        
+    <div class="coursepage_registration_form" id="coursepage_registration_form">
+        <h1>Запишись на курс онлайн</h1>
+        <form class="coursepage_r_form" enctype="multipart/form-data" method="post">
+            <div id="form_content">
+                <input type="hidden" name="select_course" id="select_course" th:value="*{title}">
+                <div class="d-flex align-items-center justify-content-center flex-wrap mb-2">
+                        <label for="fio">ФИО:</label>
+                        <input name="fio" type="text" class="form-control" id="fio_feedback" placeholder="Введите ФИО">
+                        <div class="valid-feedback">
+                            Поле заполнено
+                        </div>
+                        <div class="invalid-feedback">
+                            Заполните поле
+                        </div>
+                </div>
+
+                <div class="d-flex lign-items-center justify-content-center flex-wrap mb-2">
+                        <label for="email">Email:</label>
+                        <input name="email" type="email" class="form-control" id="email_feedback" placeholder="Введите ваш email">
+                        <div class="valid-feedback">
+                            Поле заполнено
+                        </div>
+                        <div class="invalid-feedback">
+                            Заполните поле
+                        </div>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-center flex-wrap mb-2">
+                        <label for="number">Телефон:</label>
+                        <input name="number" type="telephone" class="form-control" id="number_feedback" placeholder="Введите ваш номер телефона">
+                        <div class="valid-feedback">
+                            Поле заполнено
+                        </div>
+                        <div class="invalid-feedback">
+                            Заполните поле
+                        </div>
+                </div>
+                <div class='d-flex justify-content-center'>
+                        <div class="btn_coursepage_r_form">
+                            <button onclick="course.sendMail(event)" name="button_request" class="btn">Отправить</button>
+                        </div>
+                </div>
+
+                <div class="personal_agree">
+                    <p>Нажимая эту кнопку, Вы даете Московскому политехническому университету согласие на сбор и обработку Ваших персональных данных. Ознакомлен с Положением Московского Политеха об <a href="https://mospolytech.ru/storage/files/Polozhenie_v_otnoshenii_obrabotki_personalnyh_dannyh__(377893_v2_).pdf">обработке и защите персональных данных.</a></p>
+                </div>
+        </div>
+            </form>
+    </div>
+
+</main>
+</html>

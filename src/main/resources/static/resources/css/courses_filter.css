@@ -1,0 +1,9 @@
+#loading{
+    text-align: center;
+    background:url(../image/loader.gif) no-repeat center;
+    height: 150px;
+    width: 100%;
+}
+#price_range, #price_range_mobile{
+    width:90%;
+}

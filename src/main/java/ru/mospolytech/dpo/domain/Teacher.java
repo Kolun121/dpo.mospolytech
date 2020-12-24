@@ -37,9 +37,13 @@ public class Teacher implements Serializable{
     private String teacherInformation;
     private Date teacherDateOfBirth;
     
-    @ManyToMany@JoinTable(name = "course_teacher",
+    @ManyToMany
+    @JoinTable(name = "course_teacher",
         joinColumns = @JoinColumn(name = "teacher_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
+            inverseJoinColumns = {
+                @JoinColumn(name = "course_id", referencedColumnName = "id"),
+                @JoinColumn(name = "Version", referencedColumnName = "Version")
+            })
     private Set<Course> courses = new HashSet();
     
     @CreationTimestamp
@@ -61,8 +65,12 @@ public class Teacher implements Serializable{
             return false;
         }
         Teacher teacher = (Teacher) o;
-        return id == teacher.id &&
-                Objects.equals(fullName, teacher.fullName);
+        return Objects.equals(id, teacher.id) &&
+                Objects.equals(fullName, teacher.fullName) &&
+                Objects.equals(teacherOccupation, teacher.teacherOccupation) &&
+                Objects.equals(teacherInformation, teacher.teacherInformation) &&
+                Objects.equals(teacherDateOfBirth, teacher.teacherDateOfBirth) &&
+                Objects.equals(mainImage, teacher.mainImage);
     }
     
     @Override

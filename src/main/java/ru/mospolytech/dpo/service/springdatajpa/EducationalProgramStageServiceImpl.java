@@ -46,8 +46,8 @@ public class EducationalProgramStageServiceImpl implements EducationalProgramSta
     }
 
     @Override
-    public Optional<EducationalProgramStage> findByCourseId(Long id) {
-        return educationalProgramStageRepository.findByCourseId(id);
+    public Set<EducationalProgramStage> findAllByCourseId(Long id) {
+        return educationalProgramStageRepository.findAllByCourseIdAndCourseVersion(id, 0l);
     }
     
 }

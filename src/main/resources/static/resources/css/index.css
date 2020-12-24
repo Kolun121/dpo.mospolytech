@@ -40,6 +40,8 @@ header {
     background-size: cover;
     background-color: #464646; 
 }
+
+
 .header {
     display: flex;
     flex-direction: row;

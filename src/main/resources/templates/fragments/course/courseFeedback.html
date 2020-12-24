@@ -1,0 +1,25 @@
+<th:block th:fragment="courseFeedback (courseStages)">
+<div class="plan">
+    <h1>Учебный план</h1>
+    <div id="plan">
+
+        <div class="one_step" th:each="courseStage: ${courseStages}">
+        <svg width="44" height="44" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+
+
+        <circle cx="22" cy="22" r="20" stroke="rgba(134, 75, 160, 0.842)" fill="transparent" stroke-width="3"/>
+
+
+
+
+        </svg>  
+            <b><p class="title" th:text="${courseStage.title}"></p></b>
+            <p class="desc" th:text="${courseStage.description}"></p>
+        </div>
+
+    </div>
+    <button type="button" id="plan_btn" onclick="toggle('#plan');" class="btn btn-default">Показать программу</button>
+
+</div>
+</th:block>

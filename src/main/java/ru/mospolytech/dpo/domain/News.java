@@ -19,6 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import ru.mospolytech.dpo.domain.enumeration.Status;
 import ru.mospolytech.dpo.domain.image.NewsMainImage;
+import org.springframework.data.annotation.Version;
 
 @Getter
 @Setter
@@ -29,6 +30,10 @@ public class News implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
    
+//    @Version
+//    @Column(name = "VERSION")
+//    private long version;
+    
     private String title;
     private String description;
     

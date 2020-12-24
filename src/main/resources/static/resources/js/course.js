@@ -1,3 +1,17 @@
+
+function toggle(objName) {
+ var obj = $(objName);
+ 
+ if (obj.css("display") != "none") {
+    obj.animate({ height: 'hide' }, 500);
+    $('#plan_btn').html("Показать программу");
+    $('html,body').stop().animate({ scrollTop: $('#plan').offset().top - 150 }, 500);
+ } else {
+     obj.animate({ height: 'show' }, 500);
+     $('#plan_btn').html("Скрыть программу");
+ }
+ 
+}
 var course = {
     listItems: $('#listItems'),
 
@@ -47,38 +61,25 @@ var course = {
             }
         }
         
-//        if($('#select_face_feedback').val() === ""){ 
-//            $('#select_face_feedback').addClass('is-invalid');
-//            if(document.getElementById('select_face_feedback').classList.contains('is-valid')){
-//                document.getElementById('select_face_feedback').classList.remove('is-valid'); 
-//            }
-//            isValid = false;
-//        }else{
-//            $('#select_face_feedback').addClass('is-valid'); 
-//            if(document.getElementById('select_face_feedback').classList.contains('is-invalid')){
-//                document.getElementById('select_face_feedback').classList.remove('is-invalid'); 
-//            }
-//        }
-        
         if(!isValid){
+
             alert('Заполните необходимые поля!');
             return;
         }
-        var formData = new FormData();
-       
-        formData.append('select_course', $('#select_course').val());
-        formData.append('fio', $('#fio_feedback').val());
-        formData.append('email', $('#email_feedback').val());
-        formData.append('number', $('#number_feedback').val());
-        //formData.append('select_face', $('#select_face_feedback').val());
-    
         
+        var data = {
+            "fullName": $('#fio_feedback').val(), 
+            "email": $('#email_feedback').val(), 
+            "phone": $('#number_feedback').val(),
+            "courseTitle": $('#name_course').text()
+        };
+    
+        console.log($('#name_course').val());
         $.ajax({
             url: '/courses/ajaxSendFeedback/',
-            type: this.ajaxMethod,
-            data: formData,
-            processData: false,
-            contentType: false,
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType : 'application/json; charset=utf-8',
             beforeSend: function(){
                     $('#coursepage_registration_form').append('Подождите, заявка отправляется...');
 		    document.getElementById('form_content').style.display = 'none';
@@ -87,13 +88,8 @@ var course = {
                     document.getElementById('number_feedback').value = "";
             },
             success: function(result){
-                    //document.getElementById('form_content').style.display = 'none';
-                   // document.getElementById('fio_feedback').value = "";
-                   // document.getElementById('email_feedback').value = "";
-                    //document.getElementById('number_feedback').value = "";
-                   //document.getElementById('select_face_feedback').value = "";
       		    document.getElementById('coursepage_registration_form').value = "";
-                    $('#coursepage_registration_form').append(result); 
+                    $('#coursepage_registration_form').html(result); 
             }
         });
     },

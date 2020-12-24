@@ -10,18 +10,25 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import ru.mospolytech.dpo.domain.Course;
+import ru.mospolytech.dpo.domain.EntityId;
 
 
-public interface CourseRepository extends CrudRepository<Course, Long>, JpaSpecificationExecutor<Course> {
-    Optional<Course> findById(Long id);
+public interface CourseRepository extends CrudRepository<Course, EntityId>, JpaSpecificationExecutor<Course> {
+    Optional<Course> findById(EntityId ei);
+//    Set<Course> findAllByVersion(Long version);
     Optional<Course> findByUrlSegment(String urlSegment);
-//    Page<Course> findAll(Pageable pageable);
-
-    Page<Course> findAll(Specification<Course> filter, Pageable pageable);
-    
+    List<Course> findAllByIdOrderByUpdatedAtDesc(Long id);
     @Query(value = "SELECT min(coursePrice) FROM Course")
     public Integer min();
     
     @Query(value = "SELECT max(coursePrice) FROM Course")
     public Integer max();
+    
+    @Query(value = "SELECT max(id) FROM Course")
+    Optional<Long> maxId();
+    
+//    @Query(value = "SELECT max(version) FROM Course")
+//    Optional<Long> maxId();
+    @Query("select max(c.version) from Course c where  c.id = ?1")
+    Optional<Long> maxVersionWhereId(Long id);
 }

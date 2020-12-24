@@ -1,10 +1,13 @@
 package ru.mospolytech.dpo.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -27,15 +30,21 @@ import ru.mospolytech.dpo.domain.enumeration.Status;
 import ru.mospolytech.dpo.service.CourseService;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import ru.mospolytech.dpo.domain.UserFeedBack;
+import ru.mospolytech.dpo.service.UserFeedBackService;
 import static ru.mospolytech.dpo.specification.CourseSpecification.*;
 
 @Controller
 @RequestMapping("/courses")
 public class CoursesController {
     private final CourseService courseService;
+    private final UserFeedBackService userFeedBackService;
 
-    CoursesController(CourseService courseService) {
+    CoursesController(CourseService courseService, UserFeedBackService userFeedBackService) {
         this.courseService = courseService;
+        this.userFeedBackService = userFeedBackService;
     }
 
     @GetMapping()
@@ -55,7 +64,7 @@ public class CoursesController {
         Integer maxPrice = courseService.max();
         
         Map<String, List<? extends Enum>> appliedFilters = new HashMap();
-        
+//        CourseTargetEntity;
         List<CourseTargetEntity> courseTargetEntityList = new ArrayList<>();
         String[] courseTargetEntityArr = (courseTargetEntity == null) ? new String[]{} : courseTargetEntity.split("-");
         for(String s: courseTargetEntityArr){
@@ -103,7 +112,6 @@ public class CoursesController {
         List<CourseStudyLocation> courseStudyLocationList = new ArrayList<>();
         String[] courseStudyLocationArr = (courseStudyLocation == null) ? new String[]{} : courseStudyLocation.split("-");
         for(String s: courseStudyLocationArr){
-            courseStudyLocationList.add(CourseStudyLocation.valueOf(s));
             try {
                 courseStudyLocationList.add(CourseStudyLocation.valueOf(s));
             } catch (IllegalArgumentException e) {
@@ -145,7 +153,8 @@ public class CoursesController {
                         .and(hasCourseStudyLocation(courseStudyLocationList))
                         .and(hasCourseTargetEntity(courseTargetEntityList))
                         .and(hasCourseCompetency(courseCompetencyList))
-                        .and(hasPublishedStatus()),
+                        .and(hasPublishedStatus())
+                        .and(hasVersion(0l)),
                         pageable);
         
 
@@ -169,18 +178,116 @@ public class CoursesController {
     }
     
     @PostMapping("/ajaxCoursesFilter")
-    public String ajaxCoursesFilter(Model model, 
-            @RequestBody Map<String, String[]> filters) {
+    public @ResponseBody ModelAndView ajaxCoursesFilter(
+            Model model,
+            @RequestBody String data,
+            @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC, value = 9) Pageable pageable
+    ) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map filtersMap = objectMapper.readValue(data, Map.class);
         
-        System.out.println("----------------");
-        for(String s: filters.get("course_form")){
-            System.out.println(s);
-        }
+        //Значения минимальной и максимальной возможной цены для курсов
+        Integer minPrice = courseService.min();
+        Integer maxPrice = courseService.max();
         
-        for(String s: filters.get("course_form")){
-            System.out.println(s);
+        Integer minimumUserPrice = Integer.parseInt((String) filtersMap.get("minimum_price_user"));
+        Integer maximumUserPrice = Integer.parseInt((String) filtersMap.get("maximum_price_user"));
+        
+        //Добавляем отфильтрованные цены
+        List<Integer> userCoursePrice = new ArrayList<>();
+        
+        //Для корректной работы интерфейса пользователя, заполняем массив в случае если минимальная и максимальная цена курса
+        // в целом, не равна минимальной и максимальной цене, полученной из JSON массива
+        if(!Objects.equals(minPrice, minimumUserPrice) || !Objects.equals(maxPrice, maximumUserPrice)){
+            userCoursePrice.add(minimumUserPrice);
+            userCoursePrice.add(maximumUserPrice);
         }
-        return "courses/coursesList";
+
+        System.out.println("minimum_price_user " + filtersMap.get("minimum_price_user"));
+        System.out.println("maximum_price_user " + filtersMap.get("maximum_price_user"));
+        Map<String, List<? extends Enum>> appliedFilters = new HashMap();
+      
+        List<CourseTargetEntity> courseTargetEntityList = new ArrayList<>();
+        List<String> courseTargetEntityArr = (filtersMap.get("course_target_entity") == null) ? new ArrayList<>() : (List) filtersMap.get("course_target_entity");
+        for(String s: courseTargetEntityArr){
+            try {
+                courseTargetEntityList.add(CourseTargetEntity.valueOf(s));
+            } catch (IllegalArgumentException e) {
+            }
+        }
+        appliedFilters.put("course_target_entity", courseTargetEntityList);
+        
+        List<CourseField> courseFieldList = new ArrayList<>();
+        List<String> courseFieldArr = (filtersMap.get("course_field") == null) ? new ArrayList<>() : (List)filtersMap.get("course_field");
+        for(String s: courseFieldArr){
+            try {
+                courseFieldList.add(CourseField.valueOf(s));
+            } catch (IllegalArgumentException e) {
+            }
+        } 
+        appliedFilters.put("course_field", courseFieldList);
+
+        List<CourseType> courseTypeList = new ArrayList<>();
+        List<String> courseTypeArr = (filtersMap.get("course_type") == null) ? new ArrayList<>() : (List)filtersMap.get("course_type");
+        for(String s: courseTypeArr){
+            try {
+                courseTypeList.add(CourseType.valueOf(s));
+            } catch (IllegalArgumentException e) {
+            }
+        }
+        appliedFilters.put("course_type", courseTypeList);
+        
+        List<CourseCompetency> courseCompetencyList = new ArrayList<>();
+        List<String> courseCompetencyArr = (filtersMap.get("course_competency") == null) ? new ArrayList<>() : (List)filtersMap.get("course_competency");
+        for(String s: courseCompetencyArr){
+            try {
+                courseCompetencyList.add(CourseCompetency.valueOf(s));
+            } catch (IllegalArgumentException e) {
+            }
+        }
+        appliedFilters.put("course_competency", courseCompetencyList);
+        
+        List<CourseStudyLocation> courseStudyLocationList = new ArrayList<>();
+        List<String> courseStudyLocationArr = (filtersMap.get("course_study_location") == null) ? new ArrayList<>() : (List)filtersMap.get("course_study_location");
+        for(String s: courseStudyLocationArr){
+            try {
+                courseStudyLocationList.add(CourseStudyLocation.valueOf(s));
+            } catch (IllegalArgumentException e) {
+            }
+        }
+        appliedFilters.put("course_study_location", courseStudyLocationList);
+        
+        List<CourseForm> courseFormList = new ArrayList<>();
+        List<String> courseFormArr = (filtersMap.get("course_form") == null) ? new ArrayList<>() :  (List)filtersMap.get("course_form");
+        for(String s: courseFormArr){
+            try {
+                courseFormList.add(CourseForm.valueOf(s));
+            } catch (IllegalArgumentException e) {
+            }
+        }
+        appliedFilters.put("course_form", courseFormList);
+
+        Page<Course> courses = courseService.findAllPageableSpec(Specification
+                        .where(hasPriceBetween(
+                                userCoursePrice.isEmpty() ? minPrice : userCoursePrice.get(0), 
+                                userCoursePrice.isEmpty() ? maxPrice : userCoursePrice.get(1)
+                        ))
+                        .and(hasCourseField(courseFieldList))
+                        .and(hasCourseCompetency(courseCompetencyList))
+                        .and(hasCourseForm(courseFormList))
+                        .and(hasCourseStudyLocation(courseStudyLocationList))
+                        .and(hasCourseTargetEntity(courseTargetEntityList))
+                        .and(hasCourseCompetency(courseCompetencyList))
+                        .and(hasPublishedStatus())
+                        .and(hasVersion(0l)),
+                        pageable);
+        
+        ModelAndView mav = new ModelAndView("fragments/courseFilterList :: courseFilterList");
+        mav.addObject("courses", courses);
+        mav.addObject("appliedFilters", appliedFilters);
+        mav.addObject("userCoursePrice", userCoursePrice);
+
+        return mav;
     }
     
     @GetMapping("{urlSegment}")
@@ -190,4 +297,15 @@ public class CoursesController {
         
         return "courses/showCourse";
     }
+    
+    @PostMapping("/ajaxSendFeedback")
+    public @ResponseBody String sendUserFeedBack(
+            @RequestBody() UserFeedBack userFeedBack
+    ) {
+        userFeedBackService.save(userFeedBack);
+        
+        return "Успех!";
+    }
+
+
 }

@@ -195,7 +195,7 @@ var course = {
 
             },
             success: function(){
-                window.location = '/admin/courses/';           
+                window.location = '/admin/courses';           
             },
             error: function (e) {
                 console.log(e);

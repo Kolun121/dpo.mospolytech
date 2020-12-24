@@ -1,0 +1,16 @@
+<th:block th:fragment="nearestCourses (courses)">
+    <a th:each="course: ${courses}" th:object="${course}" 
+         th:href="@{'courses/' + ${course.urlSegment}}">
+        <div class='calendar_item'>
+            <div class='date'>
+                <p>Начало: <b>[[*{#dates.format(courseStartDate, 'dd/MMM/yyyy')}]]</b></p>
+            </div>
+            <div class='info'>
+                <img th:src="*{mainImage} ? '/img/courses/main_image/' + *{mainImage.name}: '/'">
+                <h3 th:text="*{title}"></h3>
+                <p><b>Длительность: </b>[[*{courseTime}]] часов</p>
+                <p><b>Стоимость: </b>[[*{coursePrice}]] рублей</p>
+            </div>
+        </div>
+    </a>
+</th:block>

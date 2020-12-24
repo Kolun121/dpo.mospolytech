@@ -1,0 +1,154 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+@font-face {
+    font-family: GilroyBold; 
+    src: url(../fonts/Gilroy-ExtraBold.otf); 
+}
+@font-face {
+    font-family: GilroyThin;
+    src: url(../fonts/Gilroy-Light.otf); 
+}
+body {
+    display: flex;
+	min-height: 100vh;
+    flex-direction: column;
+    height: 100%;
+}
+main h1{
+    font-size: 33px
+}
+main {
+    flex: 1 0 auto;
+    text-align: center;
+    margin-bottom: 50px;
+}
+footer {
+	flex: 0 0 auto;
+}
+.calendar {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.calendar_item {
+    width: 100%;
+    max-width: 290px;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px;
+    background-color:  rgba(94, 94, 94, 0.103); 
+    margin: 10px;
+	text-decoration: none;
+	color: black;
+}
+.calendar a:hover {
+	text-decoration: none;
+	color: black;
+}
+.calendar_item:hover {
+	box-shadow: 0 0 15px rgba(0,0,0,0.5); 
+}
+.calendar_item .info {
+    height: 100%;
+    min-height: 420px;
+    vertical-align: top;
+}
+.calendar_item a{
+	color: black;
+}
+.calendar_item h3 {
+    font-weight: bold;
+    margin-top: 15px;
+    font-family: GilroyBold; 
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 17pt;
+}
+.calendar_item img {
+    width: 100%;
+    max-width: 250px;
+	height: 100%;
+    max-height: 220px;
+    padding-top: 10px;
+}
+.calendar_item p {
+    font-family: GilroyThin;
+}
+.btn {
+    color: white;
+    background-color:rgba(134, 75, 160, 0.404);
+    margin-bottom: 20px;
+    padding: 10px 15px 10px 15px;
+    border-radius: 8px;
+    font-family: GilroyBold;
+    font-size: 15pt;
+}
+.btn:hover {
+    background-color: rgba(191, 107, 230, 0.322); 
+}
+/* .start {
+    background-color: rgba(134, 75, 160, 0.158);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+.start h1 {
+    font-size: 15pt;
+    font-family: Gilroybold;
+    margin: 5px;
+}
+.start p {
+    margin: 5px;
+} */
+.bg-info button{
+    background-color:#2aabd2 !important;
+}
+#calendar-body button{
+    color:white;
+    transition:.7s;
+    background-color:#d6d8db;
+    text-shadow:0px 0px 3px transparent,0px 0px 3px transparent,0px 0px 3px transparent;
+    padding:10px 0;
+    outline:0;
+    border:1px solid #9fcdff;
+    cursor:pointer;
+    display:flex;
+    width:100%;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+}
+#calendar-body button:hover, .bg-info button:hover{
+    border:1px solid #87CEFA;
+    background-color:#818182 !important;
+}
+#calendar-body button.selectedCalendarButton{
+    border:1px solid #87CEFA;
+    background-color:#818182 !important;
+}
+#calendar-body td{
+    padding:0;
+}
+.date {
+    background-color: rgba(85, 180, 50, 0.575);
+    padding: 10px; 
+    border-radius: 8px 8px 0 0;
+    width: 290px;
+    margin-left: -10px;
+    margin-top: -10px;
+  
+}
+.date p {
+    font-family: GilroyThin; 
+    font-size: 17pt;
+    color: black;
+    padding: 5px;
+    margin: 0;   
+}

@@ -1,0 +1,27 @@
+<th:block th:fragment="courseFilterPrice (label, name, minCoursePrice, maxCoursePrice, userCoursePrice)">
+
+<div class="card">
+    <div class="card-header" th:id="|heading_${name}|">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" 
+                th:attr="data-target='#collapse_'+ ${name}" 
+                th:attrappend="aria-controls='collapse_'+ ${name}" aria-expanded="false">
+          [[${label}]]
+          <img th:src="@{/resources/image/icons/arrow_down.png}" style="width: 15px;">
+        </button>
+      </h2>
+    </div>
+    <div th:id="'collapse_' + ${name}" class="collapse" th:attr="aria-labelledby='heading_'+ ${name}" data-parent="#accordionExample">
+      <div class="card-body">
+
+        <div class="price d-flex flex-column align-items-center">   
+            <p id="price_show">
+                [[${!#lists.isEmpty(userCoursePrice)} ? ${userCoursePrice[0]} : ${minCoursePrice}]] руб. - [[${!#lists.isEmpty(userCoursePrice)} ? ${userCoursePrice[1]} : ${maxCoursePrice}]] руб.
+            </p>
+            <div id="price_range"></div>
+        </div>
+
+      </div>
+    </div>
+</div>
+</th:block>

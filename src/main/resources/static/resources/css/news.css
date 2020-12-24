@@ -1,0 +1,109 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+@font-face {
+    font-family: GilroyBold; 
+    src: url(../fonts/Gilroy-ExtraBold.otf); 
+}
+@font-face {
+    font-family: GilroyThin;
+    src: url(../fonts/Gilroy-Light.otf); 
+}
+body {
+    display: flex;
+	min-height: 100vh;
+    flex-direction: column;
+    height: 100%;
+}
+main {
+    flex: 1 0 auto;
+    margin-bottom: 50px;
+}
+main h1{font-size:33px}
+footer {
+	flex: 0 0 auto;
+}
+h1 {
+    margin: 20px;
+    font-family:  GilroyBold;
+    text-align: center; 
+}
+.news {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    /* display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center; */
+}
+.news_item {
+    width: 100%;
+    /* border: 3px solid #874BA0; */
+    border-radius: 8px;
+    padding: 30px 10px;
+    background-color:  rgba(94, 94, 94, 0.103); 
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.wrapper {
+    width: 100%;
+    max-width: 600px;
+}
+.news_item .title {
+    font-family: GilroyBold;
+    font-size: 20pt;
+    margin: 5px 0 5px 0;
+}
+.news_item .date {
+    font-family: GilroyThin;
+    font-size: 13pt;
+    margin: 0;
+    color: rgb(95, 95, 95);
+}
+.news_item .text {
+    font-family: GilroyThin;
+    font-size: 16pt;
+    margin: 0;
+    padding-bottom: 10px;
+}
+.news_item .more {
+    font-family: GilroyThin;
+    font-size: 13pt;
+    margin: 0;
+    text-align: end;
+    margin-right: 30px;
+}
+.img_news img {
+    width: 100%;
+    max-width: 500px;
+}
+.pagination_link {
+    display: block;
+    transition: .5s;
+    font-weight: bold;
+    font-size: 18px;
+    display:inline-block;
+    margin-left: 3px;
+    margin-top:30px; 
+    cursor: pointer;
+    padding: 4px 6px;
+    background-color: #fff;
+    border: 3px solid #874BA0;
+    border-radius: 3px;
+}
+.pagination_link:hover {
+    transition: .5s;
+    background-color:#874BA0;
+    color:white;
+}
+.pagination_link.checked {
+    background-color:#874BA0;
+    color:white;
+}
