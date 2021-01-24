@@ -1,5 +1,6 @@
 <th:block th:fragment="adminJs"><th:block th:switch="${page}">
-    <th:block th:case="home">
+    <th:block th:case="index">
+        <script th:src="@{/resources/js/admin/index.js}"></script>
     </th:block>
     <th:block th:case="updateCourse">
         <script th:src="@{/webjars/croppie/2.6.3/croppie.min.js}"></script>

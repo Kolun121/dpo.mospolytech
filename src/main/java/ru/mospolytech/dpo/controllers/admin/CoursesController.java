@@ -87,6 +87,7 @@ public class CoursesController {
     public @ResponseBody String newCourse(Model model, Principal principal){
         Long maxId = courseService.maxId();
         Course newCourse = new Course();
+        
         //Кем создан
         newCourse.setCreatedBy(principal.getName());
         newCourse.setId(++maxId);

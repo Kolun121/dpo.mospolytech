@@ -47,6 +47,9 @@ header {
     flex-direction: row;
     justify-content: space-between;
 }
+.contacts_vk_header{
+        display:none;
+}
 .header p {
     margin: 0;
 }
@@ -200,7 +203,7 @@ main {
     padding-top: 50px;
 }
 .innumbers_blocks {
-    font-size: 18pt;
+    font-size: 15pt;
     font-family: GilroyThin;
 }
 .innumbers {
@@ -478,6 +481,9 @@ main {
     }
 }
 @media only screen and (max-width: 1245px) {
+    .contacts_vk_header{
+        display:block;
+    }
     .whyimportant, .slider_popular {
         justify-content: center;
     }
@@ -494,12 +500,17 @@ main {
     .logo div  {
         display: none;
     }
+    .innumbers_blocks {
+        font-size: 11pt;
+        font-family: GilroyThin;
+    }
 }
 @media only screen and (max-width: 770px) {
     .innumbers_blocks div {
         /* иллюстрации в "мы в цифрах" */
         padding: 0;
     }
+  
 }
 @media only screen and (max-width: 680px) {
    /*.populartoday_text p,*/ .whyimportant div {

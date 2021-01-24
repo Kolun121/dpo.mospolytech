@@ -5,7 +5,7 @@ values (2, 'user', '$2y$12$pPqnziz/1raSfCha/WP2/OshpLVXDqV9CQ/txBSm/QxXkPqHjdC2S
 
 
 insert into COURSES (VERSION, id, course_audience, course_document, course_goal, course_price, course_subject, course_time, created_at, title, url_segment, course_status, course_competency, course_field, course_form, course_study_location, course_target_entity, course_type, created_By)
-values (0,1, 'COURSE_AUDIENCE', 'COURSE_DOCUMENT', 'COURSE_GOAL', 1, 'COURSE_SUBJECT', 123, CURRENT_TIMESTAMP, 'TITLE', 'URL_SEGMENT', 'PUBLISHED', 'PROFESSIONAL_COMPETENCE', 'WORLDSKILLS_RUSSIA', 'OCHNAYA', 'BOLSHAYA_SEMENOVSKAYA', 'INDIVIDUAL', 'TRAINING', 'admin1');
+values (0,1, 'Руководители или заместители руководителей, отвечающие за обеспечение безопасности движения на предприятиях транспорта, начальники отделов эксплуатации и безопасности дорожного движения, технического контроля, предприятий транспорта, колонн (маршрутов)', 'Удостоверение о повышении квалификации','Приобретение теоретических знаний в области организации работы по безопасности дорожного движения на предприятии, а также практических навыков по нормативно-правовым основам безопасности дорожного движения.', 1, 'Программа разработана в соответствии с обязательными требованиями Федерального закона от 10.12.1995 г. № 196-ФЗ «О безопасности дорожного движения», и приказом Минтранса России от 28.09.2015 № 287 ', 123, CURRENT_TIMESTAMP, 'Программа повышения квалификации по безопасности дорожного движения', 'URL_SEGMENT', 'PUBLISHED', 'PROFESSIONAL_COMPETENCE', 'WORLDSKILLS_RUSSIA', 'OCHNAYA', 'BOLSHAYA_SEMENOVSKAYA', 'INDIVIDUAL', 'TRAINING', 'admin1');
 
 insert into COURSES (VERSION,id, course_audience, course_document, course_goal, course_price, course_subject, course_time, created_at, title, url_segment, course_status, course_competency, course_field, course_form, course_study_location, course_target_entity, course_type, created_By)
 values (0,2, 'COURSE_AUDIENCE2', 'COURSE_DOCUMENT', 'COURSE_GOAL', 132, 'COURSE_SUBJECT', 123, CURRENT_TIMESTAMP, 'TITLE2', 'URL_SEGMENT2', 'PUBLISHED', 'PERSONAL_COMPETENCE', 'CHILDREN_TECHNOPARK', 'REMOTE', 'ELECTROZAVODSKAYA', 'INDIVIDUAL', 'PROFESSIONAL_RETRAINING', 'admin1');
@@ -25,7 +25,7 @@ values (0,5, 'COURSE_AUDIENCE', 'COURSE_DOCUMENT', 'COURSE_GOAL', 32131, 'COURSE
 
 
 insert into EDUCATIONAL_PROGRAM_STAGE  (id, DESCRIPTION, TITLE, COURSE_ID, COURSE_VERSION)
-values (1, 'Новое описание', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 0);
+values (1, 'БЛОК 1. Система управления безопасностью дорожного движения в ТДК России', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 0);
 insert into EDUCATIONAL_PROGRAM_STAGE  (id, DESCRIPTION, TITLE, COURSE_ID, COURSE_VERSION)
 values (2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 1, 0);
 insert into EDUCATIONAL_PROGRAM_STAGE  (id, DESCRIPTION, TITLE, COURSE_ID, COURSE_VERSION)

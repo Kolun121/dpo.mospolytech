@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ru.mospolytech.dpo.domain.Course;
 import ru.mospolytech.dpo.domain.UserFeedBack;
 import ru.mospolytech.dpo.service.CourseService;
+import ru.mospolytech.dpo.service.IndexItemService;
 import ru.mospolytech.dpo.service.UserFeedBackService;
 import static ru.mospolytech.dpo.specification.CourseSpecification.hasDateBetweenCurrentDateAndYear;
 import static ru.mospolytech.dpo.specification.CourseSpecification.hasPublishedStatus;
@@ -27,10 +28,12 @@ public class IndexController {
 
     private final UserFeedBackService userFeedBackService;
     private final CourseService courseService;
+    private final IndexItemService indexItemService;
 
-    IndexController(UserFeedBackService userFeedBackService, CourseService courseService) {
+    IndexController(UserFeedBackService userFeedBackService, CourseService courseService, IndexItemService indexItemService) {
         this.userFeedBackService = userFeedBackService;
         this.courseService = courseService;
+        this.indexItemService = indexItemService;
     }
     @GetMapping("/")
     public String getIndexPage(
@@ -43,6 +46,7 @@ public class IndexController {
                         .and(hasVersion(0l)),
                         limit);
         model.addAttribute("courses", courses);
+        model.addAttribute("indexItems", indexItemService.findAll());
         return "index";
     }
     

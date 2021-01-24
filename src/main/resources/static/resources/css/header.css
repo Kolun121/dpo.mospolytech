@@ -18,6 +18,10 @@ header {
 
     font-family: GilroyBold; 
 }
+.contacts_vk_header{
+    display:none;
+}
+
 .header {
     display: flex;
     flex-direction: row;
@@ -106,6 +110,9 @@ header img {
 @media only screen and (max-width: 1245px) {
     .menu {
         display: none;
+    }
+    .contacts_vk_header{
+        display:block;
     }
     .menu-btn {
         display: block;

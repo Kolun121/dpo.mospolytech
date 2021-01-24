@@ -22,17 +22,17 @@
             </div>
             
             <ul class="navbar-nav mr-auto">
-                <li th:replace="::menuItem ('/admin','home','Главная страница','home','Главная')"/>
+                <li th:replace="::menuItem ('/admin','index','Главная страница','home','Главная')"/>
                 
-                <li th:replace="::menuItem ('/admin/courses','courses','Страница с курсами','doc','Курсы')"/>
+                <li th:replace="::menuItem ('/admin/courses','coursesList','Страница с курсами','doc','Курсы')"/>
                 
-                <li th:replace="::menuItem ('/admin/news','news','Страница с новостями','envelope','Новости')"/>
+                <li th:replace="::menuItem ('/admin/news','newsList','Страница с новостями','envelope','Новости')"/>
                 
-                <li th:replace="::menuItem ('/admin/teachers','teachers','Страница с преподавателями','pencil','Преподаватели')"/>
+                <li th:replace="::menuItem ('/admin/teachers','teachersList','Страница с преподавателями','pencil','Преподаватели')"/>
                 
-                <li th:replace="::menuItem ('/admin/contacts','contacts','Страница с контактами','phone','Контакты')"/>
+                <li th:replace="::menuItem ('/admin/contacts','contactsList','Страница с контактами','phone','Контакты')"/>
                 
-                <li th:replace="::menuItem ('/admin/userFeedBack','userFeedBack','Страница с заявками пользователей','people','Заявки')"/>
+                <li th:replace="::menuItem ('/admin/userFeedBack','userFeedBackList','Страница с заявками пользователей','people','Заявки')"/>
                 
             </ul>
             

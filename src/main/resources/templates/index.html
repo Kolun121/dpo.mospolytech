@@ -3,50 +3,57 @@
 <main>
    <div class="popular_blocks">
         <h1>Курсы и программы обучения</h1>
-<!--        <div class="popular_courses">
-        </div>-->
         <div class="popular_courses">
-                        <a href="/courses?study_field=work_with_software_products"><div>
-                <img src="">
-                <p>Программные продукты</p>
-        </div></a>
-                        <a href="/courses?study_field=economics_and_managment"><div>
-                <img src="">
-                <p>Экономика и управление</p>
-        </div></a>
-                        <a href="/courses?study_field=industry_and_ecological_safety"><div>
-                <img src="">
-                <p>Техносферная безопасность</p>
-        </div></a>
-                        <a href="/courses?study_field=transport"><div>
-                <img src="">
-                <p>Транспорт</p>
-        </div></a>
-                        <a href="/courses?study_field=metal_working"><div>
-                <img src="">
-                <p>Машиностроение</p>
-        </div></a>
-                        <a href="/courses?study_field=worldskills_russia"><div>
-                <img src="">
-                <p>Worldskills Russia</p>
-        </div></a>
+            <a th:each="item :${indexItems}" th:href="@{${item.url}}">
+                <div>
+                    <img th:src="${item.indexImage} ? '/img/index/' + ${item.indexImage.name}: '/'" >
+                    <p th:text="${item.text}"></p>
+                </div>
+            </a>
+                        
 
-    </div>
-    </div>
-
-<!--    <div class="innumbers">
-        <h1>Наши преимущества</h1>
-        <div class="innumbers_blocks"> 
-            <img  th:src="'/img/our_super.PNG'">
         </div>
-    </div>-->
-    
-<!--ИСПРАВИТЬ !!!!!!!!!!!!!-->
+    </div>
     <div class="popular_blocks">
         <h1>Наши преимущества</h1>
         <div class="innumbers_blocks"> 
-            <img  th:src="'/img/our_super.PNG'">
+             <div class="row justify-content-around">
+                <div class="col-3">
+                        <img style="width: 110px;" th:src="@{/resources/image/first.png}">
+                        <p class="number"><?= $number['number'] ?></p>
+                        <p class="number_name">Обучение подставивается под ваш график</p>
+                </div>
+                <div class="col-3">
+                        <img style="width: 110px;" th:src="@{/resources/image/second.png}">
+                        <p class="number"></p>
+                        <p class="number_name">Практические знания и актуальная теория</p>
+                </div>
+                <div class="col-3">
+                        <img style="width: 110px;" th:src="@{/resources/image/third.png}">
+                        <p class="number"></p>
+                        <p class="number_name">Индивидуальные консультации с преподавателями</p>
+                </div>
+            </div>
+            <div class="w-100"></div>
+            <div class="row  justify-content-around">
+                <div class="col-3">
+                    <img style="width: 110px;" th:src="@{/resources/image/fourth.png}">
+                    <p class="number"><?= $number['number'] ?></p>
+                    <p class="number_name">Общение с одногорупниками и полезные знакомства</p>
+                </div>
+                <div class="col-3">
+                    <img style="width: 110px;" th:src="@{/resources/image/fifth.png}">
+                    <p class="number"><?= $number['number'] ?></p>
+                    <p class="number_name">Контроль процесса обучения и помощь в достижении результата</p>
+                </div>
+                <div class="col-3">
+                    <img style="width: 110px;" th:src="@{/resources/image/sixth.png}">
+                    <p class="number"><?= $number['number'] ?></p>
+                    <p class="number_name">Официальные документы об образовании</p>
+                </div>
+            </div>
         </div>
+    
     </div>
 
     <div class="whyimportant">

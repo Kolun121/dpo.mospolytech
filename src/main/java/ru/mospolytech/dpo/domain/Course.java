@@ -129,28 +129,7 @@ public class Course implements Serializable{
         if (!(o instanceof Course)) {
             return false;
         }
-//        title;
-//        courseGoal;
-//        courseAudience;
-//        courseSubject;
-//        coursePrice;
-//        courseTime
-//        courseDocument
-//        courseStartDate  
-//        teachers
-//        urlSegment;
-//        courseField;
-//        courseType;
-//        courseCompetency;
-//        courseForm;
-//        courseStudyLocation
-//        courseTargetEntity
-//        courseStatus
-//        mainImage
-//        educationalProgramStages
-//        courseGalleryImages;
-//        createdAt
-//        updatedAt;
+
         
         Course course = (Course) o;
         return Objects.equals(id, course.id) &&
