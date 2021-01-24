@@ -29,10 +29,6 @@ public class News implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-   
-//    @Version
-//    @Column(name = "VERSION")
-//    private long version;
     
     private String title;
     private String description;

@@ -93,6 +93,7 @@ var course = {
             }
         });
     },
+    listReviews: $('#listReviews'),
     addReviewItem: function(evnt, course_id) {
         
         var isValid = true;
@@ -128,49 +129,31 @@ var course = {
             alert('Заполните необходимые поля!');
             return;
         }
-        var Data = new Date();
-        var Year = Data.getFullYear();
-        var Month = Data.getMonth() + 1
-        Month = String(Month);
+        var _this = this;
         
-        if(Month.length === 1){
-            Month = '0'+Month;
-        }
-
-        var Day = Data.getDate();
-        var Hour = Data.getHours();
-        var Minutes = Data.getMinutes();
-        var Seconds = Data.getSeconds();
-        
-        var time = Year +'-'+Month+'-'+Day+' '+Hour + ':' + Minutes +':'+Seconds;
-        
-        var formData = new FormData();
-        
-        formData.append('name', $('#review_name').val());
-        formData.append('text', $('#review_comment').val());
-        formData.append('time', time);
-
-        formData.append('course_id', course_id);
-        
+        var data = {};
+        data["name"] = $("#review_name").val();
+        data["text"] = $("#review_comment").val();
         $.ajax({
-            url: '/courses/ajaxAddReview/',
-            type: this.ajaxMethod,
-            data: formData,
-            processData: false,
-            contentType: false,
+            url: document.URL + '/review/new',
+            type: "POST",
+            data: data,
+            dataType: 'json',
             beforeSend: function(){
+                location.reload();
                 $('#add_comment_item').html('<p class="formSend_alert text-center">Спасибо за Ваш отзыв!</p>');
             },
+            error: function(result) {
+                console.log(result);
+            },
             success: function(result){
-                if(document.getElementById('removableSign')){
-                    $('#comments').html(result);
-                }else{
-                    $('#comments').prepend(result);
-                }
+                console.log("QWEQWEQWEQWEQWE");
+                console.log(result);
+                _this.listReviews.append(result);
+
                 location.hash='comments';
             }
-        });
-        
+        });    
     }
 };
 

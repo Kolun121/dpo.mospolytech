@@ -1,0 +1,7 @@
+<th:block th:fragment="courseReviews (courseReviews)">
+<div th:each="review: ${courseReviews}" class="comments_item">
+    <h2 th:text="${review.name}"></h2>
+    <h3>[[${#dates.format(review.createdAt, 'dd/MMM/yyyy HH:mm')}]]</h3>
+    <p th:text="${review.text}"></p>
+</div>
+</th:block>

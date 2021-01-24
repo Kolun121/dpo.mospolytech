@@ -109,6 +109,9 @@ public class Course implements Serializable{
     private List<EducationalProgramStage> educationalProgramStages = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+    private List<Review> courseReviews = new ArrayList<>();
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
     private List<CourseGalleryImage> courseGalleryImages = new ArrayList<>();
     
     @CreationTimestamp

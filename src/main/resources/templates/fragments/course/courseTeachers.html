@@ -1,15 +1,10 @@
 <th:block th:fragment="courseTeachers(courseTeachers)">
     <th:block th:if="${not #lists.isEmpty(courseTeachers)}">
         <h1>Преподаватели</h1>
-        <div th:each="teacher:${courseTeachers}" class="mb-5 speakers_row d-flex justify-content-center align-items-center">
-            <div class="speakers_item">
-                <img th:src="${teacher.mainImage} ? '/img/teachers/' + ${teacher.mainImage.name}: '/'" id="speakers_img">
+        <div th:each="teacher:${courseTeachers}" class="speakers_item">
+                <img th:src="${teacher.mainImage} ? '/img/teachers/' + ${teacher.mainImage.name}: @{/resources/image/man.png}" id="speakers_img">
                 <a th:href="@{'teacher/' + ${teacher.id}}" th:text="${teacher.fullName}" class="speakers_name"><p></p></a>
-            </div>
-            <div class="d-flex flex-column justify-content-center col-8">
-                <div th:text="${teacher.teacherOccupation}" class=""></div>
-                <div th:text="${teacher.teacherInformation}" class=""></div>
-            </div>
+                <p class="job" th:text="${teacher.teacherOccupation}">Преподаватель</p>
 
         </div> 
     </th:block>

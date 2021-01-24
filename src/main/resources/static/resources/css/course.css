@@ -66,7 +66,7 @@ footer {
 .about_course {
 	padding-top: 30px;
 	display: flex;
-	flex-direction: row;
+	flex-direction:column;
 	flex-wrap: wrap;
 	justify-content: space-around;
 	width: 100%;
@@ -77,7 +77,15 @@ footer {
 }
 .about_course div {
 	width: 100%;
-	max-width: 400px;
+	max-width: 800px;
+	margin: 0 auto;
+
+}
+.about_course div.about {
+	max-width: 700px;
+}
+.about_course div.aim, .about_course div.listeners, .about_course div.skills{
+	margin-top: 30px;
 }
 .about_course div p {
 	margin-bottom: 0;
@@ -98,6 +106,20 @@ footer {
 .about_course_back {
 	/*background-color:  rgba(94, 94, 94, 0.103); */
     padding-bottom: 70px;
+}
+.list6a {
+    padding:0;
+    list-style: none;
+}
+.list6a li{
+    padding:6px;
+}
+.list6a li:before {
+    padding-right:10px;
+    font-weight: bold;
+    color: #9664ac;
+    content: "\2714";
+    transition-duration: 0.5s;
 }
 
 .plan_back {
@@ -140,22 +162,16 @@ footer {
 	text-align: justify;
 }
 .plan .one_step::before{
-    border-left: 3px solid rgba(134, 75, 160, 0.842);
-    width: 1px;
-    bottom: 9px;
-    content: "";
-    left: 37px;
-    top: 40px;
-    position: relative;
+	border-left: 3px solid rgba(134, 75, 160, 0.842);
+width: 1px;
+bottom: 9px;
+content: "";
+left: 37px;
+top: 40px;
+position: relative;
 }
-.plan .one_step:last-child::before{
-    border-left: 3px solid rgba(0, 0, 0, 0);
-    width: 1px;
-    bottom: 9px;
-    content: "";
-    left: 37px;
-    top: 40px;
-    position: relative;
+.plan .one_step:last-child:before{
+	border:none	
 }
 .speakers {
 	text-align: center;
@@ -184,6 +200,9 @@ footer {
 	width: 100%;
 	max-width: 120px;
 	margin: 10px;
+}
+.speakers_item .job {font-size: 12pt;
+	margin-top: -10px;
 }
 .speakers_name  {
 	text-align: center;

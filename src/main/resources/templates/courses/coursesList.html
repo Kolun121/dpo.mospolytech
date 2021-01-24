@@ -30,14 +30,14 @@
     </div>
 	
 	
-<!--	<div class="accordion mobile" id="accordionExample mobile_filters">
+	<div class="accordion mobile" id="accordionExample mobile_filters">
 	  <div class="card">
 		<div class="card-header card-header-mobile" id="headingMobile">
 		  <h2 class="mb-0">
 			<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMobile" aria-expanded="true" aria-controls="collapseMobile">
 			 
 			  Фильтры
-			   <img src="<?= $themePath ?>/img/icons/arrow.png" style="width: 15px;">
+			   <img th:src="@{/resources/image/icons/arrow.png}"  style="width: 15px;">
 			</button>
 		  </h2>
 		</div>
@@ -46,162 +46,19 @@
 			<div class="card-body">
 				<div class="filtres filtres_mobile">		
 					<div class="accordion" id="accordionExample">
-						<div class="card">
-							<div class="card-header" id="headingOne">
-							  <h2 class="mb-0">
-								<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-								  Цена
-								  <img src="<?= $themePath ?>/img/icons/arrow_down.png" style="width: 15px;">
-								</button>
-							  </h2>
-							</div>
-							<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-							  <div class="card-body">
-								<div class="price d-flex flex-column align-items-center">                 
-									<p id="price_show_mobile">
-										<?= isset($getParams['price']) ? $getParams['price'][0] : $min_price ?> руб. - <?= isset($getParams['price']) ? $getParams['price'][1]: $max_price ?> руб.
-									</p>
-									<div id="price_range_mobile"></div>
-								</div>
-							  </div>
-							</div>
-						</div>
+						<th:block th:replace="~{fragments/courseFilterPriceMobile :: courseFilterPriceMobile('Цена', 'price', ${minCoursePrice}, ${maxCoursePrice}, ${userCoursePrice})}"></th:block>
 						  
-						<div class="card">
-							<div class="card-header" id="headingTwo">
-							  <h2 class="mb-0">
-								<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-								  Сфера обучения
-								  <img src="<?= $themePath ?>/img/icons/arrow_down.png" style="width: 15px;">
-								</button>
-							  </h2>
-							</div>
-							<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                                            <div class="card-body">
-                                                                <?php foreach ($study_field as $key => $value): ?>
-                                                                <label>
-                                                                    <input type="checkbox" class="common_selector study_field_mobile" value="<?= $key ?>"
-                                                                    <?= isset($getParams['study_field']) ? in_array($key, $getParams['study_field']) ? "checked" : "" : "" ?>  ><span class="checkbox-custom"></span>
-                                                                    <?php if($value == "WORLDSKILLS RUSSIA"):?>
-                                                                    <?php echo "Worldskills Russia"?>
-                                                                    <?php else:?>
-                                                                    <?php echo \Engine\Helper\Common::mb_ucfirst(mb_strtolower($value))?>
-                                                                    <?php endif;?>
-                                                                </label>
-                                                                <?php endforeach; ?>
-                                                            </div>
-							</div>
-						</div>
-						  
-						<div class="card">
-                                                    <div class="card-header" id="headingThree">
-                                                      <h2 class="mb-0">
-                                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                              Тип обучения
-                                                              <img src="<?= $themePath ?>/img/icons/arrow_down.png" style="width: 15px;">
-                                                            </button>
-                                                      </h2>
-                                                    </div>
-                                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                                      <div class="card-body">
-                                                        <?php foreach ($study_form as $key => $value): ?>
-                                                        <label>
-                                                            <input type="checkbox" class="common_selector study_form_mobile" value="<?= $key ?>" 
-                                                            <?= isset($getParams['study_form']) ? in_array($key, $getParams['study_form']) ? "checked" : "" : "" ?>   >
-                                                            <span class="checkbox-custom"></span><?php echo \Engine\Helper\Common::mb_ucfirst(mb_strtolower($value))?>
-                                                        </label>
-                                                        <?php endforeach; ?>
-                                                      </div>
-                                                    </div>
-						</div>
-						  
-						<div class="card">
-                                                    <div class="card-header" id="headingFour">
-                                                      <h2 class="mb-0">
-                                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                          Площадка
-                                                          <img src="<?= $themePath ?>/img/icons/arrow_down.png" style="width: 15px;">
-                                                        </button>
-                                                      </h2>
-                                                    </div>
-                                                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                                                      <div class="card-body">
-                                                        <?php foreach ($study_location as $key => $value): ?>
-                                                        <label>
-                                                            <input type="checkbox" class="common_selector study_location_mobile" value="<?= $key ?>"
-                                                            <?= isset($getParams['study_location']) ? in_array($key, $getParams['study_location']) ? "checked" : "" : "" ?>   >
-                                                            <span class="checkbox-custom"></span><?php echo $value?>
-                                                        </label>
-                                                        <?php endforeach; ?>
-                                                      </div>
-                                                    </div>
-						</div>
-						  
-						<div class="card">
-                                                    <div class="card-header" id="headingFive">
-                                                      <h2 class="mb-0">
-                                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                          Для кого
-                                                          <img src="<?= $themePath ?>/img/icons/arrow_down.png" style="width: 15px;">
-                                                        </button>
-                                                      </h2>
-                                                    </div>
-                                                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-                                                      <div class="card-body">
-                                                        <?php foreach ($course_form as $key => $value): ?>
-                                                        <label>
-                                                            <input type="checkbox" class="common_selector course_form_mobile" value="<?= $key ?>"
-                                                            <?= isset($getParams['course_form']) ? in_array($key, $getParams['course_form']) ? "checked" : "" : "" ?>>
-                                                            <span class="checkbox-custom"></span>	<?php echo $value?>
-                                                        </label>
-                                                        <?php endforeach; ?>               
-                                                      </div>
-                                                    </div>
-						</div>
-						  
-						<div class="card">
-                                                    <div class="card-header" id="headingSix">
-                                                      <h2 class="mb-0">
-                                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                                          Вид обучения
-                                                          <img src="<?= $themePath ?>/img/icons/arrow_down.png" style="width: 15px;">
-                                                        </button>
-                                                      </h2>
-                                                    </div>
-                                                    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
-                                                      <div class="card-body">
-                                                        <?php foreach ($study_type as $key => $value): ?>
-                                                        <label>
-                                                            <input type="checkbox" class="common_selector study_type_mobile" value="<?= $key ?>"
-                                                            <?= isset($getParams['study_type']) ? in_array($key, $getParams['study_type']) ? "checked" : "" : "" ?> >
-                                                            <span class="checkbox-custom"></span>	<?php echo \Engine\Helper\Common::mb_ucfirst(mb_strtolower($value))?>
-                                                        </label>
-                                                        <?php endforeach; ?>
-                                                      </div>
-                                                    </div>
-						</div>
-						  
-						<div class="card">
-                                                    <div class="card-header" id="headingSeven">
-                                                      <h2 class="mb-0">
-                                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                                          Формируемые компетенции
-                                                          <img src="<?= $themePath ?>/img/icons/arrow_down.png" style="width: 15px;">
-                                                        </button>
-                                                      </h2>
-                                                    </div>
-                                                    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
-                                                      <div class="card-body">
-                                                        <?php foreach ($study_competency as $key => $value): ?>
-                                                            <label>
-                                                                <input type="checkbox" class="common_selector study_competency_mobile" value="<?= $key ?>"
-                                                                <?= isset($getParams['study_competency']) ? in_array($key, $getParams['study_competency']) ? "checked" : "" : "" ?> >
-                                                                <span class="checkbox-custom"></span>	<?php echo \Engine\Helper\Common::mb_ucfirst(mb_strtolower($value))?>
-                                                            </label>
-                                                        <?php endforeach; ?>
-                                                      </div>
-                                                    </div>
-						 </div>
+						<th:block th:replace="~{fragments/courseFilterMobile :: courseFilterMobile ('Сфера обучения', 'course_field', ${courseField}, ${appliedFilters})}"></th:block>
+
+                                                <th:block th:replace="~{fragments/courseFilterMobile :: courseFilterMobile ('Форма обучения', 'course_form', ${courseForm}, ${appliedFilters})}"></th:block>
+
+                                                <th:block th:replace="~{fragments/courseFilterMobile :: courseFilterMobile ('Площадка', 'course_study_location', ${courseStudyLocation}, ${appliedFilters})}"></th:block>
+
+                                                <th:block th:replace="~{fragments/courseFilterMobile :: courseFilterMobile ('Для кого', 'course_target_entity', ${courseTargetEntity}, ${appliedFilters})}"></th:block>
+
+                                                <th:block th:replace="~{fragments/courseFilterMobile :: courseFilterMobile ('Вид обучения', 'course_type', ${courseType}, ${appliedFilters})}"></th:block>
+
+                                                <th:block th:replace="~{fragments/courseFilterMobile :: courseFilterMobile ('Формируемые компетенции', 'course_competency', ${courseCompetency}, ${appliedFilters})}"></th:block>
 					</div>
 					<button type="submit" class="btn button_uncheck_all_inputs" data-toggle="collapse" data-target="#collapseMobile" aria-expanded="true" aria-controls="collapseMobile">Закрыть</button>
 					<button type="submit" class="btn button_uncheck_all_inputs" id="button_uncheck_all_inputs_mobile" name="submit">Сбросить</button>
@@ -209,7 +66,7 @@
 			</div>
 		</div>
 	  </div>
-	</div>-->
+	</div>
 	
 	 
 
