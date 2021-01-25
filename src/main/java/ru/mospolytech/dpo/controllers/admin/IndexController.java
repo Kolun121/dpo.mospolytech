@@ -59,6 +59,7 @@ public class IndexController {
         
         indexItem.setId(indexItemId);
         indexItem.setText(text);
+        System.out.println(text);
         indexItem.setUrl(url);
         
         indexItem.setIndexImage(indexItemImageService.findByIndexItemId(indexItemId));
