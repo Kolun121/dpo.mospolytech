@@ -37,6 +37,7 @@ public class IndexItemServiceImpl implements IndexItemService {
 
     @Override
     public IndexItem save(IndexItem object) {
+        System.out.println(object.getText());
         return indexItemRepository.save(object);
     }
 
