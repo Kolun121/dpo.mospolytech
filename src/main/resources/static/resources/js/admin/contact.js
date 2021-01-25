@@ -49,7 +49,7 @@ var contact = {
                     $('#uploadimageModal').modal('hide');
                     document.getElementById('btn_del_photo').style.display = "block";
                     document.getElementById('file_upload_block').style.display = "none";
-                    document.getElementById('contactMainImage').src = '/img/contacts/' + result;            
+                    document.getElementById('contactMainImage').src = result;            
                 }
             });
           });

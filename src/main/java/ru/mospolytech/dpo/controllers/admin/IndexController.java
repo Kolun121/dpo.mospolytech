@@ -11,19 +11,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import ru.mospolytech.dpo.amazon.AmazonClient;
 import ru.mospolytech.dpo.domain.IndexItem;
+import ru.mospolytech.dpo.domain.image.IndexItemImage;
 import ru.mospolytech.dpo.service.IndexItemService;
 import ru.mospolytech.dpo.service.image.IndexItemImageService;
 
 @Controller("adminIndexController")
 @RequestMapping("/admin")
 public class IndexController {
+    private final String mainImageControllerDir = "index";
+
     private final IndexItemService indexItemService;
     private final IndexItemImageService indexItemImageService;
+    private final AmazonClient amazonClient;
 
-    public IndexController(IndexItemService indexItemService, IndexItemImageService indexItemImageService){
+    public IndexController(IndexItemService indexItemService,
+            IndexItemImageService indexItemImageService,
+            AmazonClient amazonClient
+    ){
         this.indexItemService = indexItemService;
         this.indexItemImageService = indexItemImageService;
+        this.amazonClient = amazonClient;
     }
     
     @GetMapping
@@ -58,6 +67,14 @@ public class IndexController {
     
     @DeleteMapping("/index/{indexItemId}")
     public @ResponseBody void deleteIndexItemById(@PathVariable Long indexItemId){
+        IndexItem indexItem = indexItemService.findById(indexItemId);
+        
+        if(indexItem.getIndexImage() != null){
+            IndexItemImage indexItemImage = indexItemImageService.findByIndexItemId(indexItemId);
+            amazonClient.deleteFileFromS3Bucket(indexItemImage.getName(), mainImageControllerDir);
+        }
+        
+        
         indexItemService.deleteById(indexItemId);
     }
 }

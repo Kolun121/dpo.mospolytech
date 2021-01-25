@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import ru.mospolytech.dpo.amazon.AmazonClient;
 import ru.mospolytech.dpo.domain.Contact;
 import ru.mospolytech.dpo.domain.image.ContactMainImage;
 import ru.mospolytech.dpo.service.ContactService;
@@ -26,15 +27,17 @@ import ru.mospolytech.dpo.service.image.ContactMainImageService;
 @Controller("adminContactMainImageController")
 public class ContactMainImageController {
     @Value("${upload.path}")
-    private String uploadPath;
-    private final String imageControllerDir = "/contacts";
+    private String uploadPath = "resources/uploads/";
+    private final String imageControllerDir = "contacts";
    
     private final ContactMainImageService contactMainImageService;
     private final ContactService contactService;
+    private final AmazonClient amazonClient;
 
-    public ContactMainImageController(ContactMainImageService contactMainImageService, ContactService contactService) {
+    public ContactMainImageController(ContactMainImageService contactMainImageService, ContactService contactService, AmazonClient amazonClient) {
         this.contactMainImageService = contactMainImageService;
         this.contactService = contactService;
+        this.amazonClient = amazonClient;
     }
 
     
@@ -43,34 +46,17 @@ public class ContactMainImageController {
             @PathVariable Long contactId,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
+        String url = amazonClient.uploadFile(file, imageControllerDir);
         
-        String resultFilename = "none";
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath + imageControllerDir);
+        Contact contact = contactService.findById(contactId);
 
-            if (!uploadDir.exists()) {
-                uploadDir.mkdirs();
-            }
-
-            String uuidFile  = UUID.randomUUID().toString();
-            resultFilename = uuidFile + "." + "png";
-
-            BufferedImage image = ImageIO.read(file.getInputStream());
-
-            File outputFile = new File(uploadPath + imageControllerDir + "/" + resultFilename);
-            ImageIO.write(image, "png", outputFile);  
-            
-            Contact contact = contactService.findById(contactId);
-            
-            ContactMainImage contactMainImage = new ContactMainImage();
-            contactMainImage.setName(resultFilename);
-            contactMainImage.setContact(contact);
-            contact.setContactMainImage(contactMainImage);
-            
-            contactMainImageService.save(contactMainImage);
-        }
+        ContactMainImage contactMainImage = new ContactMainImage();
+        contactMainImage.setName(url);
+        contactMainImage.setContact(contact);
+        contact.setContactMainImage(contactMainImage);        
+        contactMainImageService.save(contactMainImage);
         
-        return resultFilename;
+        return url;
     }
     
     @DeleteMapping("/admin/contacts/{contactId}/image")
@@ -81,9 +67,8 @@ public class ContactMainImageController {
         ContactMainImage contactMainImage = contactMainImageService.findByContactId(contactId);
         contact.setContactMainImage(null);
         
-        Path imageToDeletePath = Paths.get(uploadPath + imageControllerDir + "/" + contactMainImage.getName());
-        Files.delete(imageToDeletePath);
-        
+        amazonClient.deleteFileFromS3Bucket(contactMainImage.getName(), imageControllerDir);
+
         contactMainImageService.delete(contactMainImage);
     }
 }

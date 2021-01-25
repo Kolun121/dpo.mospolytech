@@ -1,13 +1,6 @@
 package ru.mospolytech.dpo.controllers.admin.image;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.UUID;
-import javax.imageio.ImageIO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -17,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import ru.mospolytech.dpo.amazon.AmazonClient;
 import ru.mospolytech.dpo.domain.Teacher;
 import ru.mospolytech.dpo.domain.image.TeacherMainImage;
 import ru.mospolytech.dpo.service.TeacherService;
@@ -27,14 +21,16 @@ import ru.mospolytech.dpo.service.image.TeacherMainImageService;
 public class TeacherMainImageController {
     @Value("${upload.path}")
     private String uploadPath;
-    private final String imageControllerDir = "/teachers";
+    private final String imageControllerDir = "teachers";
    
     private final TeacherMainImageService teacherMainImageService;
     private final TeacherService teacherService;
-
-    public TeacherMainImageController(TeacherMainImageService teacherMainImageService, TeacherService teacherService) {
+    private final AmazonClient amazonClient;
+    
+    public TeacherMainImageController(TeacherMainImageService teacherMainImageService, TeacherService teacherService, AmazonClient amazonClient) {
         this.teacherMainImageService = teacherMainImageService;
         this.teacherService = teacherService;
+        this.amazonClient = amazonClient;
     }
 
     
@@ -43,34 +39,19 @@ public class TeacherMainImageController {
             @PathVariable Long teacherId,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
+        String url = amazonClient.uploadFile(file, imageControllerDir);
         
-        String resultFilename = "none";
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath + imageControllerDir);
+        Teacher teacher = teacherService.findById(teacherId);
 
-            if (!uploadDir.exists()) {
-                uploadDir.mkdirs();
-            }
+        TeacherMainImage teacherMainImage = new TeacherMainImage();
+        teacherMainImage.setName(url);
+        teacherMainImage.setTeacher(teacher);
+        teacher.setMainImage(teacherMainImage);
 
-            String uuidFile  = UUID.randomUUID().toString();
-            resultFilename = uuidFile + "." + "png";
-
-            BufferedImage image = ImageIO.read(file.getInputStream());
-
-            File outputFile = new File(uploadPath + imageControllerDir + "/" + resultFilename);
-            ImageIO.write(image, "png", outputFile);  
-            
-            Teacher teacher = teacherService.findById(teacherId);
-            
-            TeacherMainImage teacherMainImage = new TeacherMainImage();
-            teacherMainImage.setName(resultFilename);
-            teacherMainImage.setTeacher(teacher);
-            teacher.setMainImage(teacherMainImage);
-            
-            teacherMainImageService.save(teacherMainImage);
-        }
+        teacherMainImageService.save(teacherMainImage);
         
-        return resultFilename;
+        
+        return url;
     }
     
     @DeleteMapping("/admin/teachers/{teacherId}/image")
@@ -81,8 +62,7 @@ public class TeacherMainImageController {
         TeacherMainImage teacherMainImage = teacherMainImageService.findByTeacherId(teacherId);
         teacher.setMainImage(null);
         
-        Path imageToDeletePath = Paths.get(uploadPath + imageControllerDir + "/" + teacherMainImage.getName());
-        Files.delete(imageToDeletePath);
+        amazonClient.deleteFileFromS3Bucket(teacherMainImage.getName(), imageControllerDir);
         
         teacherMainImageService.delete(teacherMainImage);
     }

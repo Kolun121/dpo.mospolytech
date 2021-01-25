@@ -2,7 +2,7 @@
     <th:block th:if="${not #lists.isEmpty(courseTeachers)}">
         <h1>Преподаватели</h1>
         <div th:each="teacher:${courseTeachers}" class="speakers_item">
-                <img th:src="${teacher.mainImage} ? '/img/teachers/' + ${teacher.mainImage.name}: @{/resources/image/man.png}" id="speakers_img">
+                <img th:src="${teacher.mainImage} ? ${teacher.mainImage.name}: @{/resources/image/man.png}" id="speakers_img">
                 <a th:href="@{'teacher/' + ${teacher.id}}" th:text="${teacher.fullName}" class="speakers_name"><p></p></a>
                 <p class="job" th:text="${teacher.teacherOccupation}">Преподаватель</p>
 

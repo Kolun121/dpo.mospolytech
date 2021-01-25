@@ -13,16 +13,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.mospolytech.dpo.domain.Contact;
 import ru.mospolytech.dpo.service.ContactService;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ru.mospolytech.dpo.amazon.AmazonClient;
+import ru.mospolytech.dpo.domain.image.ContactMainImage;
+import ru.mospolytech.dpo.service.image.ContactMainImageService;
 
 
 @Controller("adminContactsController")
 @RequestMapping("/admin/contacts")
 public class ContactsController {
+    private final String mainImageControllerDir = "contacts";
     
     private final ContactService contactService;
+    private final ContactMainImageService contactMainImageService;
+    private final AmazonClient amazonClient;
 
-    ContactsController(ContactService contactService) {
+    ContactsController(
+            ContactService contactService,
+            ContactMainImageService contactMainImageService,
+            AmazonClient amazonClient
+    ) {
         this.contactService = contactService;
+        this.contactMainImageService = contactMainImageService;
+        this.amazonClient = amazonClient;
     }
     
     @InitBinder
@@ -33,6 +45,7 @@ public class ContactsController {
     @GetMapping
     public String getContactsListPage(Model model) {
         model.addAttribute("contacts", contactService.findAll());
+        
         return "admin/contacts/contactsList";
     }
     
@@ -58,6 +71,15 @@ public class ContactsController {
     
     @DeleteMapping("{id}")
     public @ResponseBody void deleteById(@PathVariable Long id){
+        Contact contact = contactService.findById(id);
+        
+        if(contact.getContactMainImage()!= null){
+            ContactMainImage contactMainImage = contactMainImageService.findByContactId(id);
+            amazonClient.deleteFileFromS3Bucket(contactMainImage.getName(), mainImageControllerDir);
+            contactMainImageService.delete(contactMainImage);
+        }
+        
+
         contactService.deleteById(id);
     }
 }

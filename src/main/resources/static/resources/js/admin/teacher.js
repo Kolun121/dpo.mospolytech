@@ -63,7 +63,7 @@ var teacher = {
                     $('#uploadimageModal').modal('hide');
                     document.getElementById('btn_del_photo').style.display = "block";
                     document.getElementById('file_upload_block').style.display = "none";
-                    document.getElementById('teacherMainImage').src = '/img/teachers/' + result;            
+                    document.getElementById('teacherMainImage').src = result;            
                 }
             });
           });

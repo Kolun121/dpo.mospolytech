@@ -49,7 +49,7 @@ var news = {
                     $('#uploadimageModal').modal('hide');
                     document.getElementById('btn_del_photo').style.display = "block";
                     document.getElementById('file_upload_block').style.display = "none";
-                    document.getElementById('newsMainImage').src = '/img/news/' + result;            
+                    document.getElementById('newsMainImage').src = result;            
                 }
             });
           });

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import ru.mospolytech.dpo.amazon.AmazonClient;
 import ru.mospolytech.dpo.domain.Course;
 import ru.mospolytech.dpo.domain.image.CourseGalleryImage;
 import ru.mospolytech.dpo.domain.image.CourseMainImage;
@@ -29,14 +30,16 @@ import ru.mospolytech.dpo.domain.image.CourseMainImage;
 public class CourseGalleryImageController {
     @Value("${upload.path}")
     private String uploadPath;
-    private final String imageControllerDir = "/courses/gallery";
+    private final String imageControllerDir = "courses/gallery";
     
     private final CourseGalleryImageService courseGalleryImageService;
     private final CourseService courseService;
+    private final AmazonClient amazonClient;
 
-    public CourseGalleryImageController(CourseGalleryImageService courseGalleryImageService, CourseService courseService) {
+    public CourseGalleryImageController(CourseGalleryImageService courseGalleryImageService, CourseService courseService, AmazonClient amazonClient) {
         this.courseGalleryImageService = courseGalleryImageService;
         this.courseService = courseService;
+        this.amazonClient = amazonClient;
     }
     
     @PostMapping("/admin/courses/{courseId}/gallery/new")
@@ -44,32 +47,18 @@ public class CourseGalleryImageController {
             @PathVariable Long courseId,
             @RequestParam("file") MultipartFile file
     )throws IOException {
-        String resultFilename = "none";
+        String url = amazonClient.uploadFile(file, imageControllerDir);
         ModelAndView mav = new ModelAndView("admin/fragments/course/courseGalleryImageItem :: courseGalleryImageItem");
 
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath + imageControllerDir);
+        Course course = courseService.findById(courseId);
 
-            if (!uploadDir.exists()) {
-                uploadDir.mkdirs();
-            }
+        CourseGalleryImage courseGalleryImage = new CourseGalleryImage();
+        courseGalleryImage.setName(url);
+        courseGalleryImage.setCourse(course);
+        course.getCourseGalleryImages().add(courseGalleryImage);
+        courseGalleryImageService.save(courseGalleryImage);
 
-            String uuidFile = UUID.randomUUID().toString();
-            resultFilename = uuidFile + "." + file.getOriginalFilename();
-
-            file.transferTo(new File(uploadPath + imageControllerDir + "/" + resultFilename));
-            
-            Course course = courseService.findById(courseId);
-            
-            CourseGalleryImage courseGalleryImage = new CourseGalleryImage();
-            courseGalleryImage.setName(resultFilename);
-            courseGalleryImage.setCourse(course);
-            course.getCourseGalleryImages().add(courseGalleryImage);
-            courseGalleryImageService.save(courseGalleryImage);
-
-            mav.addObject("galleryItems", Arrays.asList(courseGalleryImage));
-
-        }
+        mav.addObject("galleryItems", Arrays.asList(courseGalleryImage));
         
         return mav;
     }
@@ -80,8 +69,7 @@ public class CourseGalleryImageController {
             @PathVariable Long id
     ) throws IOException {
         CourseGalleryImage courseGalleryImage = courseGalleryImageService.findById(id);
-        Path imageToDeletePath = Paths.get(uploadPath + imageControllerDir + "/" + courseGalleryImage.getName());
-        Files.delete(imageToDeletePath);
+        amazonClient.deleteFileFromS3Bucket(courseGalleryImage.getName(), imageControllerDir);
         
         courseGalleryImageService.delete(courseGalleryImage);
     }

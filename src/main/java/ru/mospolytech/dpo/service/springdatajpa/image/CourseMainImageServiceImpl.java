@@ -40,5 +40,10 @@ public class CourseMainImageServiceImpl implements CourseMainImageService {
 
         return courseMainImageOptional.get();
     }
+
+    @Override
+    public CourseMainImage findById(Long id) {
+        return courseMainImageRepository.findById(id).orElse(new CourseMainImage());
+    }
     
 }

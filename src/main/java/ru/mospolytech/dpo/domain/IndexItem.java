@@ -2,6 +2,7 @@ package ru.mospolytech.dpo.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class IndexItem implements Serializable{
     private String text;
     private String url;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private IndexItemImage indexImage;
     
     @Override

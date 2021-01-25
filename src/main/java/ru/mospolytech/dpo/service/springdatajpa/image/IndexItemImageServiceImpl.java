@@ -40,5 +40,10 @@ public class IndexItemImageServiceImpl implements IndexItemImageService {
 
         return indexImageOptional.get();
     }
+
+    @Override
+    public IndexItemImage findById(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

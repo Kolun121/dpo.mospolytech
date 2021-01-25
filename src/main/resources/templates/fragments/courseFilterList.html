@@ -30,7 +30,7 @@
         <tbody class="course-element"> 
             <tr th:each="course: ${courses}">
                 <th scope="row" class="img"><a th:href="@{'courses/' + ${course.urlSegment}}">
-                        <img th:src="${course.mainImage} ? '/img/courses/main_image/' + ${course.mainImage.name}: '/'"></a></th>
+                        <img th:src="${course.mainImage} ? ${course.mainImage.name}: '/'"></a></th>
                 <td class="name">
                     <a th:href="@{'courses/' + ${course.urlSegment}}" th:text="${course.title}"></a>
                 </td>

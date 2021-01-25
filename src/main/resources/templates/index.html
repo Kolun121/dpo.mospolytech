@@ -6,7 +6,7 @@
         <div class="popular_courses">
             <a th:each="item :${indexItems}" th:href="@{${item.url}}">
                 <div>
-                    <img th:src="${item.indexImage} ? '/img/index/' + ${item.indexImage.name}: '/'" >
+                    <img th:src="${item.indexImage} ? ${item.indexImage.name}: '/'" >
                     <p th:text="${item.text}"></p>
                 </div>
             </a>

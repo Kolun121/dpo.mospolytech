@@ -130,6 +130,7 @@ header img {
 }
 /* Конец стилей header */
 .menu-btn {
+    color:white;
     display: none;
 }
 main h1{

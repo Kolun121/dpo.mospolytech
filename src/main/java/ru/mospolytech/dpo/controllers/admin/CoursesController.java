@@ -34,8 +34,13 @@ import ru.mospolytech.dpo.domain.EducationalProgramStage;
 import ru.mospolytech.dpo.service.CourseService;
 import ru.mospolytech.dpo.service.TeacherService;
 import org.springframework.validation.BindingResult;
+import ru.mospolytech.dpo.amazon.AmazonClient;
 import ru.mospolytech.dpo.domain.EntityId;
+import ru.mospolytech.dpo.domain.image.CourseGalleryImage;
+import ru.mospolytech.dpo.domain.image.CourseMainImage;
 import ru.mospolytech.dpo.service.EducationalProgramStageService;
+import ru.mospolytech.dpo.service.image.CourseGalleryImageService;
+import ru.mospolytech.dpo.service.image.CourseMainImageService;
 import static ru.mospolytech.dpo.specification.CourseSpecification.hasVersion;
 
 
@@ -45,16 +50,26 @@ import static ru.mospolytech.dpo.specification.CourseSpecification.hasVersion;
 public class CoursesController {
     @Value("${upload.path}")
     private String uploadPath;
-    private final String imageControllerDir = "/courses/main_image";
+    private final String mainImageControllerDir = "courses/main_image";
+    private final String galleryImageControllerDir = "courses/gallery";
     
     private final CourseService courseService;
     private final TeacherService teacherService;
+    private final CourseGalleryImageService courseGalleryImageService;
+    private final CourseMainImageService courseMainImageService;
+    private final AmazonClient amazonClient;
 
     CoursesController(CourseService courseService, 
-            TeacherService teacherService
+            TeacherService teacherService,
+            AmazonClient amazonClient,
+            CourseGalleryImageService courseGalleryImageService,
+            CourseMainImageService courseMainImageService
     ) {
         this.courseService = courseService;
         this.teacherService = teacherService;
+        this.amazonClient = amazonClient;
+        this.courseGalleryImageService = courseGalleryImageService;
+        this.courseMainImageService = courseMainImageService;
     }
 
     
@@ -118,8 +133,10 @@ public class CoursesController {
         //Кем отредактирован
         course.setEdditedBy(principal.getName());
         
-        course.setMainImage(currentCourse.getMainImage());
-
+        
+        course.setMainImage(courseMainImageService.findByCourseId(id));
+        currentCourse.setMainImage(null);
+        
         //Только в случае, когда были вненсены какие либо изменения
         if(!course.equals(currentCourse)){
             //Сохраняем текущую версию курса
@@ -128,7 +145,6 @@ public class CoursesController {
             courseService.save(course);
         }
         
-        System.out.println(result.getAllErrors());
         
         return "redirect:/admin/courses/" + id;
     }
@@ -166,6 +182,9 @@ public class CoursesController {
         //Выставляем текущую рабочую версию (версия 0 означает, что данный курс является новешим)
         desiredCourseVersion.setVersion(0l);
         
+        desiredCourseVersion.setMainImage(courseMainImageService.findByCourseId(Long.parseLong(id)));
+        currentCourse.setMainImage(null);
+        
         courseService.save(currentCourse);
         courseService.save(desiredCourseVersion);
         return "redirect:/admin/courses/" + id + "/versions/" + 0;
@@ -173,19 +192,27 @@ public class CoursesController {
     
     @DeleteMapping("{id}")
     public @ResponseBody void deleteCourseById(@PathVariable String id){
-        List<Course> courses = courseService.findAllByIdByOrderByCreatedAtAsc(Long.parseLong(id));
-        courses.forEach((c) -> {
-            //удаляем картинки
-            if(c.getMainImage() != null){
-                Path imageToDeletePath = Paths.get(uploadPath + imageControllerDir + "/" + c.getMainImage().getName());
-                try {
-                    Files.delete(imageToDeletePath);
-                } catch (IOException ex) {
-                    Logger.getLogger(CoursesController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            courseService.delete(c);
-        });
+        Course course = courseService.findById(Long.parseLong(id));
+        
+        if(course.getMainImage() != null){
+            CourseMainImage courseMainImage = courseMainImageService.findByCourseId(Long.parseLong(id));
+            amazonClient.deleteFileFromS3Bucket(courseMainImage.getName(), mainImageControllerDir);
+            courseMainImageService.delete(courseMainImage);
+        }
+        
+                
+        if(course.getCourseGalleryImages() != null){
+            course.getCourseGalleryImages().forEach((image) -> {
+                CourseGalleryImage courseGalleryImage = courseGalleryImageService.findById(image.getId());
+                
+                amazonClient.deleteFileFromS3Bucket(courseGalleryImage.getName(), galleryImageControllerDir);
+                
+                courseGalleryImageService.delete(courseGalleryImage);
+            });
+        }
+        
+        courseService.deleteById(Long.parseLong(id));
+
     }
 
 }

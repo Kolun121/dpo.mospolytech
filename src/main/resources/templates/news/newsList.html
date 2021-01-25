@@ -15,7 +15,7 @@
                 </div>
             </div>
            <div class="img_news">
-               <img th:src="*{newsMainImage} ? '/img/news/' + *{newsMainImage.name}: '/'">
+               <img th:src="*{newsMainImage} ? *{newsMainImage.name}: '/'">
            </div>
         </div>
         <th:block th:if="${news.getTotalPages() > 1}">

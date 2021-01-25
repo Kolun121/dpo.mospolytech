@@ -13,17 +13,29 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.mospolytech.dpo.amazon.AmazonClient;
 import ru.mospolytech.dpo.domain.News;
+import ru.mospolytech.dpo.domain.image.NewsMainImage;
 import ru.mospolytech.dpo.service.NewsService;
+import ru.mospolytech.dpo.service.image.NewsMainImageService;
 
 @Controller("adminNewsController")
 @RequestMapping("/admin/news")
 public class NewsController {
+    private final String mainImageControllerDir = "news";
     
     private final NewsService newsService;
+    private final NewsMainImageService newsMainImageService;
+    private final AmazonClient amazonClient;
 
-    NewsController(NewsService newsService) {
+    NewsController(
+            NewsService newsService,
+            NewsMainImageService newsMainImageService,
+            AmazonClient amazonClient
+    ) {
         this.newsService = newsService;
+        this.newsMainImageService = newsMainImageService;
+        this.amazonClient = amazonClient;
     }
     
     @InitBinder
@@ -59,6 +71,13 @@ public class NewsController {
     
     @DeleteMapping("{id}")
     public @ResponseBody void deleteById(@PathVariable Long id){
+        News news = newsService.findById(id);
+        
+        if(news.getNewsMainImage()!= null){
+            NewsMainImage newsMainImage = newsMainImageService.findByNewsId(id);
+            amazonClient.deleteFileFromS3Bucket(newsMainImage.getName(), mainImageControllerDir);
+            newsMainImageService.delete(newsMainImage);
+        }
         newsService.deleteById(id);
     }
 }

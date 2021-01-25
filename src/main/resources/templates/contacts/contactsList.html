@@ -4,7 +4,7 @@
     <h1>Контакты</h1>
     <div class="team">
         <div class="colleague" th:object="${contact}" th:each="contact: ${contacts}">
-            <img style="border-radius:50%" th:src="*{contactMainImage} ? '/img/contacts/' + *{contactMainImage.name}: '/'" >
+            <img style="border-radius:50%" th:src="*{contactMainImage} ? *{contactMainImage.name}: '/'" >
             <div>
                 <h4 th:text="*{fullName}"></h4>
                 <p th:text="*{occupation}"></p>

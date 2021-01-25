@@ -57,10 +57,12 @@ public class Course implements Serializable{
     private String courseGoal;
     private String courseAudience;
     private String courseSubject;
-    private Integer coursePrice;
+    private Integer coursePrice = 0;
     private Integer courseTime;
     private String courseDocument;
     
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
     private Date courseStartDate;
     
     @ManyToMany

@@ -39,13 +39,40 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-
-		<dependency>
+                
+                <dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+<!--		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
-		</dependency>
-                
+		</dependency>-->
+ 
+               <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
+<dependency>
+    <groupId>com.amazonaws</groupId>
+    <artifactId>aws-java-sdk-s3</artifactId>
+    <version>1.11.942</version>
+</dependency>
+
+
+<!--<dependency>
+    <groupId>com.amazonaws.auth</groupId>
+    <artifactId>aws-java-sdk</artifactId>
+    <version>1.11.434</version>
+</dependency>-->
+
+<!-- https://mvnrepository.com/artifact/software.amazon.awssdk/regions -->
+<!--<dependency>
+    <groupId>software.amazon.awssdk</groupId>
+    <artifactId>regions</artifactId>
+    <version>2.15.69</version>
+</dependency>-->
+
+
+                 
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-security</artifactId>
@@ -73,12 +100,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+               
                 
-<!--                <dependency>
-                    <groupId>org.hibernate</groupId>
-                    <artifactId>hibernate-jpamodelgen</artifactId>
-                </dependency>-->
-                
+
+
+
+
                 <!--webjars-->
                 <dependency>
                     <groupId>org.webjars</groupId>
@@ -131,10 +158,13 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+                         <plugin>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-maven-plugin</artifactId>
+                            <configuration>
+                                <fork>false</fork>
+                            </configuration>
+                        </plugin>
                         <plugin>
                             <groupId>org.bsc.maven</groupId>
                             <artifactId>maven-processor-plugin</artifactId>

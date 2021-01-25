@@ -40,5 +40,10 @@ public class TeacherMainImageServiceImpl implements TeacherMainImageService {
     public void deleteById(Long id) {
         teacherMainImageRepository.deleteById(id);
     }
+
+    @Override
+    public TeacherMainImage findById(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

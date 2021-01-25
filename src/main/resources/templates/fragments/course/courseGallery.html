@@ -3,9 +3,9 @@
         <h1 class="text-center">Галерея</h1>
         <div class="row">
             <div th:each="galleryImage: ${courseGalleryImages}" class="col-lg-3 col-md-4 col-6 thumb">
-                <a data-fancybox="gallery" th:href="@{'/img/courses/gallery/' + ${galleryImage.name}}">
+                <a data-fancybox="gallery" th:href="@{${galleryImage.name}}">
                 <!--<a data-fancybox="gallery" th:href="@{'/img/courses/gallery/' + galleryImage.name">-->
-                    <img class="img-fluid" th:src="'/img/courses/gallery/' + ${galleryImage.name}" alt="...">
+                    <img class="img-fluid" th:src="${galleryImage.name}" alt="...">
                 </a>
             </div>
         </div>

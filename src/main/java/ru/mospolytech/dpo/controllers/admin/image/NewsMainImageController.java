@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import ru.mospolytech.dpo.amazon.AmazonClient;
 import ru.mospolytech.dpo.domain.News;
 import ru.mospolytech.dpo.domain.image.NewsMainImage;
 import ru.mospolytech.dpo.service.NewsService;
@@ -27,14 +28,16 @@ import ru.mospolytech.dpo.service.image.NewsMainImageService;
 public class NewsMainImageController {
     @Value("${upload.path}")
     private String uploadPath;
-    private final String imageControllerDir = "/news";
+    private final String imageControllerDir = "news";
    
     private final NewsMainImageService newsMainImageService;
     private final NewsService newsService;
+    private final AmazonClient amazonClient;
 
-    public NewsMainImageController(NewsMainImageService newsMainImageService, NewsService newsService) {
+    public NewsMainImageController(NewsMainImageService newsMainImageService, NewsService newsService, AmazonClient amazonClient) {
         this.newsMainImageService = newsMainImageService;
         this.newsService = newsService;
+        this.amazonClient = amazonClient;
     }
 
     
@@ -43,34 +46,18 @@ public class NewsMainImageController {
             @PathVariable Long newsId,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
+        String url = amazonClient.uploadFile(file, imageControllerDir);
         
-        String resultFilename = "none";
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath + imageControllerDir);
+        News news = newsService.findById(newsId);
 
-            if (!uploadDir.exists()) {
-                uploadDir.mkdirs();
-            }
-
-            String uuidFile  = UUID.randomUUID().toString();
-            resultFilename = uuidFile + "." + "png";
-
-            BufferedImage image = ImageIO.read(file.getInputStream());
-
-            File outputFile = new File(uploadPath + imageControllerDir + "/" + resultFilename);
-            ImageIO.write(image, "png", outputFile);  
+        NewsMainImage newsMainImage = new NewsMainImage();
+        newsMainImage.setName(url);
+        newsMainImage.setNews(news);
+        news.setNewsMainImage(newsMainImage);
             
-            News news = newsService.findById(newsId);
-            
-            NewsMainImage newsMainImage = new NewsMainImage();
-            newsMainImage.setName(resultFilename);
-            newsMainImage.setNews(news);
-            news.setNewsMainImage(newsMainImage);
-            
-            newsMainImageService.save(newsMainImage);
-        }
+        newsMainImageService.save(newsMainImage);
         
-        return resultFilename;
+        return url;
     }
     
     @DeleteMapping("/admin/news/{newsId}/image")
@@ -81,8 +68,7 @@ public class NewsMainImageController {
         NewsMainImage newsMainImage = newsMainImageService.findByNewsId(newsId);
         news.setNewsMainImage(null);
         
-        Path imageToDeletePath = Paths.get(uploadPath + imageControllerDir + "/" + newsMainImage.getName());
-        Files.delete(imageToDeletePath);
+        amazonClient.deleteFileFromS3Bucket(newsMainImage.getName(), imageControllerDir);
         
         newsMainImageService.delete(newsMainImage);
     }

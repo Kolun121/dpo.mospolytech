@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import ru.mospolytech.dpo.amazon.AmazonClient;
 import ru.mospolytech.dpo.domain.IndexItem;
 import ru.mospolytech.dpo.domain.image.IndexItemImage;
 import ru.mospolytech.dpo.service.IndexItemService;
@@ -27,14 +28,16 @@ import ru.mospolytech.dpo.service.image.IndexItemImageService;
 public class IndexItemImageController {
     @Value("${upload.path}")
     private String uploadPath;
-    private final String imageControllerDir = "/index";
+    private final String imageControllerDir = "index";
    
     private final IndexItemImageService indexItemImageService;
     private final IndexItemService indexItemService;
+    private final AmazonClient amazonClient;
 
-    public IndexItemImageController(IndexItemImageService indexItemImageService, IndexItemService indexItemService) {
+    public IndexItemImageController(IndexItemImageService indexItemImageService, IndexItemService indexItemService, AmazonClient amazonClient) {
         this.indexItemImageService = indexItemImageService;
         this.indexItemService = indexItemService;
+        this.amazonClient = amazonClient;
     }
 
     
@@ -43,33 +46,18 @@ public class IndexItemImageController {
             @PathVariable Long indexItemId,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
+        String url = amazonClient.uploadFile(file, imageControllerDir);
         
-        String resultFilename = "none";
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath + imageControllerDir);
+        IndexItem indexItem = indexItemService.findById(indexItemId);
 
-            if (!uploadDir.exists()) {
-                uploadDir.mkdirs();
-            }
-
-            String uuidFile  = UUID.randomUUID().toString();
-            resultFilename = uuidFile + "." + "png";
-
-            BufferedImage image = ImageIO.read(file.getInputStream());
-
-            File outputFile = new File(uploadPath + imageControllerDir + "/" + resultFilename);
-            ImageIO.write(image, "png", outputFile);  
-            
-            IndexItem indexItem = indexItemService.findById(indexItemId);
-            
-            IndexItemImage indexItemImage = new IndexItemImage();
-            indexItemImage.setName(resultFilename);
-            indexItemImage.setIndexItem(indexItem);
-            indexItem.setIndexImage(indexItemImage);
-            indexItemImageService.save(indexItemImage);
-        }
+        IndexItemImage indexItemImage = new IndexItemImage();
+        indexItemImage.setName(url);
+        indexItemImage.setIndexItem(indexItem);
+        indexItem.setIndexImage(indexItemImage);
+        indexItemImageService.save(indexItemImage);
         
-        return resultFilename;
+        
+        return url;
     }
     
     @DeleteMapping("/admin/index/{indexItemId}/image")
@@ -80,8 +68,7 @@ public class IndexItemImageController {
         IndexItemImage indexItemImage = indexItemImageService.findByIndexItemId(indexItemId);
         indexItem.setIndexImage(null);
         
-        Path imageToDeletePath = Paths.get(uploadPath + imageControllerDir + "/" + indexItemImage.getName());
-        Files.delete(imageToDeletePath);
+        amazonClient.deleteFileFromS3Bucket(indexItemImage.getName(), imageControllerDir);
         
         indexItemImageService.delete(indexItemImage);
     }

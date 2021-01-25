@@ -6,7 +6,7 @@
         <div class="d-flex flex-column justify-content-between align-items-between">
             <div class="d-flex justify-content-center mb-3">
                 <img class="bd-placeholder-img mr-3" th:id="|index-item-image-${item.id}|" 
-                     th:src="${item.indexImage} ? '/img/index/' + ${item.indexImage.name}: '/'" 
+                     th:src="${item.indexImage} ? ${item.indexImage.name}: '/'" 
                      width="60px" height="60px" >
                 <div class="custom-file">
                     <input type="file" accept="image/*" class="custom-file-input" 

@@ -40,5 +40,10 @@ public class NewsMainImageServiceImpl implements NewsMainImageService {
     public void deleteById(Long id) {
         newsMainImageRepository.deleteById(id);
     }
+
+    @Override
+    public NewsMainImage findById(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

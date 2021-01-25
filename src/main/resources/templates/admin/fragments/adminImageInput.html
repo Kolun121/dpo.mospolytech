@@ -23,19 +23,20 @@
             <th:block th:switch="${type}">
                 <img th:case="'course'" 
                      id="courseMainImage" th:alt="${label}" class="rounded" width="400px" height="400px"
-                     th:src="${image} ? '/img/courses/main_image/' + ${image.name}: '/'" >
+                     th:src="${image} ? ${image.name}: '/'" >
                 
                 <img th:case="'teacher'" 
                      id="teacherMainImage" th:alt="${label}" class="rounded" width="350px" height="350px"
-                     th:src="${image} ? '/img/teachers/' + ${image.name}: '/'" >
+                     th:src="${image} ? ${image.name}: '/'" >
                 
                 <img th:case="'news'" 
                      id="newsMainImage" th:alt="${label}" class="rounded" width="350px" height="350px"
-                     th:src="${image} ? '/img/news/' + ${image.name}: '/'" >
+                     th:src="${image} ? ${image.name}: '/'">
                 
                 <img th:case="'contact'" 
                      id="contactMainImage" th:alt="${label}" class="rounded" width="350px" height="350px"
-                     th:src="${image} ? '/img/contacts/' + ${image.name}: '/'" >
+                     th:src="${image} ? ${image.name}: '/'">
+                     <!--th:src="${image} ? ${image.name}: '/'" >-->
             </th:block>
         </div>
     </div>

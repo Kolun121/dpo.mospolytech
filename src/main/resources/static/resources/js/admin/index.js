@@ -22,7 +22,7 @@ var index = {
     },
     deleteIndexItem: function(event, item_id) {
         event.preventDefault;
-        if(!confirm('Вы действительно хотите удалить данный контакт?')) {
+        if(!confirm('Вы действительно хотите удалить данный блок?')) {
             return false;
         }
 
@@ -73,7 +73,7 @@ var index = {
             },
             success: function(result){
                 console.log(result);
-                document.getElementById('index-item-image-' + index_item_id).src = '/img/index/' + result;            
+                document.getElementById('index-item-image-' + index_item_id).src = result;            
             }
         });
         
