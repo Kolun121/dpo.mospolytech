@@ -164,6 +164,11 @@
         
                         </plugin>
                         <plugin>
+                            <inherited>true</inherited>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-compiler-plugin</artifactId>
+                        </plugin>
+                        <plugin>
                             <groupId>org.bsc.maven</groupId>
                             <artifactId>maven-processor-plugin</artifactId>
                             <version>2.2.4</version>
