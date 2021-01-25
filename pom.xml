@@ -167,6 +167,10 @@
                             <inherited>true</inherited>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-compiler-plugin</artifactId>
+                            <configuration>
+                                <source>11</source>   <!-- use java 8 -->
+                                <target>11</target>
+                            </configuration>
                         </plugin>
                         <plugin>
                             <groupId>org.bsc.maven</groupId>
