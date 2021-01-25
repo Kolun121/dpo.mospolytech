@@ -22,6 +22,15 @@ public class MVCConfig implements WebMvcConfigurer {
 //                .addResourceLocations("file://" + uploadPath + "/"); //LINUX
     }
     
+//    @Value("${spring.datasource.url}")
+//  private String dbUrl;
+//
+//  @Bean
+//  public DataSource dataSource() {
+//      HikariConfig config = new HikariConfig();
+//      config.setJdbcUrl(dbUrl);
+//      return new HikariDataSource(config);
+//  }
     @Bean
     public FilterRegistrationBean encodingFilterRegistrationBean() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
