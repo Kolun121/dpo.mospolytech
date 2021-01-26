@@ -20,7 +20,7 @@ public class NewsMainImageServiceImpl implements NewsMainImageService {
         Optional<NewsMainImage> newsMainImageOptional = newsMainImageRepository.findByNewsId(newsId);
         
         if (!newsMainImageOptional.isPresent()) {
-            throw new RuntimeException("Изображение не найдено по ID новости:" + newsId );
+            return null;
         }
 
         return newsMainImageOptional.get();

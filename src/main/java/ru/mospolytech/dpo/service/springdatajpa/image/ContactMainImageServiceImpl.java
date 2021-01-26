@@ -30,7 +30,7 @@ public class ContactMainImageServiceImpl implements ContactMainImageService {
         Optional<ContactMainImage> сontactMainImageOptional = сontactMainImageRepository.findByContactId(contactId);
         
         if (!сontactMainImageOptional.isPresent()) {
-            throw new RuntimeException("Изображение не найдено по ID контакта:" + contactId );
+            return null;
         }
 
         return сontactMainImageOptional.get();

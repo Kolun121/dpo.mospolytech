@@ -20,7 +20,7 @@ public class TeacherMainImageServiceImpl implements TeacherMainImageService {
         Optional<TeacherMainImage> teacherMainImageOptional = teacherMainImageRepository.findByTeacherId(teacherId);
         
         if (!teacherMainImageOptional.isPresent()) {
-            throw new RuntimeException("Изображение не найдено по ID преподавателя:" + teacherId );
+            return null;
         }
 
         return teacherMainImageOptional.get();
