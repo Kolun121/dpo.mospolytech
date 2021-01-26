@@ -135,9 +135,10 @@ public class CoursesController {
         
         CourseMainImage courseMainImage = courseMainImageService.findByCourseId(id);
         if(courseMainImage != null){
-            course.setMainImage(courseMainImageService.findByCourseId(id));
+            course.setMainImage(courseMainImage);
+            currentCourse.setMainImage(null);
         }
-        currentCourse.setMainImage(null);
+        
         
         //Только в случае, когда были вненсены какие либо изменения
         if(!course.equals(currentCourse)){

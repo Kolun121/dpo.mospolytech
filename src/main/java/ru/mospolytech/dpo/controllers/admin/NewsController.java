@@ -64,8 +64,12 @@ public class NewsController {
     @PostMapping("{id}")
     public String updateNewsItemById(@PathVariable Long id, @Valid News news, BindingResult result){
         news.setId(id);
+         
+        NewsMainImage newsMainImage = newsMainImageService.findByNewsId(id);
+        if(newsMainImage != null){
+            news.setNewsMainImage(newsMainImage);
+        }
         News savedNewsItem = newsService.save(news);
-
         return "redirect:/admin/news/" + savedNewsItem.getId();
     }
     

@@ -69,8 +69,13 @@ public class TeachersController {
     @PostMapping("{id}")
     public String updateTeacherById(@PathVariable Long id, @Valid Teacher teacher, BindingResult result){
         teacher.setId(id);
+        
+        TeacherMainImage teacherMainImage = teacherMainImageService.findByTeacherId(id);
+        if(teacherMainImage != null){
+            teacher.setMainImage(teacherMainImage);
+        }
+        
         Teacher savedTeacher = teacherService.save(teacher);
-
         return "redirect:/admin/teachers/" + savedTeacher.getId();
     }
     

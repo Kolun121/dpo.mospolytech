@@ -64,6 +64,12 @@ public class ContactsController {
     @PostMapping("{id}")
     public String updateContactById(@PathVariable Long id, @ModelAttribute Contact contact){
         contact.setId(id);
+        
+        ContactMainImage contactMainImage = contactMainImageService.findByContactId(id);
+        if(contactMainImage != null){
+            contact.setContactMainImage(contactMainImage);
+        }
+
         Contact savedContact = contactService.save(contact);
 
         return "redirect:/admin/contacts/" + savedContact.getId();
