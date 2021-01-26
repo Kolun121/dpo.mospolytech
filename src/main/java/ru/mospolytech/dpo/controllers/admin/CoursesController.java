@@ -134,7 +134,7 @@ public class CoursesController {
         course.setEdditedBy(principal.getName());
         
         CourseMainImage courseMainImage = courseMainImageService.findByCourseId(id);
-        if(course.getMainImage() != null){
+        if(courseMainImage != null){
             course.setMainImage(courseMainImageService.findByCourseId(id));
         }
         currentCourse.setMainImage(null);
