@@ -23,9 +23,9 @@
         <tbody class="filter_loading">   
             <tr class="d-flex justify-content-around" th:object="${course}" th:each="course : ${courses}">
                 <th th:text="${course.title}" class="col-2"></th>
-                <td th:text="${course.courseGoal}" class="col-3"></td>
+                <td th:text="${#strings.abbreviate(course.courseGoal,30)}" class="col-3"></td>
 <!--                <td  th:text="${course.courseForm}" class="col-3">></td>-->
-                <td  th:text="'Форма курса'" class="col-3">></td>
+                <td  th:text="*{courseForm.getValue()}" class="col-3">></td>
                 <td th:text="*{courseStatus.getValue()}" class="col-2"></td>
                 <td class="col-2"><a th:text="'Перейти'" th:href="@{'courses/' + ${course.id}}"></a></td>
             </tr>

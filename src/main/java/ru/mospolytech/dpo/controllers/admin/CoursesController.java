@@ -133,8 +133,9 @@ public class CoursesController {
         //Кем отредактирован
         course.setEdditedBy(principal.getName());
         
-        
-        course.setMainImage(courseMainImageService.findByCourseId(id));
+        if(course.getMainImage() != null){
+            course.setMainImage(courseMainImageService.findByCourseId(id));
+        }
         currentCourse.setMainImage(null);
         
         //Только в случае, когда были вненсены какие либо изменения
