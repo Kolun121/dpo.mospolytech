@@ -30,7 +30,7 @@ public class CourseServiceImpl implements CourseService {
         Set<Course> courses = new HashSet<>();
         courseRepository.findAll().forEach(courses::add);
         
-        Set<Course> coursesFilteredByVersion = courses.stream().filter((c)-> c.getVersion().equals(0)).collect(Collectors.toSet());
+        Set<Course> coursesFilteredByVersion = courses.stream().filter((Course c)-> c.getVersion().equals(0l)).collect(Collectors.toSet());
         return coursesFilteredByVersion;
     }
 
