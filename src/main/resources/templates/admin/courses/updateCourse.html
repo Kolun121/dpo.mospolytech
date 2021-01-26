@@ -87,7 +87,7 @@
                 <!--Преподаватели курса-->
                 <h4 class="text-center">Преподаватели курса</h4>
                 <div class="form-check checkbox-styling d-flex flex-column justify-content-center align-items-center">
-                    <div id="checkboxList">
+                    <div id="checkboxList" class="col-12">
                         <div th:each="teacher : ${teachers}" class="form-check checkbox-success col-md-7">
                             <input type="checkbox"  th:id="${teacher.id}" th:field="*{teachers}" th:value="${teacher.id}"/>
                             <label th:for="${teacher.id}"><a th:text="${teacher.fullName}" th:href="@{'/admin/teachers/' + ${teacher.id}}"></a></label>
