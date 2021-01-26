@@ -35,7 +35,7 @@ public class CourseMainImageServiceImpl implements CourseMainImageService {
         Optional<CourseMainImage> courseMainImageOptional = courseMainImageRepository.findByCourseId(courseId);
         
         if (!courseMainImageOptional.isPresent()) {
-            throw new RuntimeException("Изображение не найдено по ID курса:" + courseId );
+            return null;
         }
 
         return courseMainImageOptional.get();
