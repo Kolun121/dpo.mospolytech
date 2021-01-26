@@ -36,7 +36,7 @@
                 <!--Курсы преподавателя-->
                  <h4 class="text-center">Курсы преподавателя</h4>
                 <div class="form-check checkbox-styling d-flex flex-column justify-content-center align-items-center">
-                    <div id="checkboxList">
+                    <div id="checkboxList" class="col-12">
                         <div th:each="course : ${courses}" class="form-check checkbox-success col-md-7">
                         <input type="checkbox"  th:id="${course.id}" th:field="*{courses}" th:value="${course.id}"/>
                         <label th:for="${course.id}"><a th:text="${course.title}" th:href="@{'/admin/courses/' + ${course.id}}"></a></label>

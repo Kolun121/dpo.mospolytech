@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +29,9 @@ public class CourseServiceImpl implements CourseService {
     public Set<Course> findAll() {
         Set<Course> courses = new HashSet<>();
         courseRepository.findAll().forEach(courses::add);
-        return courses;
+        
+        Set<Course> coursesFilteredByVersion = courses.stream().filter((c)-> c.getVersion().equals(0)).collect(Collectors.toSet());
+        return coursesFilteredByVersion;
     }
 
     @Override
