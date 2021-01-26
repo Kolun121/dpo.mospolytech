@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -15,7 +14,6 @@ import ru.mospolytech.dpo.domain.EntityId;
 import ru.mospolytech.dpo.repository.CourseRepository;
 import ru.mospolytech.dpo.service.CourseService;
 
-//@Transactional
 @Service
 public class CourseServiceImpl implements CourseService {
     
@@ -30,7 +28,9 @@ public class CourseServiceImpl implements CourseService {
         Set<Course> courses = new HashSet<>();
         courseRepository.findAll().forEach(courses::add);
         
-        Set<Course> coursesFilteredByVersion = courses.stream().filter((Course c)-> c.getVersion().equals(0l)).collect(Collectors.toSet());
+        Set<Course> coursesFilteredByVersion = courses.stream()
+                                                .filter((Course c)-> c.getVersion().compareTo(0l) == 0)
+                                                .collect(Collectors.toSet());
         return coursesFilteredByVersion;
     }
 
